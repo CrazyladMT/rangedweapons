@@ -1,4 +1,4 @@
-core.register_globalstep(function(dtime, player)
+core.register_globalstep(function(dtime, _)
 	for _, player in pairs(core.get_connected_players()) do
 		local w_item = player:get_wielded_item()
 		local controls = player:get_player_control()
@@ -20,12 +20,12 @@ core.register_globalstep(function(dtime, player)
 			if player:get_inventory():contains_item("main", "binoculars:binoculars") then
 				local new_zoom_fov = 10
 				if player:get_properties().zoom_fov ~= new_zoom_fov then
-		   			player:set_properties({zoom_fov = new_zoom_fov})
+					player:set_properties({zoom_fov = new_zoom_fov})
 				end
 			else
 				local new_zoom_fov = 0
 				if player:get_properties().zoom_fov ~= new_zoom_fov then
-		   			player:set_properties({zoom_fov = new_zoom_fov})
+					player:set_properties({zoom_fov = new_zoom_fov})
 				end
 			end
 		end
@@ -53,7 +53,7 @@ core.register_globalstep(function(dtime, player)
 					player:set_wielded_item(itemstack)
 				end
 			end
- 		end
+		end
 
 		if u_meta:get_float("rw_cooldown") <= 0 then
 			if itemstack:get_definition().loaded_gun ~= nil then
