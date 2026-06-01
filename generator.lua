@@ -24,7 +24,7 @@ core.register_node("rangedweapons:generator", {
 	on_punch = function(pos, node, puncher)
 		local nodemeta = core.get_meta(pos)
 		local inv = puncher:get_inventory()
-		inv:add_item("main", "rangedweapons:power_particle " .. nodemeta:get_int("power_generated")) 
+		inv:add_item("main", "rangedweapons:power_particle " .. nodemeta:get_int("power_generated"))
 		nodemeta:set_int("power_generated", 0)
 		nodemeta:set_string("infotext", "currently generated power:" .. nodemeta:get_int("power_generated"))
 	end,
