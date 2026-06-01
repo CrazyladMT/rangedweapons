@@ -1,7 +1,9 @@
 core.register_craftitem("rangedweapons:glass_shards", {
-		description = "" ..core.colorize("#35cdff","Glass shards\n")..core.colorize("#FFFFFF", "3 of those, can be crafted into a file of glass fragments"),
+	description = core.colorize("#35cdff", "Glass shards\n") ..
+		"3 of these can be crafted into a pile of glass fragments",
 	inventory_image = "rangedweapons_glass_shards.png",
 })
+
 core.register_craft({
 	output = "vessels:glass_fragments",
 	recipe = {
@@ -28,4 +30,3 @@ core.register_node("rangedweapons:broken_glass", {
 	damage_per_second = 2,
 	groups = {oddly_breakable_by_hand = 3},
 })
-
