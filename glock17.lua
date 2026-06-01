@@ -1,5 +1,3 @@
-
-
 core.register_tool("rangedweapons:glock17_rld", {
 	stack_max= 1,
 	wield_scale = {x=1.1,y=1.1,z=1.05},
@@ -9,7 +7,6 @@ core.register_tool("rangedweapons:glock17_rld", {
 	groups = {not_in_creative_inventory = 1},
 	inventory_image = "rangedweapons_glock17_rld.png",
 })
-
 
 core.register_tool("rangedweapons:glock17_r", {
 	stack_max= 1,
@@ -44,16 +41,25 @@ core.register_tool("rangedweapons:glock17_rrr", {
 	inventory_image = "rangedweapons_glock17_rld.png",
 })
 
-
-
-
 core.register_tool("rangedweapons:glock17", {
-		description = "" ..core.colorize("#35cdff","Glock 17\n") ..core.colorize("#FFFFFF", "Gun damage: 5\n") ..core.colorize("#FFFFFF", "Accuracy: 96%\n") ..core.colorize("#FFFFFF", "Gun knockback: 4\n")  ..core.colorize("#FFFFFF", "Gun Critical chance: 15%\n") ..core.colorize("#FFFFFF", "Gun Critical efficiency: 2.2x\n") ..core.colorize("#FFFFFF", "Reload delay: 0.9\n")..core.colorize("#FFFFFF", "Clip size: 17/17/17\n") ..core.colorize("#FFFFFF", "Ammunition: 9x19mm Parabellum/10mm Auto/.45acp\n") ..core.colorize("#FFFFFF", "Rate of fire: 0.35\n") ..core.colorize("#FFFFFF", "Gun type: Handgun\n") ..core.colorize("#FFFFFF", "Bullet velocity: 30"),
-	wield_scale = {x=1.2,y=1.2,z=1.2},
+	description = core.colorize("#35cdff","Glock 17\n") ..
+		"Gun damage: 5\n" ..
+		"Accuracy: 96%\n" ..
+		"Gun knockback: 4\n" ..
+		"Gun Critical chance: 15%\n" ..
+		"Gun Critical efficiency: 2.2x\n" ..
+		"Reload delay: 0.9\n" ..
+		"Clip size: 17/17/17\n" ..
+		"Ammunition: 9x19mm Parabellum/10mm Auto/.45acp\n" ..
+		"Rate of fire: 0.35\n" ..
+		"Gun type: Handgun\n" ..
+		"Bullet velocity: 30",
+
+	wield_scale = {x = 1.2, y = 1.2, z = 1.2},
 	range = 0,
 	inventory_image = "rangedweapons_glock17.png",
-RW_gun_capabilities = {
-		gun_damage = {fleshy=5,knockback=4},
+	RW_gun_capabilities = {
+		gun_damage = {fleshy = 5, knockback = 4},
 		gun_crit = 15,
 		gun_critEffc = 2.2,
 		suitable_ammo = {{"rangedweapons:9mm",17},{"rangedweapons:10mm",17},{"rangedweapons:45acp",17}},
@@ -73,11 +79,11 @@ RW_gun_capabilities = {
 		gun_sound = "rangedweapons_glock",
 	},
 	on_secondary_use = function(itemstack, user, pointed_thing)
-rangedweapons_reload_gun(itemstack, user)
-return itemstack
-end,
+		rangedweapons_reload_gun(itemstack, user)
+		return itemstack
+	end,
 	on_use = function(itemstack, user, pointed_thing)
-rangedweapons_shoot_gun(itemstack, user)
-return itemstack
+		rangedweapons_shoot_gun(itemstack, user)
+		return itemstack
 	end,
 })
