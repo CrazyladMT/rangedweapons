@@ -1,388 +1,367 @@
-forbidden_ents = {
-"",
-}
-
+forbidden_ents = {""}
 
 core.register_alias("rangedweapons:726mm", "rangedweapons:762mm")
 
 core.register_craftitem("rangedweapons:shot_bullet_visual", {
-	wield_scale = {x=1.0,y=1.0,z=1.0},
+	wield_scale = {x = 1.0, y = 1.0, z = 1.0},
 	inventory_image = "rangedweapons_bulletshot.png",
 })
 
-
 local rangedweapons_shot_bullet = {
 	timer = 0,
-initial_properties = {
-	physical = true,
-	hp_max = 420,
-	glow = 100,
-	visual = "wielditem",
-	visual_size = {x=0.75, y=0.75},
-	textures = {"rangedweapons:shot_bullet_visual"},
-	lastpos = {},
+	initial_properties = {
+		physical = true,
+		hp_max = 420,
+		glow = 100,
+		visual = "wielditem",
+		visual_size = {x=0.75, y=0.75},
+		textures = {"rangedweapons:shot_bullet_visual"},
+		lastpos = {},
         collide_with_objects = true,
-	collisionbox = {-0.0025, -0.0025, -0.0025, 0.0025, 0.0025, 0.0025},
-},
+		collisionbox = {-0.0025, -0.0025, -0.0025, 0.0025, 0.0025, 0.0025},
+	},
 }
 
 local use_particles = core.settings:get_bool("rangedweapons_impact_particles", true)
 local max_lifetime = tonumber(core.settings:get("rangedweapons_bullet_lifetime")) or 10.0
 
 rangedweapons_shot_bullet.on_step = function(self, dtime, moveresult)
-----------------------------------------
----------------------------------------
-
-if self.owner == nil then
-	self.object:remove()
-	return
-end
-
-local sparks = self.sparks or 0
-local ignite = self.ignite or 0
-local size = self.size or 0.0025
-
-local SBP = self.bullet_particles
-if SBP ~= nil then
-for i=1,math.random(SBP.amount[1],SBP.amount[2]) do
-	core.add_particle({
-		pos = {x=self.object:get_pos().x+(math.random(-SBP.pos_randomness,SBP.pos_randomness)/100),y=self.object:get_pos().y+(math.random(-SBP.pos_randomness,SBP.pos_randomness)/100),z=self.object:get_pos().z+(math.random(-SBP.pos_randomness,SBP.pos_randomness)/100)},
-		velocity = {x=math.random(-SBP.velocity.x,SBP.velocity.x), y=math.random(-SBP.velocity.y,SBP.velocity.y), z=math.random(-SBP.velocity.z,SBP.velocity.z)},
-		acceleration = {x=math.random(-SBP.acceleration.x,SBP.acceleration.x), y=math.random(-SBP.acceleration.y,SBP.acceleration.y)-SBP.gravity, z=math.random(-SBP.acceleration.z,SBP.acceleration.z)},
-		expirationtime = SBP.lifetime,
-		size = math.random(SBP.minsize,SBP.maxsize)/10,
-		collisiondetection = SBP.collisiondetection,
-		vertical = false,
-		texture = SBP.texture,
-          animation = {type="vertical_frames", aspect_w=8, aspect_h=8, length = SBP.lifetime+0.1,},
-		glow = SBP.glow,
-	})
-end end
-
-
-self.timer = self.timer + dtime
-
-if self.timer >= 0 then
-self.object:set_properties({collide_with_objects = true})
-self.object:set_properties({collisionbox = {-size, -size, -size, size, size, size}})
-end
-
-if self.timer > max_lifetime then
-self.object:remove()
-end
-
-if moveresult.collides == true then
-if moveresult.collisions[1] ~= nil then
-
-local mobPen = self.mobPen or 0
-local nodePen = self.nodePen or 0
-local door_break = self.door_break or 0
-local glass_break = self.glass_break or 0
-
-if moveresult.collisions[1].type == "node" then
-
-core.check_for_falling(moveresult.collisions[1].node_pos)
-
-
-if use_particles and
-core.registered_nodes[core.get_node(moveresult.collisions[1].node_pos).name]  and
-core.registered_nodes[core.get_node(moveresult.collisions[1].node_pos).name].tiles and
-core.registered_nodes[core.get_node(moveresult.collisions[1].node_pos).name].tiles[1]
-then
-
-local hit_texture = core.registered_nodes[core.get_node(moveresult.collisions[1].node_pos).name].tiles[1]
-
-if hit_texture.name ~= nil then
-hit_texture = hit_texture.name
-end
-
-	core.add_particle({
-		pos = self.object:get_pos(),
-		velocity = {x=0, y=0, z=0},
-          	acceleration = {x=0, y=0, z=0},
-		expirationtime = 30,
-		size = math.random(10,20)/10,
-		collisiondetection = false,
-		vertical = false,
-		texture = "rangedweapons_bullethole.png",
-		glow = 0,
-	})
-
-	for i=1,math.random(4,8) do
-	core.add_particle({
-		pos = self.object:get_pos(),
-		velocity = {x=math.random(-3.0,3.0), y=math.random(2.0,5.0), z=math.random(-3.0,3.0)},
-          	acceleration = {x=math.random(-3.0,3.0), y=math.random(-10.0,-15.0), z=math.random(-3.0,3.0)},
-		expirationtime = 0.5,
-		size = math.random(10,20)/10,
-		collisiondetection = true,
-		vertical = false,
-		texture = ""..hit_texture.."^[resize:4x4".."",
-		glow = 0,
-	})
+	if self.owner == nil then
+		self.object:remove()
+		return
 	end
 
-end 
+	local sparks = self.sparks or 0
+	local ignite = self.ignite or 0
+	local size = self.size or 0.0025
 
+	local SBP = self.bullet_particles
 
-core.sound_play("default_dig_cracky", {pos = self.object:get_pos(), gain = 1.0}, true)
-
-if ignite > 0 then
-
-if core.get_node(moveresult.collisions[1].node_pos).name == "rangedweapons:barrel" then
-core.swap_node(moveresult.collisions[1].node_pos, {name = "air"})
-tnt.boom(moveresult.collisions[1].node_pos, {radius = 3})
-end 
-
-if core.get_node(moveresult.collisions[1].node_pos).name == "tnt:tnt" then
-core.swap_node(moveresult.collisions[1].node_pos, {name = "tnt:tnt_burning"})
-	core.sound_play("tnt_ignite", {pos = moveresult.collisions[1].node_pos}, true)
-	core.get_node_timer(moveresult.collisions[1].node_pos):start(3)
-	core.check_for_falling(moveresult.collisions[1].node_pos)
-end
-
-end
-
-
-if door_break > 0 and core.settings:get_bool("rangedweapons_door_breaking", true) then
-
-if string.find(core.get_node(moveresult.collisions[1].node_pos).name,"door_wood") then
-
-core.swap_node(moveresult.collisions[1].node_pos, {name = "air"})
-core.add_item(moveresult.collisions[1].node_pos, "default:wood 5")
-core.sound_play("rangedweapons_woodbreak",{pos = moveresult.collisions[1].node_pos}, true)
-
-end end
-
-if glass_break > 0 and core.settings:get_bool("rangedweapons_glass_breaking", true) then
-	
-local nodeName = core.get_node(moveresult.collisions[1].node_pos).name
-
-	if nodeName == "default:glass" then
-	core.swap_node(moveresult.collisions[1].node_pos, {name = "rangedweapons:broken_glass"})
-core.sound_play("glass_break",{pos = moveresult.collisions[1].node_pos}, true)
-	end
-	if   nodeName == "xpanes:pane" or
-		nodeName == "xpanes:pane_flat" then
-core.swap_node(moveresult.collisions[1].node_pos, {name = "air"})
-core.add_item(moveresult.collisions[1].node_pos, "rangedweapons:glass_shards")
-core.sound_play("glass_break",{pos = moveresult.collisions[1].node_pos}, true)
-	end
-if string.find(nodeName,"door_glass") then
-core.swap_node(moveresult.collisions[1].node_pos, {name = "air"})
-core.add_item(moveresult.collisions[1].node_pos, "vessels:glass_fragments 5")
-core.sound_play("glass_break",{pos = moveresult.collisions[1].node_pos}, true)
-	end
-end
-
-
-if core.get_item_group(core.get_node(moveresult.collisions[1].node_pos).name, "level") > 1  then
-   if core.settings:get_bool("rangedweapons_bullet_ricochet", true) then
-      self.object:set_velocity(moveresult.collisions[1].old_velocity)
-
-      if sparks > 0 then
-      	 make_sparks(self.object:get_pos())
-      end
-
-      local objVel = moveresult.collisions[1].old_velocity
-      local objRot = self.object:get_rotation()
-
-      if objRot and objVel then
-      	 if moveresult.collisions[1].axis == "x" then
-	    self.object:set_rotation({x=0,y=objRot.y,z=objRot.z+3})
-	    self.object:set_velocity({x=objVel.x*-1,y=objVel.y,z=objVel.z})
-	 end
-
-	 if moveresult.collisions[1].axis == "z" then
-	    self.object:set_rotation({x=0,y=objRot.y,z=objRot.z+3})
-	    self.object:set_velocity({x=objVel.x,y=objVel.y,z=objVel.z*-1})
-	 end
-
-	 if moveresult.collisions[1].axis == "y" then
-	    self.object:set_rotation({x=0,y=objRot.y+3,z=objRot.z+3})
-	    self.object:set_velocity({x=objVel.x,y=objVel.y*-1,z=objVel.z})
-	 end
-      end
-   else
-	self.object:remove()
-   end
-
-else
-
-if math.random(1,100) <= nodePen then
-   if use_particles then
-	for i=1,10 do
-	core.add_particle({
-		pos = self.object:get_pos(),
-		velocity = {x=1.5, y=1.5, z=1.5} ,
-          	acceleration = {x=math.random(-3.0,3.0), y=math.random(-4.0,4.0), z=math.random(-3.0,3.0)},
-		expirationtime = 1.25,
-		size = math.random(3,6),
-		collisiondetection = false,
-		vertical = false,
-		texture = "tnt_smoke.png",
-		glow = 2,
-	})
-	end
-    end
-core.sound_play("default_dig_cracky", {pos = self.object:get_pos(), gain = 1.0}, true)
-self.object:set_properties({collisionbox = {0,0,0,0,0,0}})
-self.object:set_velocity(moveresult.collisions[1].old_velocity)
-else
-
-if core.get_item_group(core.get_node(moveresult.collisions[1].node_pos).name, "leaves") > 0  then
-
-core.sound_play("default_dig_snappy", {pos = self.object:get_pos(), gain = 1.5}, true)
-
-if use_particles then
-for i = 1,math.random(3,6) do
-	core.add_particle({
-		pos = self.object:get_pos(),
-		velocity = {x=math.random(-2,2), y=math.random(3,6), z=math.random(-2,2)},
-          acceleration = {x=math.random(-2,2), y=math.random(-3,-6), z=math.random(-2,2)},
-		expirationtime = math.random(2,4), 
-		size = math.random(6,9), 
-		collisiondetection = true,
-		collision_removal = false,
-		vertical = false,
-		texture = "rangedweapons_leaf.png",
-          animation = {type="vertical_frames", aspect_w=8, aspect_h=8, length = 0.8,},
-		glow = 15,
-	})
-end
-end
-
-self.object:set_properties({collisionbox = {0,0,0,0,0,0}})
-self.object:set_velocity(moveresult.collisions[1].old_velocity)
-
-else
-if self.OnCollision ~= nil then
-self.OnCollision(self.owner,self,moveresult.collisions[1])
-end
-self.object:remove()
-end
-end
-end
-
-end
-
-if moveresult.collisions[1].type == "object" and (not moveresult.collisions[1].object:is_player() or moveresult.collisions[1].object:get_player_name() ~= self.owner) then
-
-
-local actualDamage = self.damage or {fleshy=1}
-local damage = {}
-local crit = self.crit or 0
-local critEffc = self.critEffc or 1
-local owner = core.get_player_by_name(self.owner)
-local hit_texture = "rangedweapons_hit.png"
-local dps = self.dps or 0
-local skill = self.skill_value or 1
-
-for _, dmg in pairs(actualDamage) do
-    damage[_] = actualDamage[_]
-end
-
-local player_dmg_multiplier = tonumber(core.settings:get("rangedweapons_player_dmg_multiplier")) or 1.0
-local headshot_dmg_multiplier = tonumber(core.settings:get("rangedweapons_headshot_dmg_multiplier")) or 1.75
-local mob_dmg_multiplier = tonumber(core.settings:get("rangedweapons_mob_dmg_multiplier")) or 1.0
-
-if moveresult.collisions[1].object:is_player() then
-   for _, player_dmg in pairs(damage) do
-       damage[_] = damage[_] * player_dmg_multiplier
-   end
-   if self.object:get_pos().y - moveresult.collisions[1].object:get_pos().y > 1.5 then
-      for _, hs_dmg in pairs(damage) do
-      	  damage[_] = damage[_] * headshot_dmg_multiplier
-      end
-   end 
-   knockback = damage.knockback or 0
-   projectile_kb(moveresult.collisions[1].object,self.object,knockback)
-else
-   for _, mob_dmg in pairs(damage) do
-       damage[_] = damage[_] * mob_dmg_multiplier
-   end
-end
-
-for _, bonus_dmg in pairs(damage) do
-    damage[_] = (damage[_]*skill) + (self.dps*self.timer)
-end
-
-if math.random(1,100) <= crit+((skill*10)-10) then
-   for _, critDmg in pairs(damage) do
-       damage[_] = damage[_] * critEffc
-   end
-
-
-   local entpos = self.object:get_pos()
-   core.add_particle	({
-   	pos = entpos, velocity = 0, acceleration = {x=0, y=5, z=0},
-	expirationtime = 0.75, size = 12, collisiondetection = false,
-	vertical = false, texture = "rangedweapons_crit.png", glow = 30,})
-	hit_texture = "rangedweapons_crithit.png"
-   end
-
-moveresult.collisions[1].object:punch(owner, 1.0, {
-		full_punch_interval = 1.0,
-		damage_groups = damage,}, nil)
-owner:hud_change(hit, "text", hit_texture)
-
-	local bloodyness = tonumber(core.settings:get("rangedweapons_bloodyness")) or 10
-	for i=1,math.random(math.ceil(bloodyness*0.66),math.ceil(bloodyness*1.5)) do
-	core.add_particle({
-		pos = self.object:get_pos(),
-		velocity = {x=math.random(-15.0,15.0)/10, y=math.random(2.0,5.0), z=math.random(-15.0,15.0)/10},
-          	acceleration = {x=math.random(-3.0,3.0), y=math.random(-10.0,-15.0), z=math.random(-3.0,3.0)},
-		expirationtime = 0.75,
-		size = math.random(10,20)/10,
-		collisiondetection = true,
-		vertical = false,
-		texture = "rangedweapons_blood.png",
-          animation = {type="vertical_frames", aspect_w=8, aspect_h=8, length = 0.8,},
-		glow = 0,
-	})
+	if SBP ~= nil then
+		for i = 1, math.random(SBP.amount[1],SBP.amount[2]) do
+			core.add_particle({
+				pos = {x=self.object:get_pos().x+(math.random(-SBP.pos_randomness,SBP.pos_randomness)/100),y=self.object:get_pos().y+(math.random(-SBP.pos_randomness,SBP.pos_randomness)/100),z=self.object:get_pos().z+(math.random(-SBP.pos_randomness,SBP.pos_randomness)/100)},
+				velocity = {x=math.random(-SBP.velocity.x,SBP.velocity.x), y=math.random(-SBP.velocity.y,SBP.velocity.y), z=math.random(-SBP.velocity.z,SBP.velocity.z)},
+				acceleration = {x=math.random(-SBP.acceleration.x,SBP.acceleration.x), y=math.random(-SBP.acceleration.y,SBP.acceleration.y)-SBP.gravity, z=math.random(-SBP.acceleration.z,SBP.acceleration.z)},
+				expirationtime = SBP.lifetime,
+				size = math.random(SBP.minsize,SBP.maxsize)/10,
+				collisiondetection = SBP.collisiondetection,
+				vertical = false,
+				texture = SBP.texture,
+          		animation = {type="vertical_frames", aspect_w=8, aspect_h=8, length = SBP.lifetime+0.1,},
+				glow = SBP.glow,
+			})
+		end
 	end
 
 
-if math.random(1,100) <= mobPen then
-   if use_particles then
-	for i=1,10 do
-	core.add_particle({
-		pos = self.object:get_pos(),
-		velocity = {x=1.5, y=1.5, z=1.5} ,
-          	acceleration = {x=math.random(-3.0,3.0), y=math.random(-4.0,4.0), z=math.random(-3.0,3.0)},
-		expirationtime = 1.25,
-		size = math.random(3,6),
-		collisiondetection = false,
-		vertical = false,
-		texture = "tnt_smoke.png",
-		glow = 2,
-	})
+	self.timer = self.timer + dtime
+
+	if self.timer >= 0 then
+		self.object:set_properties({collide_with_objects = true})
+		self.object:set_properties({collisionbox = {-size, -size, -size, size, size, size}})
 	end
-    end
-core.sound_play("default_dig_cracky", {pos = self.object:get_pos(), gain = 1.0}, true)
-self.object:set_properties({collisionbox = {0,0,0,0,0,0}})
-self.object:set_velocity(moveresult.collisions[1].old_velocity)
-else
-if self.OnCollision ~= nil then
-self.OnCollision(self.owner,self,moveresult.collisions[1])
-end
-self.object:remove()
-end
-end
 
+	if self.timer > max_lifetime then
+		self.object:remove()
+	end
 
-else
+	if moveresult.collides == true then
+		if moveresult.collisions[1] ~= nil then
+			local mobPen = self.mobPen or 0
+			local nodePen = self.nodePen or 0
+			local door_break = self.door_break or 0
+			local glass_break = self.glass_break or 0
 
-self.object:remove()
+			if moveresult.collisions[1].type == "node" then
+				core.check_for_falling(moveresult.collisions[1].node_pos)
 
-end
-end
+				if use_particles and
+					core.registered_nodes[core.get_node(moveresult.collisions[1].node_pos).name] and
+					core.registered_nodes[core.get_node(moveresult.collisions[1].node_pos).name].tiles and
+					core.registered_nodes[core.get_node(moveresult.collisions[1].node_pos).name].tiles[1]
+				then
+					local hit_texture = core.registered_nodes[core.get_node(moveresult.collisions[1].node_pos).name].tiles[1]
+					if hit_texture.name ~= nil then
+						hit_texture = hit_texture.name
+					end
 
+					core.add_particle({
+						pos = self.object:get_pos(),
+						velocity = {x=0, y=0, z=0},
+          				acceleration = {x=0, y=0, z=0},
+						expirationtime = 30,
+						size = math.random(10,20)/10,
+						collisiondetection = false,
+						vertical = false,
+						texture = "rangedweapons_bullethole.png",
+						glow = 0,
+					})
+
+					for i=1,math.random(4,8) do
+						core.add_particle({
+							pos = self.object:get_pos(),
+							velocity = {x=math.random(-3.0,3.0), y=math.random(2.0,5.0), z=math.random(-3.0,3.0)},
+          					acceleration = {x=math.random(-3.0,3.0), y=math.random(-10.0,-15.0), z=math.random(-3.0,3.0)},
+							expirationtime = 0.5,
+							size = math.random(10,20)/10,
+							collisiondetection = true,
+							vertical = false,
+							texture = ""..hit_texture.."^[resize:4x4".."",
+							glow = 0,
+						})
+					end
+				end
+
+				core.sound_play("default_dig_cracky", {pos = self.object:get_pos(), gain = 1.0}, true)
+
+				if ignite > 0 then
+					if core.get_node(moveresult.collisions[1].node_pos).name == "rangedweapons:barrel" then
+						core.swap_node(moveresult.collisions[1].node_pos, {name = "air"})
+						tnt.boom(moveresult.collisions[1].node_pos, {radius = 3})
+					end
+
+					if core.get_node(moveresult.collisions[1].node_pos).name == "tnt:tnt" then
+						core.swap_node(moveresult.collisions[1].node_pos, {name = "tnt:tnt_burning"})
+						core.sound_play("tnt_ignite", {pos = moveresult.collisions[1].node_pos}, true)
+						core.get_node_timer(moveresult.collisions[1].node_pos):start(3)
+						core.check_for_falling(moveresult.collisions[1].node_pos)
+					end
+				end
+
+				if door_break > 0 and core.settings:get_bool("rangedweapons_door_breaking", true) then
+					if string.find(core.get_node(moveresult.collisions[1].node_pos).name,"door_wood") then
+						core.swap_node(moveresult.collisions[1].node_pos, {name = "air"})
+						core.add_item(moveresult.collisions[1].node_pos, "default:wood 5")
+						core.sound_play("rangedweapons_woodbreak",{pos = moveresult.collisions[1].node_pos}, true)
+					end
+				end
+
+				if glass_break > 0 and core.settings:get_bool("rangedweapons_glass_breaking", true) then
+					local nodeName = core.get_node(moveresult.collisions[1].node_pos).name
+					if nodeName == "default:glass" then
+						core.swap_node(moveresult.collisions[1].node_pos, {name = "rangedweapons:broken_glass"})
+						core.sound_play("glass_break",{pos = moveresult.collisions[1].node_pos}, true)
+					end
+
+					if nodeName == "xpanes:pane" or nodeName == "xpanes:pane_flat" then
+						core.swap_node(moveresult.collisions[1].node_pos, {name = "air"})
+						core.add_item(moveresult.collisions[1].node_pos, "rangedweapons:glass_shards")
+						core.sound_play("glass_break",{pos = moveresult.collisions[1].node_pos}, true)
+					end
+
+					if string.find(nodeName,"door_glass") then
+						core.swap_node(moveresult.collisions[1].node_pos, {name = "air"})
+						core.add_item(moveresult.collisions[1].node_pos, "vessels:glass_fragments 5")
+						core.sound_play("glass_break",{pos = moveresult.collisions[1].node_pos}, true)
+					end
+				end
+
+				if core.get_item_group(core.get_node(moveresult.collisions[1].node_pos).name, "level") > 1 then
+					if core.settings:get_bool("rangedweapons_bullet_ricochet", true) then
+      					self.object:set_velocity(moveresult.collisions[1].old_velocity)
+
+      					if sparks > 0 then
+      	 					make_sparks(self.object:get_pos())
+      					end
+
+      					local objVel = moveresult.collisions[1].old_velocity
+      					local objRot = self.object:get_rotation()
+
+      					if objRot and objVel then
+      	 					if moveresult.collisions[1].axis == "x" then
+	    						self.object:set_rotation({x=0,y=objRot.y,z=objRot.z+3})
+	    						self.object:set_velocity({x=objVel.x*-1,y=objVel.y,z=objVel.z})
+	 						end
+
+	 						if moveresult.collisions[1].axis == "z" then
+	    						self.object:set_rotation({x=0,y=objRot.y,z=objRot.z+3})
+	    						self.object:set_velocity({x=objVel.x,y=objVel.y,z=objVel.z*-1})
+	 						end
+
+	 						if moveresult.collisions[1].axis == "y" then
+	    						self.object:set_rotation({x=0,y=objRot.y+3,z=objRot.z+3})
+	    						self.object:set_velocity({x=objVel.x,y=objVel.y*-1,z=objVel.z})
+	 						end
+      					end
+   					else
+						self.object:remove()
+   					end
+				else
+					if math.random(1,100) <= nodePen then
+   						if use_particles then
+							for i = 1, 10 do
+								core.add_particle({
+									pos = self.object:get_pos(),
+									velocity = {x=1.5, y=1.5, z=1.5} ,
+          							acceleration = {x=math.random(-3.0,3.0), y=math.random(-4.0,4.0), z=math.random(-3.0,3.0)},
+									expirationtime = 1.25,
+									size = math.random(3,6),
+									collisiondetection = false,
+									vertical = false,
+									texture = "tnt_smoke.png",
+									glow = 2,
+								})
+							end
+    					end
+
+						core.sound_play("default_dig_cracky", {pos = self.object:get_pos(), gain = 1.0}, true)
+						self.object:set_properties({collisionbox = {0,0,0,0,0,0}})
+						self.object:set_velocity(moveresult.collisions[1].old_velocity)
+					else
+						if core.get_item_group(core.get_node(moveresult.collisions[1].node_pos).name, "leaves") > 0 then
+							core.sound_play("default_dig_snappy", {pos = self.object:get_pos(), gain = 1.5}, true)
+
+							if use_particles then
+								for i = 1,math.random(3,6) do
+									core.add_particle({
+										pos = self.object:get_pos(),
+										velocity = {x=math.random(-2,2), y=math.random(3,6), z=math.random(-2,2)},
+          								acceleration = {x=math.random(-2,2), y=math.random(-3,-6), z=math.random(-2,2)},
+										expirationtime = math.random(2,4), 
+										size = math.random(6,9), 
+										collisiondetection = true,
+										collision_removal = false,
+										vertical = false,
+										texture = "rangedweapons_leaf.png",
+          								animation = {type="vertical_frames", aspect_w=8, aspect_h=8, length = 0.8,},
+										glow = 15,
+									})
+								end
+							end
+
+							self.object:set_properties({collisionbox = {0,0,0,0,0,0}})
+							self.object:set_velocity(moveresult.collisions[1].old_velocity)
+						else
+							if self.OnCollision ~= nil then
+								self.OnCollision(self.owner,self,moveresult.collisions[1])
+							end
+							self.object:remove()
+						end
+					end
+				end
+			end
+
+			if moveresult.collisions[1].type == "object" and (not moveresult.collisions[1].object:is_player() or moveresult.collisions[1].object:get_player_name() ~= self.owner) then
+				local actualDamage = self.damage or {fleshy=1}
+				local damage = {}
+				local crit = self.crit or 0
+				local critEffc = self.critEffc or 1
+				local owner = core.get_player_by_name(self.owner)
+				local hit_texture = "rangedweapons_hit.png"
+				local dps = self.dps or 0
+				local skill = self.skill_value or 1
+
+				for _, dmg in pairs(actualDamage) do
+    				damage[_] = actualDamage[_]
+				end
+
+				local player_dmg_multiplier = tonumber(core.settings:get("rangedweapons_player_dmg_multiplier")) or 1.0
+				local headshot_dmg_multiplier = tonumber(core.settings:get("rangedweapons_headshot_dmg_multiplier")) or 1.75
+				local mob_dmg_multiplier = tonumber(core.settings:get("rangedweapons_mob_dmg_multiplier")) or 1.0
+
+				if moveresult.collisions[1].object:is_player() then
+   					for _, player_dmg in pairs(damage) do
+       					damage[_] = damage[_] * player_dmg_multiplier
+   					end
+
+   					if self.object:get_pos().y - moveresult.collisions[1].object:get_pos().y > 1.5 then
+      					for _, hs_dmg in pairs(damage) do
+      	  					damage[_] = damage[_] * headshot_dmg_multiplier
+      					end
+   					end
+
+   					knockback = damage.knockback or 0
+   					projectile_kb(moveresult.collisions[1].object,self.object,knockback)
+				else
+   					for _, mob_dmg in pairs(damage) do
+       					damage[_] = damage[_] * mob_dmg_multiplier
+   					end
+				end
+
+				for _, bonus_dmg in pairs(damage) do
+    				damage[_] = (damage[_]*skill) + (self.dps*self.timer)
+				end
+
+				if math.random(1,100) <= crit+((skill*10)-10) then
+   					for _, critDmg in pairs(damage) do
+       					damage[_] = damage[_] * critEffc
+   					end
+
+   					local entpos = self.object:get_pos()
+   					core.add_particle({
+   						pos = entpos,
+						velocity = 0,
+						acceleration = {x=0, y=5, z=0},
+						expirationtime = 0.75,
+						size = 12,
+						collisiondetection = false,
+						vertical = false,
+						texture = "rangedweapons_crit.png",
+						glow = 30,
+					})
+
+					hit_texture = "rangedweapons_crithit.png"
+   				end
+
+				moveresult.collisions[1].object:punch(owner, 1.0, {
+					full_punch_interval = 1.0,
+					damage_groups = damage,
+				}, nil)
+
+				owner:hud_change(hit, "text", hit_texture)
+
+				local bloodyness = tonumber(core.settings:get("rangedweapons_bloodyness")) or 10
+				for i=1,math.random(math.ceil(bloodyness*0.66),math.ceil(bloodyness*1.5)) do
+					core.add_particle({
+						pos = self.object:get_pos(),
+						velocity = {x=math.random(-15.0,15.0)/10, y=math.random(2.0,5.0), z=math.random(-15.0,15.0)/10},
+          				acceleration = {x=math.random(-3.0,3.0), y=math.random(-10.0,-15.0), z=math.random(-3.0,3.0)},
+						expirationtime = 0.75,
+						size = math.random(10,20)/10,
+						collisiondetection = true,
+						vertical = false,
+						texture = "rangedweapons_blood.png",
+          				animation = {type="vertical_frames", aspect_w=8, aspect_h=8, length = 0.8,},
+						glow = 0,
+					})
+				end
+
+				if math.random(1,100) <= mobPen then
+   					if use_particles then
+						for i=1,10 do
+							core.add_particle({
+								pos = self.object:get_pos(),
+								velocity = {x=1.5, y=1.5, z=1.5} ,
+          						acceleration = {x=math.random(-3.0,3.0), y=math.random(-4.0,4.0), z=math.random(-3.0,3.0)},
+								expirationtime = 1.25,
+								size = math.random(3,6),
+								collisiondetection = false,
+								vertical = false,
+								texture = "tnt_smoke.png",
+								glow = 2,
+							})
+						end
+    				end
+
+					core.sound_play("default_dig_cracky", {pos = self.object:get_pos(), gain = 1.0}, true)
+					self.object:set_properties({collisionbox = {0,0,0,0,0,0}})
+					self.object:set_velocity(moveresult.collisions[1].old_velocity)
+				else
+					if self.OnCollision ~= nil then
+						self.OnCollision(self.owner,self,moveresult.collisions[1])
+					end
+
+					self.object:remove()
+				end
+			end
+		else
+			self.object:remove()
+		end
+	end
 end
 
 core.register_entity("rangedweapons:shot_bullet", rangedweapons_shot_bullet) 
-
-
 
 ---
 --- actual mags
@@ -401,6 +380,7 @@ core.register_craftitem("rangedweapons:handgun_mag_black", {
 	wield_scale = {x=0.6,y=0.6,z=0.8},
 	inventory_image = "rangedweapons_magazine_handgun.png",
 })
+
 local rangedweapons_mag = {
 	physical = false,
 	timer = 0,
@@ -410,24 +390,25 @@ local rangedweapons_mag = {
 	lastpos= {},
 	collisionbox = {0, 0, 0, 0, 0, 0},
 }
+
 rangedweapons_mag.on_step = function(self, dtime, pos)
 	self.timer = self.timer + dtime
 	local pos = self.object:get_pos()
 	local node = core.get_node(pos)
 	if self.lastpos.y ~= nil then
 		if core.registered_nodes[node.name] ~= nil then
-		if core.registered_nodes[node.name].walkable then
-	local vel = self.object:get_velocity()
-	local acc = self.object:get_acceleration()
-	self.object:set_velocity({x=0, y=0, z=0})
-	self.object:set_acceleration({x=0, y=0, z=0})
-			end end
+			if core.registered_nodes[node.name].walkable then
+				local vel = self.object:get_velocity()
+				local acc = self.object:get_acceleration()
+				self.object:set_velocity({x=0, y=0, z=0})
+				self.object:set_acceleration({x=0, y=0, z=0})
+			end
+		end
 	end
 	if self.timer > 2.0 then
 		self.object:remove()
-
 	end
-	self.lastpos= {x = pos.x, y = pos.y, z = pos.z}
+	self.lastpos = {x = pos.x, y = pos.y, z = pos.z}
 end
 
 core.register_entity("rangedweapons:mag", rangedweapons_mag)
@@ -453,12 +434,19 @@ core.register_craftitem("rangedweapons:rifle_mag", {
 })
 
 core.register_craftitem("rangedweapons:9mm", {
-	stack_max= 500,
+	stack_max = 500,
 	wield_scale = {x=0.4,y=0.4,z=1.2},
-		description = "" ..core.colorize("#35cdff","9x19mm Parabellum\n")..core.colorize("#FFFFFF", "Bullet damage: 1 \n") ..core.colorize("#FFFFFF", "Bullet crit efficiency: 0.25 \n") ..core.colorize("#FFFFFF", "Bullet crit chance: 1% \n") ..core.colorize("#FFFFFF", "Bullet velocity: 25 \n") ..core.colorize("#FFFFFF", "Bullet knockback: 1 \n")   ..core.colorize("#FFFFFF", "Ammunition for some guns"),
+	description = core.colorize("#35cdff","9x19mm Parabellum\n") ..
+		"Bullet damage: 1 \n" ..
+		"Bullet crit efficiency: 0.25 \n" ..
+		"Bullet crit chance: 1% \n" ..
+		"Bullet velocity: 25 \n" ..
+		"Bullet knockback: 1 \n" ..
+		"Ammunition for some guns",
+
 	inventory_image = "rangedweapons_9mm.png",
 	RW_ammo_capabilities = {
-		ammo_damage = {fleshy=1,knockback=1},
+		ammo_damage = {fleshy = 1, knockback = 1},
 		ammo_critEffc = 0.25,
 		ammo_crit = 1,
 		ammo_velocity = 25,
@@ -474,15 +462,21 @@ core.register_craftitem("rangedweapons:9mm", {
 		ignites_explosives = 1,
 	}
 })
+
 core.register_craftitem("rangedweapons:45acp", {
-	stack_max= 450,
+	stack_max = 450,
 	wield_scale = {x=0.4,y=0.4,z=1.2},
-		description = "" ..core.colorize("#35cdff",".45ACP catridge\n")..core.colorize("#FFFFFF", "Bullet damage: 2 \n") ..core.colorize("#FFFFFF", "Bullet crit efficiency: 0.50 \n") ..core.colorize("#FFFFFF", "Bullet crit chance: 2% \n")
-..core.colorize("#FFFFFF", "Bullet velocity: 20 \n") 
-..core.colorize("#FFFFFF", "Bullet knockback: 2 \n") ..core.colorize("#FFFFFF", "Ammunition for some guns"),
+	description = core.colorize("#35cdff",".45ACP catridge\n") ..
+		"Bullet damage: 2 \n" ..
+		"Bullet crit efficiency: 0.50 \n" ..
+		"Bullet crit chance: 2% \n" ..
+		"Bullet velocity: 20 \n" ..
+		"Bullet knockback: 2 \n" ..
+		"Ammunition for some guns",
+
 	inventory_image = "rangedweapons_45acp.png",
 	RW_ammo_capabilities = {
-		ammo_damage = {fleshy=2,knockback=1},
+		ammo_damage = {fleshy = 2, knockback = 1},
 		ammo_critEffc = 0.50,
 		ammo_crit = 1,
 		ammo_velocity = 20,
@@ -498,14 +492,21 @@ core.register_craftitem("rangedweapons:45acp", {
 		ignites_explosives = 1,
 	},
 })
+
 core.register_craftitem("rangedweapons:10mm", {
-	stack_max= 400,
+	stack_max = 400,
 	wield_scale = {x=0.4,y=0.4,z=1.2},
-		description = "" ..core.colorize("#35cdff","10mm Auto\n")..core.colorize("#FFFFFF", "Bullet damage: 2 \n") ..core.colorize("#FFFFFF", "Bullet crit efficiency:0.30 \n") ..core.colorize("#FFFFFF", "Bullet velocity: 25 \n") 
-..core.colorize("#FFFFFF", "Bullet knockback: 1 \n")  ..core.colorize("#FFFFFF", "Bullet crit chance: 1% \n") ..core.colorize("#FFFFFF", "Ammunition for some guns"),
+	description = core.colorize("#35cdff","10mm Auto\n") ..
+		"Bullet damage: 2 \n" ..
+		"Bullet crit efficiency:0.30 \n" ..
+		"Bullet velocity: 25 \n" ..
+		"Bullet knockback: 1 \n" ..
+		"Bullet crit chance: 1% \n" ..
+		"Ammunition for some guns",
+
 	inventory_image = "rangedweapons_10mm.png",
 	RW_ammo_capabilities = {
-		ammo_damage = {fleshy=2,knockback=1},
+		ammo_damage = {fleshy = 2, knockback = 1},
 		ammo_critEffc = 0.3,
 		ammo_crit = 1,
 		ammo_velocity = 25,
@@ -522,14 +523,21 @@ core.register_craftitem("rangedweapons:10mm", {
 	}
 })
 
-
 core.register_craftitem("rangedweapons:357", {
-	stack_max= 150,
+	stack_max = 150,
 	wield_scale = {x=0.4,y=0.4,z=1.2},
-		description = "" ..core.colorize("#35cdff",".357 magnum round\n")..core.colorize("#FFFFFF", "Bullet damage: 4 \n") ..core.colorize("#FFFFFF", "Bullet crit efficiency: 0.6 \n") ..core.colorize("#FFFFFF", "Bullet crit chance: 3% \n") ..core.colorize("#FFFFFF", "Bullet knockback: 5 \n") ..core.colorize("#FFFFFF", "Bullet enemy Penetration: 5%\n") ..core.colorize("#FFFFFF", "Bullet velocity: 45 \n")    ..core.colorize("#FFFFFF", "Ammunition for some guns"),
+	description = core.colorize("#35cdff",".357 magnum round\n") ..
+		"Bullet damage: 4 \n" ..
+		"Bullet crit efficiency: 0.6 \n" ..
+		"Bullet crit chance: 3% \n" ..
+		"Bullet knockback: 5 \n" ..
+		"Bullet enemy Penetration: 5%\n" ..
+		"Bullet velocity: 45 \n" ..
+		"Ammunition for some guns",
+
 	inventory_image = "rangedweapons_357.png",
 	RW_ammo_capabilities = {
-		ammo_damage = {fleshy=4,knockback=5},
+		ammo_damage = {fleshy = 4, knockback = 5},
 		ammo_critEffc = 0.6,
 		ammo_crit = 3,
 		ammo_velocity = 45,
@@ -548,12 +556,20 @@ core.register_craftitem("rangedweapons:357", {
 })
 
 core.register_craftitem("rangedweapons:50ae", {
-	stack_max= 100,
+	stack_max = 100,
 	wield_scale = {x=0.6,y=0.6,z=1.5},
-		description = "" ..core.colorize("#35cdff",".50AE catridge\n")..core.colorize("#FFFFFF", "Bullet damage: 8 \n") ..core.colorize("#FFFFFF", "Bullet crit efficiency: 0.9 \n") ..core.colorize("#FFFFFF", "Bullet crit chance: 6% \n") ..core.colorize("#FFFFFF", "Bullet knockback: 10 \n") ..core.colorize("#FFFFFF", "Bullet enemy Penetration: 15%\n") ..core.colorize("#FFFFFF", "Bullet velocity: 55 \n")    ..core.colorize("#FFFFFF", "Ammunition for some guns"),
+	description = core.colorize("#35cdff",".50AE catridge\n") ..
+		"Bullet damage: 8 \n" ..
+		"Bullet crit efficiency: 0.9 \n" ..
+		"Bullet crit chance: 6% \n" ..
+		"Bullet knockback: 10 \n" ..
+		"Bullet enemy Penetration: 15%\n" ..
+		"Bullet velocity: 55 \n" ..
+		"Ammunition for some guns",
+
 	inventory_image = "rangedweapons_50ae.png",
 	RW_ammo_capabilities = {
-		ammo_damage = {fleshy=8,knockback=10},
+		ammo_damage = {fleshy = 8, knockback = 10},
 		ammo_critEffc = 0.9,
 		ammo_crit = 6,
 		ammo_velocity = 55,
@@ -572,12 +588,20 @@ core.register_craftitem("rangedweapons:50ae", {
 })
 
 core.register_craftitem("rangedweapons:44", {
-	stack_max= 150,
+	stack_max = 150,
 	wield_scale = {x=0.4,y=0.4,z=1.2},
-		description = "" ..core.colorize("#35cdff",".44 magnum round\n")..core.colorize("#FFFFFF", "Bullet damage: 4 \n") ..core.colorize("#FFFFFF", "Bullet crit efficiency: 0.7 \n") ..core.colorize("#FFFFFF", "Bullet crit chance: 4% \n") ..core.colorize("#FFFFFF", "Bullet knockback: 6 \n") ..core.colorize("#FFFFFF", "Bullet enemy Penetration: 6%\n") ..core.colorize("#FFFFFF", "Bullet velocity: 50 \n")  ..core.colorize("#FFFFFF", "Ammunition for some guns"),
+	description = core.colorize("#35cdff",".44 magnum round\n") ..
+		"Bullet damage: 4 \n" ..
+		"Bullet crit efficiency: 0.7 \n" ..
+		"Bullet crit chance: 4% \n" ..
+		"Bullet knockback: 6 \n" ..
+		"Bullet enemy Penetration: 6%\n" ..
+		"Bullet velocity: 50 \n" ..
+		"Ammunition for some guns",
+
 	inventory_image = "rangedweapons_44.png",
 	RW_ammo_capabilities = {
-		ammo_damage = {fleshy=4,knockback=6},
+		ammo_damage = {fleshy = 4, knockback = 6},
 		ammo_critEffc = 0.7,
 		ammo_crit = 4,
 		ammo_velocity = 50,
@@ -594,13 +618,22 @@ core.register_craftitem("rangedweapons:44", {
 		ignites_explosives = 1,
 	}
 })
+
 core.register_craftitem("rangedweapons:762mm", {
-	stack_max= 250,
+	stack_max = 250,
 	wield_scale = {x=0.4,y=0.4,z=1.2},
-		description = "" ..core.colorize("#35cdff","7.62mm round\n")..core.colorize("#FFFFFF", "Bullet damage: 4 \n") ..core.colorize("#FFFFFF", "Bullet crit efficiency: 0.5 \n") ..core.colorize("#FFFFFF", "Bullet crit chance: 2% \n") ..core.colorize("#FFFFFF", "Bullet velocity: 40 \n") ..core.colorize("#FFFFFF", "Bullet knockback: 4 \n") ..core.colorize("#FFFFFF", "Bullet enemy Penetration: 5%\n")   ..core.colorize("#FFFFFF", "Ammunition for some guns"),
+	description = core.colorize("#35cdff","7.62mm round\n") ..
+		"Bullet damage: 4 \n" ..
+		"Bullet crit efficiency: 0.5 \n" ..
+		"Bullet crit chance: 2% \n" ..
+		"Bullet velocity: 40 \n" ..
+		"Bullet knockback: 4 \n" ..
+		"Bullet enemy Penetration: 5%\n" ..
+		"Ammunition for some guns",
+
 	inventory_image = "rangedweapons_762mm.png",
 	RW_ammo_capabilities = {
-		ammo_damage = {fleshy=4,knockback=4},
+		ammo_damage = {fleshy = 4, knockback = 4},
 		ammo_critEffc = 0.5,
 		ammo_crit = 2,
 		ammo_velocity = 40,
@@ -617,13 +650,21 @@ core.register_craftitem("rangedweapons:762mm", {
 		ignites_explosives = 1,
 	},
 })
+
 core.register_craftitem("rangedweapons:556mm", {
-	stack_max= 300,
+	stack_max = 300,
 	wield_scale = {x=0.4,y=0.4,z=1.2},
-		description = "" ..core.colorize("#35cdff","5.56mm round\n")..core.colorize("#FFFFFF", "Bullet damage: 3 \n") ..core.colorize("#FFFFFF", "Bullet crit efficiency: 0.4 \n") ..core.colorize("#FFFFFF", "Bullet crit chance: 2% \n") ..core.colorize("#FFFFFF", "Bullet velocity: 35 \n") ..core.colorize("#FFFFFF", "Bullet knockback: 3 \n")    ..core.colorize("#FFFFFF", "Ammunition for some guns"),
+	description = core.colorize("#35cdff","5.56mm round\n") ..
+		"Bullet damage: 3 \n" ..
+		"Bullet crit efficiency: 0.4 \n)" ..
+		"Bullet crit chance: 2% \n" ..
+		"Bullet velocity: 35 \n" ..
+		"Bullet knockback: 3 \n" ..
+		"Ammunition for some guns",
+
 	inventory_image = "rangedweapons_556mm.png",
 	RW_ammo_capabilities = {
-		ammo_damage = {fleshy=3,knockback=3},
+		ammo_damage = {fleshy = 3, knockback = 3},
 		ammo_critEffc = 0.4,
 		ammo_crit = 2,
 		ammo_velocity = 35,
@@ -639,13 +680,23 @@ core.register_craftitem("rangedweapons:556mm", {
 		ignites_explosives = 1,
 	},
 })
+
 core.register_craftitem("rangedweapons:shell", {
-	stack_max= 50,
+	stack_max = 50,
 	wield_scale = {x=0.4,y=0.4,z=1.2},
-		description = "" ..core.colorize("#35cdff","12 Gauge shell\n")..core.colorize("#FFFFFF", "Bullet damage: 2 \n") ..core.colorize("#FFFFFF", "Bullet crit efficiency: 0.15 \n") ..core.colorize("#FFFFFF", "Bullet crit chance: 1% \n") ..core.colorize("#FFFFFF", "Bullet velocity: 20 \n") ..core.colorize("#FFFFFF", "Bullet knockback: 4 \n") ..core.colorize("#FFFFFF", "Bullet gravity: 5 \n")  ..core.colorize("#FFFFFF", "Bullet projectile multiplier: 1.5x\n")   ..core.colorize("#FFFFFF", "Ammunition for some guns"),
+	description = core.colorize("#35cdff","12 Gauge shell\n") ..
+		"Bullet damage: 2 \n" ..
+		"Bullet crit efficiency: 0.15 \n" ..
+		"Bullet crit chance: 1% \n" ..
+		"Bullet velocity: 20 \n" ..
+		"Bullet knockback: 4 \n" ..
+		"Bullet gravity: 5 \n" ..
+		"Bullet projectile multiplier: 1.5x\n" ..
+		"Ammunition for some guns",
+
 	inventory_image = "rangedweapons_shell.png",
 	RW_ammo_capabilities = {
-		ammo_damage = {fleshy=2,knockback=4},
+		ammo_damage = {fleshy = 2, knockback = 4},
 		ammo_projectile_multiplier = 1.5,
 		ammo_critEffc = 0.15,
 		ammo_crit = 1,
@@ -664,13 +715,24 @@ core.register_craftitem("rangedweapons:shell", {
 		ignites_explosives = 1,
 	},
 })
+
 core.register_craftitem("rangedweapons:308winchester", {
-	stack_max= 75,
+	stack_max = 75,
 	wield_scale = {x=0.4,y=0.4,z=1.2},
-		description = "" ..core.colorize("#35cdff",".308 winchester round\n")..core.colorize("#FFFFFF", "Bullet damage: 8 \n") ..core.colorize("#FFFFFF", "Bullet crit efficiency: 0.75 \n") ..core.colorize("#FFFFFF", "Bullet crit chance: 4% \n") ..core.colorize("#FFFFFF", "Bullet velocity: 60 \n") ..core.colorize("#FFFFFF", "Bullet knockback: 10 \n") ..core.colorize("#FFFFFF", "Damage gain over 1 sec of flight time: 40 \n") ..core.colorize("#FFFFFF", "Bullet enemy Penetration: 20%\n") ..core.colorize("#FFFFFF", "Bullet node Penetration: 10%\n")      ..core.colorize("#FFFFFF", "Ammunition for some guns"),
+	description = core.colorize("#35cdff",".308 winchester round\n") ..
+		"Bullet damage: 8 \n" ..
+		"Bullet crit efficiency: 0.75 \n" ..
+		"Bullet crit chance: 4% \n" ..
+		"Bullet velocity: 60 \n" ..
+		"Bullet knockback: 10 \n" ..
+		"Damage gain over 1 sec of flight time: 40 \n" ..
+		"Bullet enemy Penetration: 20%\n" ..
+		"Bullet node Penetration: 10%\n" ..
+		"Ammunition for some guns",
+
 	inventory_image = "rangedweapons_308winchester.png",
 	RW_ammo_capabilities = {
-		ammo_damage = {fleshy=8,knockback=10},
+		ammo_damage = {fleshy = 8, knockback = 10},
 		ammo_critEffc = 0.75,
 		ammo_crit = 2,
 		ammo_velocity = 60,
@@ -691,12 +753,22 @@ core.register_craftitem("rangedweapons:308winchester", {
 })
 
 core.register_craftitem("rangedweapons:408cheytac", {
-	stack_max= 40,
+	stack_max = 40,
 	wield_scale = {x=0.65,y=0.65,z=1.5},
-		description = "" ..core.colorize("#35cdff",".408 chey tac\n")..core.colorize("#FFFFFF", "Bullet damage: 10 \n") ..core.colorize("#FFFFFF", "Bullet crit efficiency: 0.8 \n") ..core.colorize("#FFFFFF", "Bullet crit chance: 5% \n") ..core.colorize("#FFFFFF", "Bullet velocity: 70 \n") ..core.colorize("#FFFFFF", "Bullet knockback: 15 \n") ..core.colorize("#FFFFFF", "Damage gain over 1 sec of flight time: 80 \n") ..core.colorize("#FFFFFF", "Bullet enemy Penetration: 45%\n") ..core.colorize("#FFFFFF", "Bullet node Penetration: 20%\n")      ..core.colorize("#FFFFFF", "Ammunition for some guns"),
+	description = core.colorize("#35cdff",".408 chey tac\n") ..
+		"Bullet damage: 10 \n" ..
+		"Bullet crit efficiency: 0.8 \n" ..
+		"Bullet crit chance: 5% \n" ..
+		"Bullet velocity: 70 \n" ..
+		"Bullet knockback: 15 \n" ..
+		"Damage gain over 1 sec of flight time: 80 \n" ..
+		"Bullet enemy Penetration: 45%\n" ..
+		"Bullet node Penetration: 20%\n" ..
+		"Ammunition for some guns",
+
 	inventory_image = "rangedweapons_408cheytac.png",
 	RW_ammo_capabilities = {
-		ammo_damage = {fleshy=10,knockback=15},
+		ammo_damage = {fleshy = 10, knockback = 15},
 		ammo_critEffc = 0.8,
 		ammo_crit = 5,
 		ammo_velocity = 70,
@@ -717,12 +789,21 @@ core.register_craftitem("rangedweapons:408cheytac", {
 })
 
 core.register_craftitem("rangedweapons:40mm", {
-	stack_max= 25,
+	stack_max = 25,
 	wield_scale = {x=0.8,y=0.8,z=2.4},
-		description = "" ..core.colorize("#35cdff",".40mm grenade\n")..core.colorize("#FFFFFF", "Bullet damage: 10 \n") ..core.colorize("#FFFFFF", "Bullet crit efficiency: 1.0 \n") ..core.colorize("#FFFFFF", "Bullet crit chance: 1% \n") ..core.colorize("#FFFFFF", "Bullet velocity: 15 \n") ..core.colorize("#FFFFFF", "Bullet knockback: 10 \n") ..core.colorize("#FFFFFF", "Bullet gravity: 5 \n")  ..core.colorize("#FFFFFF", "explodes on impact with a radius of 2\n")  ..core.colorize("#FFFFFF", "Ammunition for grenade launchers"),
+	description = core.colorize("#35cdff",".40mm grenade\n") ..
+		"Bullet damage: 10 \n" ..
+		"Bullet crit efficiency: 1.0 \n" ..
+		"Bullet crit chance: 1% \n" ..
+		"Bullet velocity: 15 \n" ..
+		"Bullet knockback: 10 \n" ..
+		"Bullet gravity: 5 \n" ..
+		"explodes on impact with a radius of 2\n" ..
+		"Ammunition for grenade launchers",
+
 	inventory_image = "rangedweapons_40mm.png",
 	RW_ammo_capabilities = {
-		ammo_damage = {fleshy=10,knockback=15},
+		ammo_damage = {fleshy = 10, knockback = 15},
 		ammo_critEffc = 1.0,
 		ammo_crit = 1,
 		ammo_velocity = 15,
@@ -738,32 +819,42 @@ core.register_craftitem("rangedweapons:40mm", {
 		ammo_gravity = 5,
 		ignites_explosives = 1,
 
-OnCollision = function(player,bullet,target)
-	tnt.boom(bullet.object:get_pos(), {radius = 2})
-end,
-ammo_particles = {
-	velocity = {x=1,y=1,z=1},
-	acceleration = {x=1,y=1,z=1},
-	collisiondetection = true,
-	lifetime = 1,
-	texture = "tnt_smoke.png",
-	minsize = 50,
-	maxsize = 75,
-	pos_randomness = 50,
-	glow = 20,
-	gravity = 10,
-	amount = {1,1}
-},
-},
+		OnCollision = function(player,bullet,target)
+			tnt.boom(bullet.object:get_pos(), {radius = 2})
+		end,
+
+		ammo_particles = {
+			velocity = {x=1,y=1,z=1},
+			acceleration = {x=1,y=1,z=1},
+			collisiondetection = true,
+			lifetime = 1,
+			texture = "tnt_smoke.png",
+			minsize = 50,
+			maxsize = 75,
+			pos_randomness = 50,
+			glow = 20,
+			gravity = 10,
+			amount = {1,1}
+		},
+	},
 })
 
 core.register_craftitem("rangedweapons:rocket", {
-	stack_max= 15,
+	stack_max = 15,
 	wield_scale = {x=1.2,y=1.2,z=2.4},
-		description = "" ..core.colorize("#35cdff","rocket\n")..core.colorize("#FFFFFF", "Bullet damage: 15 \n") ..core.colorize("#FFFFFF", "Bullet crit efficiency: 1.0 \n") ..core.colorize("#FFFFFF", "Bullet crit chance: 1% \n") ..core.colorize("#FFFFFF", "Bullet velocity: 20 \n") ..core.colorize("#FFFFFF", "Bullet knockback: 20 \n") ..core.colorize("#FFFFFF", "Bullet gravity: 5 \n")  ..core.colorize("#FFFFFF", "explodes on impact with a radius of 3\n")  ..core.colorize("#FFFFFF", "Ammunition for rocket launchers"),
+	description = core.colorize("#35cdff","rocket\n") ..
+		"Bullet damage: 15 \n" ..
+		"Bullet crit efficiency: 1.0 \n" ..
+		"Bullet crit chance: 1% \n" ..
+		"Bullet velocity: 20 \n" ..
+		"Bullet knockback: 20 \n" ..
+		"Bullet gravity: 5 \n" ..
+		"explodes on impact with a radius of 3\n" ..
+		"Ammunition for rocket launchers",
+
 	inventory_image = "rangedweapons_rocket.png",
 	RW_ammo_capabilities = {
-		ammo_damage = {fleshy=15,knockback=20},
+		ammo_damage = {fleshy = 15, knockback = 20},
 		ammo_critEffc = 1.0,
 		ammo_crit = 1,
 		ammo_velocity = 20,
@@ -775,21 +866,22 @@ core.register_craftitem("rangedweapons:rocket", {
 		has_sparks = 1,
 		ignites_explosives = 1,
 
-OnCollision = function(player,bullet,target)
-	tnt.boom(bullet.object:get_pos() , {radius = 3})
-end,
-ammo_particles = {
-	velocity = {x=1,y=1,z=1},
-	acceleration = {x=1,y=1,z=1},
-	collisiondetection = true,
-	lifetime = 1,
-	texture = "tnt_smoke.png",
-	minsize = 50,
-	maxsize = 75,
-	pos_randomness = 50,
-	glow = 20,
-	gravity = 10,
-	amount = {1,1}
-},
-},
+	OnCollision = function(player,bullet,target)
+		tnt.boom(bullet.object:get_pos() , {radius = 3})
+	end,
+
+	ammo_particles = {
+		velocity = {x=1,y=1,z=1},
+		acceleration = {x=1,y=1,z=1},
+		collisiondetection = true,
+		lifetime = 1,
+		texture = "tnt_smoke.png",
+		minsize = 50,
+		maxsize = 75,
+		pos_randomness = 50,
+		glow = 20,
+		gravity = 10,
+		amount = {1,1}
+	},
+	},
 })
