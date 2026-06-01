@@ -43,7 +43,7 @@ rangedweapons_rocket.on_step = function(self, dtime, _)
 		core.add_particle({
 			pos = pos,
 			velocity = 0,
-          	acceleration = {x=0, y=0, z=0},
+			acceleration = {x=0, y=0, z=0},
 			expirationtime = 0.04,
 			size = 7,
 			collisiondetection = false,
@@ -54,7 +54,7 @@ rangedweapons_rocket.on_step = function(self, dtime, _)
 		core.add_particle({
 			pos = pos,
 			velocity = 0,
-          	acceleration = {x=0, y=6, z=0},
+			acceleration = {x=0, y=6, z=0},
 			expirationtime = 0.4,
 			size = 4,
 			collisiondetection = false,
@@ -100,7 +100,7 @@ local rangedweapons_he_grenade = {
 	collisionbox = {0, 0, 0, 0, 0, 0},
 }
 
-rangedweapons_he_grenade.on_step = function(self, dtime, pos)
+rangedweapons_he_grenade.on_step = function(self, dtime, _)
 	self.timer = self.timer + dtime
 	local tiem = 0.002
 	local pos = self.object:get_pos()
@@ -109,7 +109,7 @@ rangedweapons_he_grenade.on_step = function(self, dtime, pos)
 		core.add_particle({
 			pos = pos,
 			velocity = 0,
-       	   acceleration = {x=0, y=0, z=0},
+			acceleration = {x=0, y=0, z=0},
 			expirationtime = 0.04,
 			size = 7,
 			collisiondetection = false,
@@ -120,7 +120,7 @@ rangedweapons_he_grenade.on_step = function(self, dtime, pos)
 		core.add_particle({
 			pos = pos,
 			velocity = 0,
-          	acceleration = {x=0, y=16, z=0},
+			acceleration = {x=0, y=16, z=0},
 			expirationtime = 0.4,
 			size = 4,
 			collisiondetection = false,
