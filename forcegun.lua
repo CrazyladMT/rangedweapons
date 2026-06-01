@@ -78,7 +78,7 @@ rangedweapons_forceblast.on_step = function(self, dtime, moveresult)
 				core.add_particle({
 					pos = ({x = pos.x, y = pos.y, z = pos.z}),
 					velocity ={x=0,y=0,z=0},
-        		  	acceleration ={x=0,y=0,z=0},
+					acceleration ={x=0,y=0,z=0},
 					expirationtime = 0.20,
 					size = 16,
 					collisiondetection = true,
@@ -86,7 +86,7 @@ rangedweapons_forceblast.on_step = function(self, dtime, moveresult)
 					vertical = false,
 					texture = "rangedweapons_force_blast.png",
 					glow = 20,
-        			animation = {type="vertical_frames", aspect_w=64, aspect_h=64, length = 0.20,},
+					animation = {type="vertical_frames", aspect_w=64, aspect_h=64, length = 0.20,},
 				})
 
 				self.object:remove()
@@ -127,7 +127,7 @@ rangedweapons_forceblast.on_step = function(self, dtime, moveresult)
 				core.add_particle({
 					pos = ({x = pos.x, y = pos.y, z = pos.z}),
 					velocity ={x=0,y=0,z=0},
-          			acceleration ={x=0,y=0,z=0},
+					acceleration ={x=0,y=0,z=0},
 					expirationtime = 0.20,
 					size = 128,
 					collisiondetection = true,
@@ -135,7 +135,7 @@ rangedweapons_forceblast.on_step = function(self, dtime, moveresult)
 					vertical = false,
 					texture = "rangedweapons_force_blast.png",
 					glow = 20,
-         			animation = {type="vertical_frames", aspect_w = 64, aspect_h = 64, length = 0.20,},
+					animation = {type="vertical_frames", aspect_w = 64, aspect_h = 64, length = 0.20,},
 				})
 
 				self.object:remove()
