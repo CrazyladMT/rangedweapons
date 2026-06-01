@@ -1,5 +1,3 @@
-
-
 core.register_tool("rangedweapons:g36_r", {
 	stack_max= 1,
 	wield_scale = {x=1.75,y=1.75,z=1.3},
@@ -33,12 +31,24 @@ core.register_tool("rangedweapons:g36_rrr", {
 	inventory_image = "rangedweapons_g36.png",
 })
 
-
-	core.register_tool("rangedweapons:g36", {
+core.register_tool("rangedweapons:g36", {
 	stack_max= 1,
 	wield_scale = {x=1.75,y=1.75,z=1.3},
-		description = "" ..core.colorize("#35cdff","g36\n") ..core.colorize("#FFFFFF", "Gun damage: 7\n") ..core.colorize("#FFFFFF", "accuracy: 80%\n") ..core.colorize("#FFFFFF", "Gun knockback: 5\n")  ..core.colorize("#FFFFFF", "Gun Critical chance: 12%\n")..core.colorize("#FFFFFF", "Critical efficiency: 2.9x\n")  ..core.colorize("#FFFFFF", "Reload delay: 1.2\n") ..core.colorize("#FFFFFF", "Clip size: 30\n")   ..core.colorize("#FFFFFF", "Ammunition: 5.56mm rounds\n") ..core.colorize("#FFFFFF", "Rate of fire: 0.08(full-auto)\n") ..core.colorize("#FFFFFF", "Gun type: assault rifle\n") ..core.colorize("#FFFFFF", "Block penetration: 6%\n")
-..core.colorize("#FFFFFF", "Enemy penetration: 17%\n") ..core.colorize("#FFFFFF", "Bullet velocity: 40"),
+	description = core.colorize("#35cdff","g36\n") ..
+		"Gun damage: 7\n" ..
+		"accuracy: 80%\n" ..
+		"Gun knockback: 5\n" ..
+		"Gun Critical chance: 12%\n" ..
+		"Critical efficiency: 2.9x\n" ..
+		"Reload delay: 1.2\n" ..
+		"Clip size: 30\n" ..
+		"Ammunition: 5.56mm rounds\n" ..
+		"Rate of fire: 0.08(full-auto)\n" ..
+		"Gun type: assault rifle\n" ..
+		"Block penetration: 6%\n" ..
+		"Enemy penetration: 17%\n" ..
+		"Bullet velocity: 40",
+
 	range = 0,
 	inventory_image = "rangedweapons_g36.png",
 	RW_gun_capabilities = {
@@ -65,9 +75,7 @@ core.register_tool("rangedweapons:g36_rrr", {
 		gun_sound = "rangedweapons_smg",
 	},
 	on_secondary_use = function(itemstack, user, pointed_thing)
-rangedweapons_reload_gun(itemstack, user)
-return itemstack
-end,
-
-	inventory_image = "rangedweapons_g36.png",
+		rangedweapons_reload_gun(itemstack, user)
+		return itemstack
+	end,
 })
