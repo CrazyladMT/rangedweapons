@@ -1,5 +1,3 @@
-
-
 core.register_tool("rangedweapons:beretta_rld", {
 	stack_max= 1,
 	wield_scale = {x=1.1,y=1.1,z=1.05},
@@ -9,6 +7,7 @@ core.register_tool("rangedweapons:beretta_rld", {
 	groups = {not_in_creative_inventory = 1},
 	inventory_image = "rangedweapons_beretta_rld.png",
 })
+
 core.register_tool("rangedweapons:beretta_r", {
 	stack_max= 1,
 	wield_scale = {x=1.1,y=1.1,z=1.05},
@@ -21,11 +20,23 @@ core.register_tool("rangedweapons:beretta_r", {
 })
 
 core.register_tool("rangedweapons:beretta", {
-		description = "" ..core.colorize("#35cdff","Beretta M9\n") ..core.colorize("#FFFFFF", "Gun damage: 4\n")..core.colorize("#FFFFFF", "Accuracy: 94%\n")  ..core.colorize("#FFFFFF", "gun knockback: 4\n") ..core.colorize("#FFFFFF", "Gun crit chance: 13%\n")..core.colorize("#FFFFFF", "Critical efficiency: 2.1x\n") ..core.colorize("#FFFFFF", "Reload delay: 0.5\n")..core.colorize("#FFFFFF", "Clip size: 15\n") ..core.colorize("#FFFFFF", "Ammunition: 9x19mm Parabellum\n") ..core.colorize("#FFFFFF", "Rate of fire: 0.4\n") ..core.colorize("#FFFFFF", "Gun type: Handgun\n") ..core.colorize("#FFFFFF", "Bullet velocity: 25"),
+	description = core.colorize("#35cdff","Beretta M9\n") ..
+		"Gun damage: 4\n" ..
+		"Accuracy: 94%\n" ..
+		"gun knockback: 4\n" ..
+		"Gun crit chance: 13%\n" ..
+		"Critical efficiency: 2.1x\n" ..
+		"Reload delay: 0.5\n" ..
+		"Clip size: 15\n" ..
+		"Ammunition: 9x19mm Parabellum\n" ..
+		"Rate of fire: 0.4\n" ..
+		"Gun type: Handgun\n" ..
+		"Bullet velocity: 25",
+
 	wield_scale = {x=1.1,y=1.1,z=1.05},
 	range = 0,
 	inventory_image = "rangedweapons_beretta.png",
-RW_gun_capabilities = {
+	RW_gun_capabilities = {
 		gun_damage = {fleshy=4,knockback=4},
 		gun_crit = 15,
 		gun_critEffc = 2.1,
@@ -46,12 +57,12 @@ RW_gun_capabilities = {
 		gun_sound = "rangedweapons_beretta",
 	},
 	on_secondary_use = function(itemstack, user, pointed_thing)
-rangedweapons_reload_gun(itemstack, user)
-return itemstack
-end,
+		rangedweapons_reload_gun(itemstack, user)
+		return itemstack
+	end,
 	on_use = function(itemstack, user, pointed_thing)
-rangedweapons_shoot_gun(itemstack, user)
-return itemstack
+		rangedweapons_shoot_gun(itemstack, user)
+		return itemstack
 	end,
 })
 
