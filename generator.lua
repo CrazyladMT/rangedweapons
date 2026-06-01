@@ -1,7 +1,7 @@
-
-
 core.register_node("rangedweapons:generator", {
-		description = "" ..core.colorize("#35cdff","Power particle generator\n")..core.colorize("#FFFFFF", "generates 1 power particle every 3 seconds (can hold up to 200). Punch to harvest them"),
+	description = core.colorize("#35cdff","Power particle generator\n") ..
+		"generates 1 power particle every 3 seconds (can hold up to 200). Punch to harvest them",
+
 	tiles = {
 		"rangedweapons_generator_top.png",
 		"rangedweapons_generator_bottom.png",
@@ -15,25 +15,21 @@ core.register_node("rangedweapons:generator", {
 	groups = {cracky = 3, oddly_breakable_by_hand = 3},
 	on_timer = function(pos, elapsed)
 		core.get_node_timer(pos):start(3)
-	local nodemeta = core.get_meta(pos)
-if nodemeta:get_int("power_generated") < 200 then
-	nodemeta:set_int("power_generated",nodemeta:get_int("power_generated")+1)
-	nodemeta:set_string("infotext", "currently generated power:"..nodemeta:get_int("power_generated"))
-end
+		local nodemeta = core.get_meta(pos)
+		if nodemeta:get_int("power_generated") < 200 then
+			nodemeta:set_int("power_generated", nodemeta:get_int("power_generated")+1)
+			nodemeta:set_string("infotext", "currently generated power:" .. nodemeta:get_int("power_generated"))
+		end
 	end,
 	on_punch = function(pos, node, puncher)
-local nodemeta = core.get_meta(pos)
-local inv = puncher:get_inventory()
-inv:add_item("main", "rangedweapons:power_particle "..nodemeta:get_int("power_generated")) 
-nodemeta:set_int("power_generated",0)
-nodemeta:set_string("infotext", "currently generated power:"..nodemeta:get_int("power_generated"))
+		local nodemeta = core.get_meta(pos)
+		local inv = puncher:get_inventory()
+		inv:add_item("main", "rangedweapons:power_particle " .. nodemeta:get_int("power_generated")) 
+		nodemeta:set_int("power_generated", 0)
+		nodemeta:set_string("infotext", "currently generated power:" .. nodemeta:get_int("power_generated"))
 	end,
 	on_construct = function(pos)
 		core.get_node_timer(pos):start(3)
 	end,
 	sounds = default.node_sound_wood_defaults(),
 })
-
-
-
-
