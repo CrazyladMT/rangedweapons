@@ -1,6 +1,18 @@
-----------------------------
-----------------------------
-if core.settings:get_bool("rangedweapons_gun_crafting", true) then
+if not core.settings:get_bool("rangedweapons_gun_crafting", true) then
+	return
+end
+
+if not core.settings:get_bool("rangedweapons_other_weapons_crafting", true) then
+	return
+end
+
+if not core.settings:get_bool("rangedweapons_ammo_crafting", true) then
+	return
+end
+
+if not core.settings:get_bool("rangedweapons_item_crafting", true) then
+	return
+end
 
 core.register_craft({
 	output = "rangedweapons:aa12",
@@ -279,8 +291,6 @@ core.register_craft({
 	}
 })
 
-
-
 core.register_craft({
 	output = "rangedweapons:remington",
 	recipe = {
@@ -337,8 +347,8 @@ core.register_craft({
 core.register_craft({
 	output = "rangedweapons:taurus",
 	recipe = {
-{"rangedweapons:gunsteel_ingot", "default:mese_crystal", "default:mese_crystal_fragment"},
-{"rangedweapons:gunsteel_ingot", "default:diamondblock", "rangedweapons:gunsteel_ingot"},
+		{"rangedweapons:gunsteel_ingot", "default:mese_crystal", "default:mese_crystal_fragment"},
+		{"rangedweapons:gunsteel_ingot", "default:diamondblock", "rangedweapons:gunsteel_ingot"},
 		{"", "rangedweapons:gunsteel_ingot", "rangedweapons:plastic_sheet"},
 	}
 })
@@ -346,8 +356,8 @@ core.register_craft({
 core.register_craft({
 	output = "rangedweapons:taurus",
 	recipe = {
-{"moreores:silver_ingot", "default:mese_crystal", "default:mese_crystal_fragment"},
-{"moreores:silver_ingot", "default:diamondblock", "moreores:silver_ingot"},
+		{"moreores:silver_ingot", "default:mese_crystal", "default:mese_crystal_fragment"},
+		{"moreores:silver_ingot", "default:diamondblock", "moreores:silver_ingot"},
 		{"", "moreores:silver_ingot", "rangedweapons:plastic_sheet"},
 	}
 })
@@ -387,11 +397,6 @@ core.register_craft({
 		{"", "default:steel_ingot", ""},
 	}
 })
-
-end
-----------------------------------
-----------------------------------
-if core.settings:get_bool("rangedweapons_other_weapons_crafting", true) then
 
 core.register_craft({
 	output = "rangedweapons:barrel",
@@ -475,11 +480,6 @@ core.register_craft({
 		{"", "default:diamond", ""},
 	}
 })
-
-end
-------------------------------------
-------------------------------------
-if core.settings:get_bool("rangedweapons_ammo_crafting", true) then
 
 core.register_craft({
 	output = "rangedweapons:9mm 40",
@@ -591,15 +591,10 @@ core.register_craft({
 	}
 })
 
-end
--------------------------------------
--------------------------------------
-if core.settings:get_bool("rangedweapons_item_crafting", true) then
-
 core.register_craft({
 	output = "rangedweapons:generator",
 	recipe = {
-{"default:gold_ingot", "default:gold_ingot", "default:gold_ingot"},
+		{"default:gold_ingot", "default:gold_ingot", "default:gold_ingot"},
 		{"rangedweapons:gunsteel_ingot", "rangedweapons:gun_power_core", "rangedweapons:gunsteel_ingot"},
 		{"rangedweapons:gunsteel_ingot", "rangedweapons:gunsteel_ingot", "rangedweapons:gunsteel_ingot"},
 	}
@@ -637,5 +632,3 @@ core.register_craft({
 		{"rangedweapons:gunsteel_ingot", "default:goldblock", "rangedweapons:gunsteel_ingot"},
 	}
 })
-
-end
