@@ -1,4 +1,4 @@
-minetest.register_tool("rangedweapons:rpg_rld", {
+core.register_tool("rangedweapons:rpg_rld", {
 		description = "" ..core.colorize("#35cdff","rpg7\n") ..core.colorize("#FFFFFF", "Direct contact damage: 20\n")..core.colorize("#FFFFFF", "Accuracy: 100%\n")  ..core.colorize("#FFFFFF", "direct contact knockback: 35\n") ..core.colorize("#FFFFFF", "Gun crit chance: 10%\n")..core.colorize("#FFFFFF", "Critical efficiency: 3x\n") ..core.colorize("#FFFFFF", "Reload delay: 1.0\n")..core.colorize("#FFFFFF", "Clip size: 1\n") ..core.colorize("#FFFFFF", "Gun gravity: 5\n")..core.colorize("#FFFFFF", "Ammunition: rockets\n")..core.colorize("#FFFFFF", "Gun type: rocket launcher\n") ..core.colorize("#FFFFFF", "Bullet velocity: 25"),
 	range = 0,
 	wield_scale = {x=2.5,y=2.5,z=3.75},
@@ -32,7 +32,7 @@ return itemstack
 	end,
 })
 
-minetest.register_tool("rangedweapons:rpg", {
+core.register_tool("rangedweapons:rpg", {
 		description = "" ..core.colorize("#35cdff","rpg7\n") ..core.colorize("#FFFFFF", "Direct contact damage: 20\n")..core.colorize("#FFFFFF", "Accuracy: 100%\n")  ..core.colorize("#FFFFFF", "direct contact knockback: 35\n") ..core.colorize("#FFFFFF", "Gun crit chance: 10%\n")..core.colorize("#FFFFFF", "Critical efficiency: 3x\n") ..core.colorize("#FFFFFF", "Reload delay: 1.0\n")..core.colorize("#FFFFFF", "Clip size: 1\n") ..core.colorize("#FFFFFF", "Gun gravity: 5\n")..core.colorize("#FFFFFF", "Ammunition: rockets\n")..core.colorize("#FFFFFF", "Gun type: rocket launcher\n") ..core.colorize("#FFFFFF", "Bullet velocity: 25"),
 	range = 0,
 	wield_scale = {x=2.5,y=2.5,z=3.75},

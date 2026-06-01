@@ -1,4 +1,4 @@
-minetest.register_tool("rangedweapons:benelli_rld", {
+core.register_tool("rangedweapons:benelli_rld", {
 	stack_max= 1,
 	range = 0,
 	wield_scale = {x=1.9,y=1.9,z=1.1},
@@ -9,7 +9,7 @@ minetest.register_tool("rangedweapons:benelli_rld", {
 	inventory_image = "rangedweapons_benelli_rld.png",
 })
 
-minetest.register_tool("rangedweapons:benelli", {
+core.register_tool("rangedweapons:benelli", {
 		description = "" ..core.colorize("#35cdff","benelli m3\n") ..core.colorize("#FFFFFF", "Ranged damage: 2\n") ..core.colorize("#FFFFFF", "projectiles: 5\n") ..core.colorize("#FFFFFF", "Gun gravity: 4\n") ..core.colorize("#FFFFFF", "Accuracy: 48%\n")..core.colorize("#FFFFFF", "knockback: 6\n") ..core.colorize("#FFFFFF", "Critical chance: 6%\n") ..core.colorize("#FFFFFF", "Critical efficiency: 2.0x\n") ..core.colorize("#FFFFFF", "Ammunition: 12 gauge shells\n") ..core.colorize("#FFFFFF", "Pump delay: 0.6\n")..core.colorize("#FFFFFF", "Clip size: 7\n") ..core.colorize("#27a600", "Gun is ready to fire!\n") ..core.colorize("#fff21c", "Right-click to load in a bullet!\n")  ..core.colorize("#FFFFFF", "Gun type: shotgun\n") ..core.colorize("#FFFFFF", "Bullet velocity: 26"),
 	range = 0,
 	wield_scale = {x=1.9,y=1.9,z=1.1},
@@ -45,7 +45,7 @@ return itemstack
 	end,
 })
 
-minetest.register_tool("rangedweapons:benelli_uld", {
+core.register_tool("rangedweapons:benelli_uld", {
 	stack_max= 1,
 	wield_scale = {x=1.9,y=1.9,z=1.1},
 	range = 0,
@@ -53,7 +53,7 @@ minetest.register_tool("rangedweapons:benelli_uld", {
 	inventory_image = "rangedweapons_benelli.png",
 	groups = {not_in_creative_inventory = 1},
 	on_use = function(itemstack, user)
-		minetest.sound_play("rangedweapons_empty", {pos = user:get_pos()}, true)
+		core.sound_play("rangedweapons_empty", {pos = user:get_pos()}, true)
 	end,
 on_secondary_use = function(itemstack, user, pointed_thing)
 eject_shell(itemstack,user,"rangedweapons:benelli_rld",0.6,"rangedweapons_shotgun_reload_a","rangedweapons:empty_shell")

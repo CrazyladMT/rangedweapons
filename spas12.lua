@@ -1,4 +1,4 @@
-minetest.register_tool("rangedweapons:spas12_rld", {
+core.register_tool("rangedweapons:spas12_rld", {
 	stack_max= 1,
 	range = 0,
 	wield_scale = {x=1.9,y=1.9,z=1.1},
@@ -9,7 +9,7 @@ minetest.register_tool("rangedweapons:spas12_rld", {
 	inventory_image = "rangedweapons_spas12_rld.png",
 })
 
-minetest.register_tool("rangedweapons:spas12", {
+core.register_tool("rangedweapons:spas12", {
 		description = "" ..core.colorize("#35cdff","spas-12\n") ..core.colorize("#FFFFFF", "Ranged damage: 3\n") ..core.colorize("#FFFFFF", "projectiles: 6\n") ..core.colorize("#FFFFFF", "Gun gravity: 3\n") ..core.colorize("#FFFFFF", "Accuracy: 52%\n")..core.colorize("#FFFFFF", "knockback: 7\n") ..core.colorize("#FFFFFF", "Critical chance: 7%\n") ..core.colorize("#FFFFFF", "Critical efficiency: 2.1x\n") ..core.colorize("#FFFFFF", "Ammunition: 12 gauge shells\n") ..core.colorize("#FFFFFF", "Pump delay: 0.45\n")..core.colorize("#FFFFFF", "Clip size: 8\n") ..core.colorize("#27a600", "Gun is ready to fire!\n") ..core.colorize("#fff21c", "Right-click to load in a bullet!\n")  ..core.colorize("#FFFFFF", "Gun type: shotgun\n") ..core.colorize("#FFFFFF", "Bullet velocity: 32"),
 	range = 0,
 	wield_scale = {x=1.9,y=1.9,z=1.1},
@@ -45,7 +45,7 @@ return itemstack
 	end,
 })
 
-minetest.register_tool("rangedweapons:spas12_uld", {
+core.register_tool("rangedweapons:spas12_uld", {
 	stack_max= 1,
 	wield_scale = {x=1.9,y=1.9,z=1.1},
 	range = 0,
@@ -53,7 +53,7 @@ minetest.register_tool("rangedweapons:spas12_uld", {
 	inventory_image = "rangedweapons_spas12.png",
 	groups = {not_in_creative_inventory = 1},
 	on_use = function(itemstack, user)
-		minetest.sound_play("rangedweapons_empty", {pos = user:get_pos()}, true)
+		core.sound_play("rangedweapons_empty", {pos = user:get_pos()}, true)
 	end,
 on_secondary_use = function(itemstack, user, pointed_thing)
 eject_shell(itemstack,user,"rangedweapons:spas12_rld",0.6,"rangedweapons_shotgun_reload_a","rangedweapons:empty_shell")

@@ -1,6 +1,6 @@
 
 
-minetest.register_tool("rangedweapons:aa12_r", {
+core.register_tool("rangedweapons:aa12_r", {
 	stack_max= 1,
 	wield_scale = {x=1.9,y=1.9,z=1.4},
 	description = "",
@@ -10,7 +10,7 @@ minetest.register_tool("rangedweapons:aa12_r", {
 	groups = {not_in_creative_inventory = 1},
 	inventory_image = "rangedweapons_aa12_rld.png",
 })
-minetest.register_tool("rangedweapons:aa12_rr", {
+core.register_tool("rangedweapons:aa12_rr", {
 	stack_max= 1,
 	wield_scale = {x=1.9,y=1.9,z=1.4},
 	description = "",
@@ -20,7 +20,7 @@ minetest.register_tool("rangedweapons:aa12_rr", {
 	groups = {not_in_creative_inventory = 1},
 	inventory_image = "rangedweapons_aa12.png",
 })
-minetest.register_tool("rangedweapons:aa12_rrr", {
+core.register_tool("rangedweapons:aa12_rrr", {
 	stack_max= 1,
 	wield_scale = {x=1.9,y=1.9,z=1.4},
 	description = "",
@@ -32,7 +32,7 @@ minetest.register_tool("rangedweapons:aa12_rrr", {
 })
 -------------------------------------------
 
-	minetest.register_tool("rangedweapons:aa12", {
+	core.register_tool("rangedweapons:aa12", {
 	stack_max= 1,
 	wield_scale = {x=1.9,y=1.9,z=1.4},
 		description = "" ..core.colorize("#35cdff","AA-12\n") ..core.colorize("#FFFFFF", "Ranged damage: 1\n") ..core.colorize("#FFFFFF", "projectiles: 5\n") ..core.colorize("#FFFFFF", "Gun gravity: 4\n") ..core.colorize("#FFFFFF", "accuracy: 40%\n") ..core.colorize("#FFFFFF", "knockback: 5\n") ..core.colorize("#FFFFFF", "Reload delay: 1.5\n")  ..core.colorize("#FFFFFF", "Clip size: 20\n") ..core.colorize("#FFFFFF", "Critical chance: 5%\n") ..core.colorize("#FFFFFF", "Critical efficiency: 2.0x\n")  ..core.colorize("#FFFFFF", "Ammunition: 12 gauge shell\n") ..core.colorize("#FFFFFF", "Rate of fire: 0.2 (full-auto)\n") ..core.colorize("#FFFFFF", "Gun type: shotgun\n") ..core.colorize("#FFFFFF", "Bullet velocity: 25"),

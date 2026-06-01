@@ -1,5 +1,5 @@
 
-minetest.register_tool("rangedweapons:milkor_rld", {
+core.register_tool("rangedweapons:milkor_rld", {
 	stack_max= 1,
 	range = 0,
 	wield_scale = {x=1.75,y=1.75,z=2.0},
@@ -10,7 +10,7 @@ minetest.register_tool("rangedweapons:milkor_rld", {
 })
 
 
-minetest.register_tool("rangedweapons:milkor", {
+core.register_tool("rangedweapons:milkor", {
 		description = "" ..core.colorize("#35cdff","Milkor MGL\n") ..core.colorize("#FFFFFF", "Direct contact damage: 15\n")..core.colorize("#FFFFFF", "Accuracy: 96%\n") ..core.colorize("#FFFFFF", "Direct contact knockback: 25\n") ..core.colorize("#FFFFFF", "Critical chance: 9%\n") ..core.colorize("#FFFFFF", "Critical efficiency: 3.0x\n") ..core.colorize("#FFFFFF", "Ammunition: 40mm grenades\n") ..core.colorize("#FFFFFF", "Reload time: 0.75\n") ..core.colorize("#FFFFFF", "Rate of fire: 0.35\n") ..core.colorize("#FFFFFF", "Gun gravity: 1\n") ..core.colorize("#FFFFFF", "Clip Size: 6\n")..core.colorize("#FFFFFF", "Gun type: grenade launcher\n") ..core.colorize("#FFFFFF", "Bullet velocity: 30"),
 	range = 0,
 	wield_scale = {x=1.75,y=1.75,z=2.0},

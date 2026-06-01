@@ -1,6 +1,6 @@
 
 
-minetest.register_tool("rangedweapons:makarov_rld", {
+core.register_tool("rangedweapons:makarov_rld", {
 	stack_max= 1,
 	wield_scale = {x=0.9,y=0.9,z=1.0},
 	description = "",
@@ -9,7 +9,7 @@ minetest.register_tool("rangedweapons:makarov_rld", {
 	groups = {not_in_creative_inventory = 1},
 	inventory_image = "rangedweapons_makarov_rld.png",
 })
-minetest.register_tool("rangedweapons:makarov_r", {
+core.register_tool("rangedweapons:makarov_r", {
 	stack_max= 1,
 	wield_scale = {x=0.9,y=0.9,z=1.0},
 	description = "",
@@ -20,7 +20,7 @@ minetest.register_tool("rangedweapons:makarov_r", {
 	inventory_image = "rangedweapons_makarov.png",
 })
 
-minetest.register_tool("rangedweapons:makarov_rr", {
+core.register_tool("rangedweapons:makarov_rr", {
 	stack_max= 1,
 	wield_scale = {x=0.9,y=0.9,z=1.0},
 	description = "",
@@ -31,7 +31,7 @@ minetest.register_tool("rangedweapons:makarov_rr", {
 	inventory_image = "rangedweapons_makarov.png",
 })
 
-minetest.register_tool("rangedweapons:makarov_rrr", {
+core.register_tool("rangedweapons:makarov_rrr", {
 	stack_max= 1,
 	wield_scale = {x=0.9,y=0.9,z=1.0},
 	description = "",
@@ -43,7 +43,7 @@ minetest.register_tool("rangedweapons:makarov_rrr", {
 })
 
 
-minetest.register_tool("rangedweapons:makarov", {
+core.register_tool("rangedweapons:makarov", {
 		description = "" ..core.colorize("#35cdff","Makarov pistol\n") ..core.colorize("#FFFFFF", "Gun damage: 3\n")..core.colorize("#FFFFFF", "Accuracy: 90%\n")  ..core.colorize("#FFFFFF", "gun knockback: 3\n") ..core.colorize("#FFFFFF", "Gun crit chance: 10%\n")..core.colorize("#FFFFFF", "Critical efficiency: 2x\n") ..core.colorize("#FFFFFF", "Reload delay: 1.1\n")..core.colorize("#FFFFFF", "Clip size: 8\n") ..core.colorize("#FFFFFF", "Ammunition: 9x19mm Parabellum\n") ..core.colorize("#FFFFFF", "Rate of fire: 0.5\n") ..core.colorize("#FFFFFF", "Gun type: Handgun\n") ..core.colorize("#FFFFFF", "Bullet velocity: 20"),
 	range = 0,
 	wield_scale = {x=0.9,y=0.9,z=1.0},

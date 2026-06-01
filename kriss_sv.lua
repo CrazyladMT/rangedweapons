@@ -1,5 +1,5 @@
 
-minetest.register_tool("rangedweapons:kriss_sv_r", {
+core.register_tool("rangedweapons:kriss_sv_r", {
 	stack_max= 1,
 	wield_scale = {x=1.75,y=1.75,z=1.15},
 	description = "",
@@ -10,7 +10,7 @@ minetest.register_tool("rangedweapons:kriss_sv_r", {
 	inventory_image = "rangedweapons_kriss_sv_rld.png",
 })
 
-minetest.register_tool("rangedweapons:kriss_sv_rr", {
+core.register_tool("rangedweapons:kriss_sv_rr", {
 	stack_max= 1,
 	wield_scale = {x=1.75,y=1.75,z=1.15},
 	description = "",
@@ -21,7 +21,7 @@ minetest.register_tool("rangedweapons:kriss_sv_rr", {
 	inventory_image = "rangedweapons_kriss_sv.png",
 })
 
-minetest.register_tool("rangedweapons:kriss_sv_rrr", {
+core.register_tool("rangedweapons:kriss_sv_rrr", {
 	stack_max= 1,
 	wield_scale = {x=1.75,y=1.75,z=1.15},
 	description = "",
@@ -33,7 +33,7 @@ minetest.register_tool("rangedweapons:kriss_sv_rrr", {
 })
 
 
-	minetest.register_tool("rangedweapons:kriss_sv", {
+	core.register_tool("rangedweapons:kriss_sv", {
 	stack_max= 1,
 	wield_scale = {x=1.75,y=1.75,z=1.15},
 		description = "" ..core.colorize("#35cdff","Kriss Super V\n") ..core.colorize("#FFFFFF", "Gun damage: 1\n") ..core.colorize("#FFFFFF", "accuracy: 60%\n") ..core.colorize("#FFFFFF", "Gun knockback: 0\n")  ..core.colorize("#FFFFFF", "Gun Critical chance: 6%\n") ..core.colorize("#FFFFFF", "Critical efficiency: 1.85x\n") ..core.colorize("#FFFFFF", "Reload delay: 0.9\n") ..core.colorize("#FFFFFF", "Clip size: 33/33/13\n")   ..core.colorize("#FFFFFF", "Ammunition: 9x19mm parabellum/10mm auto/.45 acp\n") ..core.colorize("#FFFFFF", "Rate of fire: 0.05\n") ..core.colorize("#FFFFFF", "Gun type: machine pistol\n") ..core.colorize("#FFFFFF", "Bullet velocity: 20"),

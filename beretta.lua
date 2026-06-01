@@ -1,6 +1,6 @@
 
 
-minetest.register_tool("rangedweapons:beretta_rld", {
+core.register_tool("rangedweapons:beretta_rld", {
 	stack_max= 1,
 	wield_scale = {x=1.1,y=1.1,z=1.05},
 	description = "",
@@ -9,7 +9,7 @@ minetest.register_tool("rangedweapons:beretta_rld", {
 	groups = {not_in_creative_inventory = 1},
 	inventory_image = "rangedweapons_beretta_rld.png",
 })
-minetest.register_tool("rangedweapons:beretta_r", {
+core.register_tool("rangedweapons:beretta_r", {
 	stack_max= 1,
 	wield_scale = {x=1.1,y=1.1,z=1.05},
 	description = "",
@@ -20,7 +20,7 @@ minetest.register_tool("rangedweapons:beretta_r", {
 	inventory_image = "rangedweapons_beretta_rld.png",
 })
 
-minetest.register_tool("rangedweapons:beretta", {
+core.register_tool("rangedweapons:beretta", {
 		description = "" ..core.colorize("#35cdff","Beretta M9\n") ..core.colorize("#FFFFFF", "Gun damage: 4\n")..core.colorize("#FFFFFF", "Accuracy: 94%\n")  ..core.colorize("#FFFFFF", "gun knockback: 4\n") ..core.colorize("#FFFFFF", "Gun crit chance: 13%\n")..core.colorize("#FFFFFF", "Critical efficiency: 2.1x\n") ..core.colorize("#FFFFFF", "Reload delay: 0.5\n")..core.colorize("#FFFFFF", "Clip size: 15\n") ..core.colorize("#FFFFFF", "Ammunition: 9x19mm Parabellum\n") ..core.colorize("#FFFFFF", "Rate of fire: 0.4\n") ..core.colorize("#FFFFFF", "Gun type: Handgun\n") ..core.colorize("#FFFFFF", "Bullet velocity: 25"),
 	wield_scale = {x=1.1,y=1.1,z=1.05},
 	range = 0,

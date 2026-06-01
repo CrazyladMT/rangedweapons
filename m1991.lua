@@ -1,6 +1,6 @@
 
 
-minetest.register_tool("rangedweapons:m1991_rld", {
+core.register_tool("rangedweapons:m1991_rld", {
 	stack_max= 1,
 	wield_scale = {x=1.1,y=1.1,z=1.05},
 	description = "",
@@ -9,7 +9,7 @@ minetest.register_tool("rangedweapons:m1991_rld", {
 	groups = {not_in_creative_inventory = 1},
 	inventory_image = "rangedweapons_m1991_rld.png",
 })
-minetest.register_tool("rangedweapons:m1991_r", {
+core.register_tool("rangedweapons:m1991_r", {
 	stack_max= 1,
 	wield_scale = {x=1.1,y=1.1,z=1.05},
 	description = "",
@@ -19,7 +19,7 @@ minetest.register_tool("rangedweapons:m1991_r", {
 	groups = {not_in_creative_inventory = 1},
 	inventory_image = "rangedweapons_m1991.png",
 })
-minetest.register_tool("rangedweapons:m1991_rr", {
+core.register_tool("rangedweapons:m1991_rr", {
 	stack_max= 1,
 	wield_scale = {x=1.1,y=1.1,z=1.05},
 	description = "",
@@ -29,7 +29,7 @@ minetest.register_tool("rangedweapons:m1991_rr", {
 	groups = {not_in_creative_inventory = 1},
 	inventory_image = "rangedweapons_m1991.png",
 })
-minetest.register_tool("rangedweapons:m1991_rrr", {
+core.register_tool("rangedweapons:m1991_rrr", {
 	stack_max= 1,
 	wield_scale = {x=1.1,y=1.1,z=1.05},
 	description = "",
@@ -40,7 +40,7 @@ minetest.register_tool("rangedweapons:m1991_rrr", {
 	inventory_image = "rangedweapons_m1991_rld.png",
 })
 
-minetest.register_tool("rangedweapons:m1991", {
+core.register_tool("rangedweapons:m1991", {
 		description = "" ..core.colorize("#35cdff","m1991\n") ..core.colorize("#FFFFFF", "Gun damage: 4\n")..core.colorize("#FFFFFF", "Accuracy: 92%\n")  ..core.colorize("#FFFFFF", "gun knockback: 4\n") ..core.colorize("#FFFFFF", "Gun crit chance: 13%\n")..core.colorize("#FFFFFF", "Critical efficiency: 2.1x\n") ..core.colorize("#FFFFFF", "Reload delay: 1.0\n")..core.colorize("#FFFFFF", "Clip size: 8\n") ..core.colorize("#FFFFFF", "Ammunition: .45acp\n") ..core.colorize("#FFFFFF", "Rate of fire: 0.4\n") ..core.colorize("#FFFFFF", "Gun type: Handgun\n") ..core.colorize("#FFFFFF", "Bullet velocity: 25"),
 	wield_scale = {x=1.1,y=1.1,z=1.05},
 	range = 0,

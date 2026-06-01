@@ -1,5 +1,5 @@
 
-minetest.register_tool("rangedweapons:scar_r", {
+core.register_tool("rangedweapons:scar_r", {
 	stack_max= 1,
 	wield_scale = {x=1.7,y=1.7,z=1.25},
 	description = "",
@@ -10,7 +10,7 @@ minetest.register_tool("rangedweapons:scar_r", {
 	inventory_image = "rangedweapons_scar_rld.png",
 })
 
-minetest.register_tool("rangedweapons:scar_rr", {
+core.register_tool("rangedweapons:scar_rr", {
 	stack_max= 1,
 	wield_scale = {x=1.7,y=1.7,z=1.25},
 	description = "",
@@ -21,7 +21,7 @@ minetest.register_tool("rangedweapons:scar_rr", {
 	inventory_image = "rangedweapons_scar.png",
 })
 
-minetest.register_tool("rangedweapons:scar_rrr", {
+core.register_tool("rangedweapons:scar_rrr", {
 	stack_max= 1,
 	wield_scale = {x=1.7,y=1.7,z=1.25},
 	description = "",
@@ -32,7 +32,7 @@ minetest.register_tool("rangedweapons:scar_rrr", {
 	inventory_image = "rangedweapons_scar.png",
 })
 
-	minetest.register_tool("rangedweapons:scar", {
+	core.register_tool("rangedweapons:scar", {
 	stack_max= 1,
 	wield_scale = {x=1.7,y=1.7,z=1.25},
 		description = "" ..core.colorize("#35cdff","FN SCAR 16\n") ..core.colorize("#FFFFFF", "Ranged damage: 9\n") ..core.colorize("#FFFFFF", "Accuracy: 85%\n") ..core.colorize("#FFFFFF", "Gun knockback: 6\n")..core.colorize("#FFFFFF", "Critical chance: 11%\n") ..core.colorize("#FFFFFF", "Critical efficiency: 2.75x\n") ..core.colorize("#FFFFFF", "Ammunition: 7.62mm rounds/5.56mm rounds\n") ..core.colorize("#FFFFFF", "Reload delay: 1.2\n") ..core.colorize("#FFFFFF", "Clip size: 20/30\n") ..core.colorize("#FFFFFF", "Rate of fire: 0.15\n") ..core.colorize("#FFFFFF", "Block penetration: 7%\n")

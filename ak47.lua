@@ -1,6 +1,6 @@
 
 
-minetest.register_tool("rangedweapons:ak47_r", {
+core.register_tool("rangedweapons:ak47_r", {
 	stack_max= 1,
 	wield_scale = {x=1.75,y=1.75,z=1.3},
 	description = "",
@@ -11,7 +11,7 @@ minetest.register_tool("rangedweapons:ak47_r", {
 	inventory_image = "rangedweapons_ak47_rld.png",
 })
 
-minetest.register_tool("rangedweapons:ak47_rr", {
+core.register_tool("rangedweapons:ak47_rr", {
 	stack_max= 1,
 	wield_scale = {x=1.75,y=1.75,z=1.3},
 	description = "",
@@ -22,7 +22,7 @@ minetest.register_tool("rangedweapons:ak47_rr", {
 	inventory_image = "rangedweapons_ak47.png",
 })
 
-minetest.register_tool("rangedweapons:ak47_rrr", {
+core.register_tool("rangedweapons:ak47_rrr", {
 	stack_max= 1,
 	wield_scale = {x=1.75,y=1.75,z=1.3},
 	description = "",
@@ -34,7 +34,7 @@ minetest.register_tool("rangedweapons:ak47_rrr", {
 })
 
 
-	minetest.register_tool("rangedweapons:ak47", {
+	core.register_tool("rangedweapons:ak47", {
 	stack_max= 1,
 	wield_scale = {x=1.75,y=1.75,z=1.3},
 		description = "" ..core.colorize("#35cdff","AK-47\n") ..core.colorize("#FFFFFF", "Gun damage: 7\n") ..core.colorize("#FFFFFF", "accuracy: 77%\n") ..core.colorize("#FFFFFF", "Gun knockback: 5\n")  ..core.colorize("#FFFFFF", "Gun Critical chance: 12%\n")..core.colorize("#FFFFFF", "Critical efficiency: 2.9x\n")  ..core.colorize("#FFFFFF", "Reload delay: 1.4\n") ..core.colorize("#FFFFFF", "Clip size: 30\n")   ..core.colorize("#FFFFFF", "Ammunition: 7.62mm rounds\n") ..core.colorize("#FFFFFF", "Rate of fire: 0.10(full-auto)\n") ..core.colorize("#FFFFFF", "Gun type: assault rifle\n") ..core.colorize("#FFFFFF", "Block penetration: 5%\n")

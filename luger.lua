@@ -1,5 +1,5 @@
 ------------reload--------------------
-minetest.register_tool("rangedweapons:luger_r", {
+core.register_tool("rangedweapons:luger_r", {
 	stack_max= 1,
 	wield_scale = {x=0.9,y=0.9,z=1.0},
 	description = "",
@@ -9,7 +9,7 @@ minetest.register_tool("rangedweapons:luger_r", {
 	load_sound = "rangedweapons_handgun_mag_in",
 	inventory_image = "rangedweapons_luger.png",
 })
-minetest.register_tool("rangedweapons:luger_rr", {
+core.register_tool("rangedweapons:luger_rr", {
 	stack_max= 1,
 	wield_scale = {x=0.9,y=0.9,z=1.0},
 	description = "",
@@ -19,7 +19,7 @@ minetest.register_tool("rangedweapons:luger_rr", {
 	load_sound = "rangedweapons_reload_a",
 	inventory_image = "rangedweapons_luger.png",
 })
-minetest.register_tool("rangedweapons:luger_rrr", {
+core.register_tool("rangedweapons:luger_rrr", {
 	stack_max= 1,
 	wield_scale = {x=0.9,y=0.9,z=1.0},
 	description = "",
@@ -29,7 +29,7 @@ minetest.register_tool("rangedweapons:luger_rrr", {
 	load_sound = "rangedweapons_reload_b",
 	inventory_image = "rangedweapons_luger_rld.png",
 })
-minetest.register_tool("rangedweapons:luger_rld", {
+core.register_tool("rangedweapons:luger_rld", {
 	stack_max= 1,
 	wield_scale = {x=0.9,y=0.9,z=1.0},
 	description = "",
@@ -40,7 +40,7 @@ minetest.register_tool("rangedweapons:luger_rld", {
 })
 -----------------gun--------------
 
-minetest.register_tool("rangedweapons:luger", {
+core.register_tool("rangedweapons:luger", {
 		description = "" ..core.colorize("#35cdff","Luger P08\n") ..core.colorize("#FFFFFF", "Ranged damage: 4\n")..core.colorize("#FFFFFF", "Accuracy: 92%\n")  ..core.colorize("#FFFFFF", "Gun knockback: 3\n") ..core.colorize("#FFFFFF", "Critical chance: 10%\n") ..core.colorize("#FFFFFF", "Critical efficiency: 2x\n") ..core.colorize("#FFFFFF", "Ammunition: 9x19mm parabellum\n")..core.colorize("#FFFFFF", "Reload delay: 1.0\n")..core.colorize("#FFFFFF", "Clip size: 8\n") ..core.colorize("#FFFFFF", "Rate of fire: 0.625\n") ..core.colorize("#FFFFFF", "Gun type: Handgun\n") ..core.colorize("#FFFFFF", "Bullet velocity: 20"),
 	range = 0,
 	wield_scale = {x=0.9,y=0.9,z=1.0},

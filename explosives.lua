@@ -37,9 +37,9 @@ rangedweapons_rocket.on_step = function(self, dtime, pos)
 	self.timer = self.timer + dtime
 	local tiem = 0.002
 	local pos = self.object:get_pos()
-	local node = minetest.get_node(pos)
+	local node = core.get_node(pos)
 	if self.timer >= 0.002 then
-	minetest.add_particle({
+	core.add_particle({
 		pos = pos,
 		velocity = 0,
           acceleration = {x=0, y=0, z=0},
@@ -50,7 +50,7 @@ rangedweapons_rocket.on_step = function(self, dtime, pos)
 		texture = "rangedweapons_rocket_fly.png",
 		glow = 15,
 	})
-	minetest.add_particle({
+	core.add_particle({
 		pos = pos,
 		velocity = 0,
           	acceleration = {x=0, y=6, z=0},
@@ -64,7 +64,7 @@ rangedweapons_rocket.on_step = function(self, dtime, pos)
 	tiem = tiem + 0.002 
 	end
 	if self.timer >= 0.375 then
-	local objs = minetest.get_objects_inside_radius({x = pos.x, y = pos.y, z = pos.z}, 1.5)
+	local objs = core.get_objects_inside_radius({x = pos.x, y = pos.y, z = pos.z}, 1.5)
 		for k, obj in pairs(objs) do
 		if obj:get_luaentity() ~= nil then
 		if obj:get_luaentity().name ~= "rangedweapons:rocket" and obj:get_luaentity().name ~= "__builtin:item" then
@@ -75,7 +75,7 @@ rangedweapons_rocket.on_step = function(self, dtime, pos)
 	end
 end
 	if self.lastpos.x ~= nil then
-		if minetest.registered_nodes[node.name].walkable then
+		if core.registered_nodes[node.name].walkable then
 		tnt.boom(pos, rocket_boom)
 		self.object:remove()
 			end
@@ -87,7 +87,7 @@ end
 	self.lastpos= {x = pos.x, y = pos.y, z = pos.z}
 end
 
-minetest.register_entity("rangedweapons:rocket", rangedweapons_rocket)
+core.register_entity("rangedweapons:rocket", rangedweapons_rocket)
 
 
 local rangedweapons_he_grenade = {
@@ -103,9 +103,9 @@ rangedweapons_he_grenade.on_step = function(self, dtime, pos)
 	self.timer = self.timer + dtime
 	local tiem = 0.002
 	local pos = self.object:get_pos()
-	local node = minetest.get_node(pos)
+	local node = core.get_node(pos)
 	if self.timer >= 0.002 then
-	minetest.add_particle({
+	core.add_particle({
 		pos = pos,
 		velocity = 0,
           acceleration = {x=0, y=0, z=0},
@@ -116,7 +116,7 @@ rangedweapons_he_grenade.on_step = function(self, dtime, pos)
 		texture = "rangedweapons_rocket_fly.png",
 		glow = 15,
 	})
-	minetest.add_particle({
+	core.add_particle({
 		pos = pos,
 		velocity = 0,
           	acceleration = {x=0, y=16, z=0},
@@ -130,7 +130,7 @@ rangedweapons_he_grenade.on_step = function(self, dtime, pos)
 	tiem = tiem + 0.002 
 	end
 	if self.timer >= 0.4 then
-	local objs = minetest.get_objects_inside_radius({x = pos.x, y = pos.y, z = pos.z}, 1.5)
+	local objs = core.get_objects_inside_radius({x = pos.x, y = pos.y, z = pos.z}, 1.5)
 		for k, obj in pairs(objs) do
 		if obj:get_luaentity() ~= nil then
 		if obj:get_luaentity().name ~= "rangedweapons:he_grenade" and obj:get_luaentity().name ~= "__builtin:item" then
@@ -141,7 +141,7 @@ rangedweapons_he_grenade.on_step = function(self, dtime, pos)
 	end
 end
 	if self.lastpos.x ~= nil then
-		if minetest.registered_nodes[node.name].walkable then
+		if core.registered_nodes[node.name].walkable then
 		tnt.boom(pos, he_boom)
 		self.object:remove()
 			end
@@ -153,7 +153,7 @@ end
 	self.lastpos= {x = pos.x, y = pos.y, z = pos.z}
 end
 
-minetest.register_entity("rangedweapons:he_grenade", rangedweapons_he_grenade)
+core.register_entity("rangedweapons:he_grenade", rangedweapons_he_grenade)
 
 
 local barrel_boom = {
@@ -169,7 +169,7 @@ local barrel_boom = {
 }
 tnt.register_tnt(barrel_boom)
 
-minetest.register_node("rangedweapons:barrel", {
+core.register_node("rangedweapons:barrel", {
 		description = "" ..core.colorize("#35cdff","Explosive barrel\n")..core.colorize("#FFFFFF", "It will explode if shot by gun"),
 	tiles = {
 		"rangedweapons_barrel_top.png",

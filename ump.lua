@@ -1,7 +1,7 @@
 
 
 
-minetest.register_tool("rangedweapons:ump_r", {
+core.register_tool("rangedweapons:ump_r", {
 	stack_max= 1,
 	wield_scale = {x=1.9,y=1.9,z=1.25},
 	description = "",
@@ -11,7 +11,7 @@ minetest.register_tool("rangedweapons:ump_r", {
 	groups = {not_in_creative_inventory = 1},
 	inventory_image = "rangedweapons_ump_rld.png",
 })
-minetest.register_tool("rangedweapons:ump_rr", {
+core.register_tool("rangedweapons:ump_rr", {
 	stack_max= 1,
 	wield_scale = {x=1.9,y=1.9,z=1.25},
 	description = "",
@@ -21,7 +21,7 @@ minetest.register_tool("rangedweapons:ump_rr", {
 	groups = {not_in_creative_inventory = 1},
 	inventory_image = "rangedweapons_ump.png",
 })
-minetest.register_tool("rangedweapons:ump_rrr", {
+core.register_tool("rangedweapons:ump_rrr", {
 	stack_max= 1,
 	wield_scale = {x=1.9,y=1.9,z=1.25},
 	description = "",
@@ -33,7 +33,7 @@ minetest.register_tool("rangedweapons:ump_rrr", {
 })
 -------------------------------------------
 
-	minetest.register_tool("rangedweapons:ump", {
+	core.register_tool("rangedweapons:ump", {
 	stack_max= 1,
 	wield_scale = {x=1.9,y=1.9,z=1.25},
 		description = "" ..core.colorize("#35cdff","UMP-9\n") ..core.colorize("#FFFFFF", "Ranged damage: 5\n") ..core.colorize("#FFFFFF", "accuracy: 79%\n") ..core.colorize("#FFFFFF", "knockback: 1\n") ..core.colorize("#FFFFFF", "Reload delay: 1.25\n")  ..core.colorize("#FFFFFF", "Clip size: 25/25\n") ..core.colorize("#FFFFFF", "Critical chance: 9%\n") ..core.colorize("#FFFFFF", "Critical efficiency: 2.0x\n")  ..core.colorize("#FFFFFF", "Ammunition: 9x19mm parabellum/.45acp\n") ..core.colorize("#FFFFFF", "Rate of fire: 0.115 (full-auto)\n") ..core.colorize("#FFFFFF", "Gun type: smg\n") ..core.colorize("#FFFFFF", "Bullet velocity: 32"),

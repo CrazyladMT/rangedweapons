@@ -1,9 +1,9 @@
-minetest.register_craftitem("rangedweapons:red_ray_visual", {
+core.register_craftitem("rangedweapons:red_ray_visual", {
 	wield_scale = {x=1.5,y=1.5,z=2.0},
 	inventory_image = "rangedweapons_red_ray.png",
 })
 
-	minetest.register_tool("rangedweapons:laser_rifle", {
+	core.register_tool("rangedweapons:laser_rifle", {
 	wield_scale = {x=1.9,y=1.9,z=2.5},
 		description = "" ..core.colorize("#35cdff","Laser rifle\n") ..core.colorize("#FFFFFF", "Ranged damage: 12\n") ..core.colorize("#FFFFFF", "accuracy: 100%\n") ..core.colorize("#FFFFFF", "knockback: 0\n")  ..core.colorize("#FFFFFF", "Critical chance: 9%\n") ..core.colorize("#FFFFFF", "Critical efficiency: 2.0x\n")  ..core.colorize("#FFFFFF", "Power usage: 8\n") ..core.colorize("#FFFFFF", "Rate of fire: 0.1 (full-auto)\n") ..core.colorize("#FFFFFF", "Enemy penetration: 40%\n") ..core.colorize("#FFFFFF", "Gun type: power assault rifle\n") ..core.colorize("#FFFFFF", "Bullet velocity: 60"),
 	range = 0,

@@ -1,12 +1,12 @@
 
 
 
-minetest.register_craftitem("rangedweapons:thrown_javelin", {
+core.register_craftitem("rangedweapons:thrown_javelin", {
 	wield_scale = {x=2.0,y=2.0,z=1.0},
 	inventory_image = "rangedweapons_thrown_javelin.png",
 })
 
-minetest.register_tool("rangedweapons:javelin", {
+core.register_tool("rangedweapons:javelin", {
 		description = "" ..core.colorize("#35cdff","Javelin\n") ..core.colorize("#FFFFFF", "Melee damage: 8\n") ..core.colorize("#FFFFFF", "Melee range: 4.5\n")..core.colorize("#FFFFFF", "Full punch interval: 1.25\n")  ..core.colorize("#FFFFFF", "Ranged damage: 9\n") ..core.colorize("#FFFFFF", "Accuracy: 92%\n") ..core.colorize("#FFFFFF", "knockback: 10\n") ..core.colorize("#FFFFFF", "Critical chance: 11%\n") ..core.colorize("#FFFFFF", "Critical efficiency: 2.5x\n") ..core.colorize("#FFFFFF", "Projectile gravity: 6\n") ..core.colorize("#FFFFFF", "Projectile velocity: 35\n") ..core.colorize("#FFFFFF", "Enemy penetration: 50%\n") ..core.colorize("#ffc000", "Right-click to throw, Left-click to stab\n")..core.colorize("#ffc000", "Throwing wears the javelin out 5x faster than stabbing.") ,
 	wield_scale = {x=2.0,y=2.0,z=1.0},
 	range = 4.5,
@@ -45,7 +45,7 @@ OnCollision = function(player,bullet,target)
 local throwDur = 40
 if bullet.wear+(65535/throwDur) < 65535 then
 javStack = {name="rangedweapons:javelin",wear=(bullet.wear)+(65535/throwDur)}
-minetest.add_item(bullet.object:get_pos(),javStack) end end,
+core.add_item(bullet.object:get_pos(),javStack) end end,
 	},
 	on_secondary_use = function(itemstack, user, pointed_thing)
 rangedweapons_yeet(itemstack, user)

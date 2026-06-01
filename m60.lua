@@ -1,5 +1,5 @@
 
-minetest.register_tool("rangedweapons:m60_r", {
+core.register_tool("rangedweapons:m60_r", {
 	stack_max= 1,
 	wield_scale = {x=2.0,y=2.0,z=1.4},
 	description = "",
@@ -10,7 +10,7 @@ minetest.register_tool("rangedweapons:m60_r", {
 	inventory_image = "rangedweapons_m60_rld.png",
 })
 
-	minetest.register_tool("rangedweapons:m60", {
+	core.register_tool("rangedweapons:m60", {
 	stack_max= 1,
 	wield_scale = {x=2.0,y=2.0,z=1.4},
 		description = "" ..core.colorize("#35cdff","m60\n") ..core.colorize("#FFFFFF", "Gun damage: 9\n") ..core.colorize("#FFFFFF", "accuracy: 65%\n") ..core.colorize("#FFFFFF", "Gun knockback: 7\n")  ..core.colorize("#FFFFFF", "Gun Critical chance: 13%\n")..core.colorize("#FFFFFF", "Critical efficiency: 3.0x\n")  ..core.colorize("#FFFFFF", "Reload delay: 1.0\n") ..core.colorize("#FFFFFF", "Clip size: 100\n")   ..core.colorize("#FFFFFF", "Ammunition: 7.62mm rounds\n") ..core.colorize("#FFFFFF", "Rate of fire: 0.09(full-auto)\n") ..core.colorize("#FFFFFF", "Gun type: heavy machinegun\n") ..core.colorize("#FFFFFF", "Block penetration: 12%\n")

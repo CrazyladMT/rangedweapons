@@ -1,6 +1,6 @@
-if minetest.settings:get_bool("minigun_aswell") then
+if core.settings:get_bool("minigun_aswell") then
 
-minetest.register_tool("rangedweapons:minigun_r", {
+core.register_tool("rangedweapons:minigun_r", {
 	stack_max= 1,
 	wield_scale = {x=3.0,y=3.0,z=3.0},
 	description = "",
@@ -11,7 +11,7 @@ minetest.register_tool("rangedweapons:minigun_r", {
 	inventory_image = "rangedweapons_minigun_rld.png",
 })
 
-	minetest.register_tool("rangedweapons:minigun", {
+	core.register_tool("rangedweapons:minigun", {
 	stack_max= 1,
 	wield_scale = {x=3.0,y=3.0,z=3.0},
 		description = "" ..core.colorize("#35cdff","minigun\n") ..core.colorize("#FFFFFF", "Gun damage: 10\n") ..core.colorize("#FFFFFF", "accuracy: 50%\n") ..core.colorize("#FFFFFF", "Gun knockback: 8\n")  ..core.colorize("#FFFFFF", "Gun Critical chance: 14%\n")..core.colorize("#FFFFFF", "Critical efficiency: 3.0x\n")  ..core.colorize("#FFFFFF", "Reload delay: 2.0\n") ..core.colorize("#FFFFFF", "Clip size: 100\n")   ..core.colorize("#FFFFFF", "Ammunition: 7.62mm rounds\n") ..core.colorize("#FFFFFF", "Rate of fire: 0.04(full-auto)\n") ..core.colorize("#FFFFFF", "Gun type: heavy machinegun\n") ..core.colorize("#FFFFFF", "Block penetration: 15%\n")

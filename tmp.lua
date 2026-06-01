@@ -1,5 +1,5 @@
 
-minetest.register_tool("rangedweapons:tmp_r", {
+core.register_tool("rangedweapons:tmp_r", {
 	stack_max= 1,
 	wield_scale = {x=1.15,y=1.15,z=1.15},
 	description = "",
@@ -10,7 +10,7 @@ minetest.register_tool("rangedweapons:tmp_r", {
 	inventory_image = "rangedweapons_tmp_rld.png",
 })
 
-minetest.register_tool("rangedweapons:tmp_rr", {
+core.register_tool("rangedweapons:tmp_rr", {
 	stack_max= 1,
 	wield_scale = {x=1.15,y=1.15,z=1.15},
 	description = "",
@@ -21,7 +21,7 @@ minetest.register_tool("rangedweapons:tmp_rr", {
 	inventory_image = "rangedweapons_tmp.png",
 })
 
-minetest.register_tool("rangedweapons:tmp_rrr", {
+core.register_tool("rangedweapons:tmp_rrr", {
 	stack_max= 1,
 	wield_scale = {x=1.15,y=1.15,z=1.15},
 	description = "",
@@ -32,7 +32,7 @@ minetest.register_tool("rangedweapons:tmp_rrr", {
 	inventory_image = "rangedweapons_tmp.png",
 })
 
-	minetest.register_tool("rangedweapons:tmp", {
+	core.register_tool("rangedweapons:tmp", {
 	stack_max= 1,
 	wield_scale = {x=1.15,y=1.15,z=1.15},
 		description = "" ..core.colorize("#35cdff","Steyr T.M.P.\n") ..core.colorize("#FFFFFF", "Gun damage: 1\n") ..core.colorize("#FFFFFF", "accuracy: 64%\n") ..core.colorize("#FFFFFF", "Gun knockback: 0\n")  ..core.colorize("#FFFFFF", "Gun Critical chance: 4%\n")..core.colorize("#FFFFFF", "Critical efficiency: 1.85x\n")   ..core.colorize("#FFFFFF", "Reload delay: 1.0\n") ..core.colorize("#FFFFFF", "Clip size: 30\n")   ..core.colorize("#FFFFFF", "Ammunition: 9x19mm parabellum\n") ..core.colorize("#FFFFFF", "Rate of fire: 0.066(full-auto)\n") ..core.colorize("#FFFFFF", "Gun type: machine pistol\n") ..core.colorize("#FFFFFF", "Bullet velocity: 20"),

@@ -1,4 +1,4 @@
-local S = minetest.get_translator("rangedweapons")
+local S = core.get_translator("rangedweapons")
 local skill_list = {
 	{id="handgun_skill",name="Handgun"},
 	{id="mp_skill",name="Machine Pistol"},
@@ -11,7 +11,7 @@ local skill_list = {
 	{id="throw_skill",name="Throwing weapons"},
 }
 
-minetest.register_on_joinplayer(
+core.register_on_joinplayer(
    function(player)
       local meta = player:get_meta()
       for _,skill in ipairs(skill_list) do
@@ -22,9 +22,9 @@ minetest.register_on_joinplayer(
    end
 )
 
-minetest.register_chatcommand("gunskills", {
+core.register_chatcommand("gunskills", {
 	func = function(name, param)
-	for _, player in pairs(minetest.get_connected_players()) do
+	for _, player in pairs(core.get_connected_players()) do
 	local meta = player:get_meta()
 local handguns = meta:get_int("handgun_skill")
 local mps = meta:get_int("mp_skill") 
@@ -35,7 +35,7 @@ local arifle = meta:get_int("arifle_skill")
 local revolver = meta:get_int("revolver_skill")
 local rifle = meta:get_int("rifle_skill")
 local throw = meta:get_int("throw_skill")
-		minetest.show_formspec(name, "rangedweapons:gunskills_form",
+		core.show_formspec(name, "rangedweapons:gunskills_form",
 "size[11,7]"..
 "label[0,0;Gun efficiency: increases damage, accuracy and crit chance.]"..
 "image[0,1;1,1;rangedweapons_handgun_img.png]"..
@@ -62,21 +62,21 @@ end
 	end
 })
 
-local min_gun_efficiency = tonumber(minetest.settings:get("rangedweapons_min_gun_efficiency")) or 40
+local min_gun_efficiency = tonumber(core.settings:get("rangedweapons_min_gun_efficiency")) or 40
 local timer = 0
-minetest.register_globalstep(
+core.register_globalstep(
    function(dtime, player)
       timer = timer + dtime;
 
       if timer > 60 then
-	 for _, player in pairs(minetest.get_connected_players()) do
+	 for _, player in pairs(core.get_connected_players()) do
 	    local meta = player:get_meta()
 	    for _,skill in ipairs(skill_list) do
 	       if math.random(1, 40) == 1 then
 		  if meta:get_int(skill.id) > min_gun_efficiency then
 		     meta:set_int(skill.id, meta:get_int(skill.id) - 1)
-		     minetest.chat_send_player(player:get_player_name(),
-					       minetest.colorize("#ff0000",S("@1 skill degraded!", S(skill.name))))
+		     core.chat_send_player(player:get_player_name(),
+					       core.colorize("#ff0000",S("@1 skill degraded!", S(skill.name))))
 		  end
 	       end
 	    end

@@ -1,6 +1,6 @@
 
 
-minetest.register_tool("rangedweapons:thompson_r", {
+core.register_tool("rangedweapons:thompson_r", {
 	stack_max= 1,
 	wield_scale = {x=1.9,y=1.9,z=1.25},
 	description = "",
@@ -10,7 +10,7 @@ minetest.register_tool("rangedweapons:thompson_r", {
 	groups = {not_in_creative_inventory = 1},
 	inventory_image = "rangedweapons_thompson_rld.png",
 })
-minetest.register_tool("rangedweapons:thompson_rr", {
+core.register_tool("rangedweapons:thompson_rr", {
 	stack_max= 1,
 	wield_scale = {x=1.9,y=1.9,z=1.25},
 	description = "",
@@ -20,7 +20,7 @@ minetest.register_tool("rangedweapons:thompson_rr", {
 	groups = {not_in_creative_inventory = 1},
 	inventory_image = "rangedweapons_thompson.png",
 })
-minetest.register_tool("rangedweapons:thompson_rrr", {
+core.register_tool("rangedweapons:thompson_rrr", {
 	stack_max= 1,
 	wield_scale = {x=1.9,y=1.9,z=1.25},
 	description = "",
@@ -32,7 +32,7 @@ minetest.register_tool("rangedweapons:thompson_rrr", {
 })
 -------------------------------------------
 
-	minetest.register_tool("rangedweapons:thompson", {
+	core.register_tool("rangedweapons:thompson", {
 	stack_max= 1,
 	wield_scale = {x=1.9,y=1.9,z=1.25},
 		description = "" ..core.colorize("#35cdff","Thompson SMG\n") ..core.colorize("#FFFFFF", "Ranged damage: 4\n") ..core.colorize("#FFFFFF", "accuracy: 75%\n") ..core.colorize("#FFFFFF", "knockback: 1\n") ..core.colorize("#FFFFFF", "Reload delay: 1.4\n")  ..core.colorize("#FFFFFF", "Clip size: 30/30\n") ..core.colorize("#FFFFFF", "Critical chance: 8%\n") ..core.colorize("#FFFFFF", "Critical efficiency: 2.0x\n")  ..core.colorize("#FFFFFF", "Ammunition: 10mm auto/.45acp\n") ..core.colorize("#FFFFFF", "Rate of fire: 0.1 (full-auto)\n") ..core.colorize("#FFFFFF", "Gun type: smg\n") ..core.colorize("#FFFFFF", "Bullet velocity: 30"),

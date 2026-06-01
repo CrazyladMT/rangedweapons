@@ -1,7 +1,7 @@
 
 
 
-minetest.register_tool("rangedweapons:deagle_rld", {
+core.register_tool("rangedweapons:deagle_rld", {
 	stack_max= 1,
 	wield_scale = {x=1.25,y=1.25,z=1.5},
 	description = "",
@@ -10,7 +10,7 @@ minetest.register_tool("rangedweapons:deagle_rld", {
 	groups = {not_in_creative_inventory = 1},
 	inventory_image = "rangedweapons_deagle_rld.png",
 })
-minetest.register_tool("rangedweapons:deagle_r", {
+core.register_tool("rangedweapons:deagle_r", {
 	stack_max= 1,
 	wield_scale = {x=1.25,y=1.25,z=1.5},
 	description = "",
@@ -21,7 +21,7 @@ minetest.register_tool("rangedweapons:deagle_r", {
 	inventory_image = "rangedweapons_deagle_rld.png",
 })
 
-minetest.register_tool("rangedweapons:deagle", {
+core.register_tool("rangedweapons:deagle", {
 		description = "" ..core.colorize("#35cdff","Desert Eagle\n")..core.colorize("#FFFFFF", "Ranged damage: 11\n") ..core.colorize("#FFFFFF", "Accuracy: 85%\n") ..core.colorize("#FFFFFF", "knockback: 6\n")  ..core.colorize("#FFFFFF", "Critical chance: 20%\n") ..core.colorize("#FFFFFF", "Critical efficiency: 3x\n")..core.colorize("#FFFFFF", "Reload delay: 0.6\n")..core.colorize("#FFFFFF", "Clip size: 9/8/7\n")  ..core.colorize("#FFFFFF", "Ammunition: .357 Magnum rounds/.44 magnum rounds/.50AE catridges\n") ..core.colorize("#FFFFFF", "Rate of fire: 0.7\n") ..core.colorize("#FFFFFF", "Gun type: Magnum\n") ..core.colorize("#FFFFFF", "Block penetration: 5%\n")
 ..core.colorize("#FFFFFF", "penetration: 15%\n")..core.colorize("#FFFFFF", "Bullet velocity: 50"),
 	wield_scale = {x=1.25,y=1.25,z=1.5},
@@ -59,7 +59,7 @@ return itemstack
 	end,
 })
 
-minetest.register_tool("rangedweapons:golden_deagle_rld", {
+core.register_tool("rangedweapons:golden_deagle_rld", {
 	stack_max= 1,
 	wield_scale = {x=1.25,y=1.25,z=1.5},
 	description = "",
@@ -68,7 +68,7 @@ minetest.register_tool("rangedweapons:golden_deagle_rld", {
 	groups = {not_in_creative_inventory = 1},
 	inventory_image = "rangedweapons_golden_deagle_rld.png",
 })
-minetest.register_tool("rangedweapons:golden_deagle_r", {
+core.register_tool("rangedweapons:golden_deagle_r", {
 	stack_max= 1,
 	wield_scale = {x=1.25,y=1.25,z=1.5},
 	description = "",
@@ -79,7 +79,7 @@ minetest.register_tool("rangedweapons:golden_deagle_r", {
 	inventory_image = "rangedweapons_golden_deagle_rld.png",
 })
 
-minetest.register_tool("rangedweapons:golden_deagle", {
+core.register_tool("rangedweapons:golden_deagle", {
 		description = "" ..core.colorize("#35cdff","Golden Desert Eagle\n")..core.colorize("#FFFFFF", "Ranged damage: 14\n") ..core.colorize("#FFFFFF", "Accuracy: 90%\n") ..core.colorize("#FFFFFF", "knockback: 6\n")  ..core.colorize("#FFFFFF", "Critical chance: 23%\n") ..core.colorize("#FFFFFF", "Critical efficiency: 3x\n")..core.colorize("#FFFFFF", "Reload delay: 0.6\n")..core.colorize("#FFFFFF", "Clip size: 9/8/7\n")  ..core.colorize("#FFFFFF", "Ammunition: .357 Magnum rounds/.44 magnum rounds/.50AE catridges\n") ..core.colorize("#FFFFFF", "Rate of fire: 0.75\n") ..core.colorize("#FFFFFF", "Gun type: Magnum\n") ..core.colorize("#FFFFFF", "Block penetration: 5%\n")
 ..core.colorize("#FFFFFF", "penetration: 15%\n")..core.colorize("#FFFFFF", "Bullet velocity: 50"),
 	wield_scale = {x=1.25,y=1.25,z=1.5},

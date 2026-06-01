@@ -1,9 +1,9 @@
-minetest.register_craftitem("rangedweapons:blue_ray_visual", {
+core.register_craftitem("rangedweapons:blue_ray_visual", {
 	wield_scale = {x=1.75,y=1.75,z=1.75},
 	inventory_image = "rangedweapons_blue_ray.png",
 })
 
-	minetest.register_tool("rangedweapons:laser_blaster", {
+	core.register_tool("rangedweapons:laser_blaster", {
 	stack_max= 1,
 	wield_scale = {x=1.15,y=1.15,z=1.15},
 		description = "" ..core.colorize("#35cdff","Laser blaster\n") ..core.colorize("#FFFFFF", "Ranged damage: 15\n") ..core.colorize("#FFFFFF", "accuracy: 100%\n") ..core.colorize("#FFFFFF", "knockback: 0\n")  ..core.colorize("#FFFFFF", "Critical chance: 10%\n") ..core.colorize("#FFFFFF", "Critical efficiency: 2.0x\n")  ..core.colorize("#FFFFFF", "Power usage: 10\n") ..core.colorize("#FFFFFF", "Rate of fire: 0.3\n") ..core.colorize("#FFFFFF", "Enemy penetration: 50%\n") ..core.colorize("#FFFFFF", "Gun type: power pistol\n") ..core.colorize("#FFFFFF", "Bullet velocity: 65"),

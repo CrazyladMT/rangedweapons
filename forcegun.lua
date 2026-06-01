@@ -1,6 +1,6 @@
 local proj_dir
 
-minetest.register_tool("rangedweapons:forcegun", {
+core.register_tool("rangedweapons:forcegun", {
 		description = "" ..core.colorize("#35cdff","Force gun\n") ..core.colorize("#FFFFFF", "Completelly harmless... by itself...\n")..core.colorize("#FFFFFF", "It's projectile will push either the entity it hits directly, or everyone near the node it collides with far away.\n")  ..core.colorize("#FFFFFF", "Perfect for rocket-jumping or YEETing enemies away.\n")..core.colorize("#FFFFFF", "Power usage: 40\n")..core.colorize("#FFFFFF", "Gun type:Power Special-gun\n") ..core.colorize("#FFFFFF", "Bullet velocity: 60"),
 	range = 0,
 	wield_scale = {x=2.0,y=2.0,z=1.75},
@@ -15,9 +15,9 @@ if  inv:contains_item("main", "rangedweapons:power_particle 40") then
 		if pos and dir then
 		inv:remove_item("main", "rangedweapons:power_particle 25")
 			pos.y = pos.y + 1.5
-			local obj = minetest.add_entity(pos, "rangedweapons:forceblast")
+			local obj = core.add_entity(pos, "rangedweapons:forceblast")
 			if obj then
-				minetest.sound_play("rangedweapons_rocket", {object=obj}, true)
+				core.sound_play("rangedweapons_rocket", {object=obj}, true)
 				obj:set_velocity({x=dir.x * 60, y=dir.y * 60, z=dir.z * 60})
 
 				obj:set_yaw(yaw - math.pi/2)
@@ -72,7 +72,7 @@ moveresult.collisions[1].object:add_player_velocity({x=proj_dir.x * 20, y=5+ (pr
 moveresult.collisions[1].object:add_velocity({x=proj_dir.x * 20, y=5+ (proj_dir.y * 20), z=proj_dir.z * 20})
 
 end
-	minetest.add_particle({
+	core.add_particle({
 		pos = ({x = pos.x, y = pos.y, z = pos.z}),
 		velocity ={x=0,y=0,z=0},
           	acceleration ={x=0,y=0,z=0},
@@ -90,7 +90,7 @@ end
 
 if moveresult.collisions[1].type == "node" then
 
-local objs = minetest.get_objects_inside_radius({x = pos.x, y = pos.y, z = pos.z}, 7)
+local objs = core.get_objects_inside_radius({x = pos.x, y = pos.y, z = pos.z}, 7)
 		for k, obj in pairs(objs) do
 
 local posd_x = 1
@@ -125,7 +125,7 @@ end
 end
 end
 
-	minetest.add_particle({
+	core.add_particle({
 		pos = ({x = pos.x, y = pos.y, z = pos.z}),
 		velocity ={x=0,y=0,z=0},
           	acceleration ={x=0,y=0,z=0},
@@ -147,4 +147,4 @@ end
 end	
 
 
-minetest.register_entity("rangedweapons:forceblast", rangedweapons_forceblast)
+core.register_entity("rangedweapons:forceblast", rangedweapons_forceblast)

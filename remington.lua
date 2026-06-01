@@ -1,4 +1,4 @@
-minetest.register_tool("rangedweapons:remington_rld", {
+core.register_tool("rangedweapons:remington_rld", {
 	stack_max= 1,
 	range = 0,
 	wield_scale = {x=1.9,y=1.9,z=1.1},
@@ -9,7 +9,7 @@ minetest.register_tool("rangedweapons:remington_rld", {
 	inventory_image = "rangedweapons_remington_rld.png",
 })
 
-minetest.register_tool("rangedweapons:remington", {
+core.register_tool("rangedweapons:remington", {
 		description = "" ..core.colorize("#35cdff","Remington 870\n") ..core.colorize("#FFFFFF", "Ranged damage: 1\n") ..core.colorize("#FFFFFF", "projectiles: 4\n") ..core.colorize("#FFFFFF", "Gun gravity: 5\n") ..core.colorize("#FFFFFF", "Accuracy: 40%\n")..core.colorize("#FFFFFF", "knockback: 5\n") ..core.colorize("#FFFFFF", "Critical chance: 4%\n") ..core.colorize("#FFFFFF", "Critical efficiency: 2.0x\n") ..core.colorize("#FFFFFF", "Ammunition: 12 gauge shells\n") ..core.colorize("#FFFFFF", "Pump delay: 0.8\n")..core.colorize("#FFFFFF", "Clip size: 4\n") ..core.colorize("#27a600", "Gun is ready to fire!\n") ..core.colorize("#fff21c", "Right-click to load in a bullet!\n")  ..core.colorize("#FFFFFF", "Gun type: shotgun\n") ..core.colorize("#FFFFFF", "Bullet velocity: 18"),
 	range = 0,
 	wield_scale = {x=1.9,y=1.9,z=1.1},
@@ -45,7 +45,7 @@ return itemstack
 	end,
 })
 
-minetest.register_tool("rangedweapons:remington_uld", {
+core.register_tool("rangedweapons:remington_uld", {
 	stack_max= 1,
 	wield_scale = {x=1.9,y=1.9,z=1.1},
 	range = 0,
@@ -53,7 +53,7 @@ minetest.register_tool("rangedweapons:remington_uld", {
 	inventory_image = "rangedweapons_remington.png",
 	groups = {not_in_creative_inventory = 1},
 	on_use = function(user)
-		minetest.sound_play("rangedweapons_empty", {user}, true)
+		core.sound_play("rangedweapons_empty", {user}, true)
 	end,
 on_secondary_use = function(itemstack, user, pointed_thing)
 eject_shell(itemstack,user,"rangedweapons:remington_rld",0.8,"rangedweapons_shotgun_reload_a","rangedweapons:empty_shell")

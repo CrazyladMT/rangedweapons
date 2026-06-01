@@ -1,6 +1,6 @@
 
 
-minetest.register_tool("rangedweapons:m16_r", {
+core.register_tool("rangedweapons:m16_r", {
 	stack_max= 1,
 	wield_scale = {x=1.75,y=1.75,z=1.3},
 	description = "",
@@ -11,7 +11,7 @@ minetest.register_tool("rangedweapons:m16_r", {
 	inventory_image = "rangedweapons_m16_rld.png",
 })
 
-minetest.register_tool("rangedweapons:m16_rr", {
+core.register_tool("rangedweapons:m16_rr", {
 	stack_max= 1,
 	wield_scale = {x=1.75,y=1.75,z=1.3},
 	description = "",
@@ -22,7 +22,7 @@ minetest.register_tool("rangedweapons:m16_rr", {
 	inventory_image = "rangedweapons_m16.png",
 })
 
-minetest.register_tool("rangedweapons:m16_rrr", {
+core.register_tool("rangedweapons:m16_rrr", {
 	stack_max= 1,
 	wield_scale = {x=1.75,y=1.75,z=1.3},
 	description = "",
@@ -34,7 +34,7 @@ minetest.register_tool("rangedweapons:m16_rrr", {
 })
 
 
-	minetest.register_tool("rangedweapons:m16", {
+	core.register_tool("rangedweapons:m16", {
 	stack_max= 1,
 	wield_scale = {x=1.75,y=1.75,z=1.3},
 		description = "" ..core.colorize("#35cdff","m16\n") ..core.colorize("#FFFFFF", "Gun damage: 6\n") ..core.colorize("#FFFFFF", "accuracy: 75%\n") ..core.colorize("#FFFFFF", "Gun knockback: 4\n")  ..core.colorize("#FFFFFF", "Gun Critical chance: 11%\n")..core.colorize("#FFFFFF", "Critical efficiency: 2.75x\n")  ..core.colorize("#FFFFFF", "Reload delay: 1.0\n") ..core.colorize("#FFFFFF", "Clip size: 20\n")   ..core.colorize("#FFFFFF", "Ammunition: 5.56mm rounds\n") ..core.colorize("#FFFFFF", "Rate of fire: 0.067(full-auto)\n") ..core.colorize("#FFFFFF", "Gun type: assault rifle\n")

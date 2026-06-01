@@ -1,6 +1,6 @@
 
 
-minetest.register_tool("rangedweapons:m200_uld", {
+core.register_tool("rangedweapons:m200_uld", {
 	stack_max= 1,
 	wield_scale = {x=2.1,y=2.1,z=1.2},
 	range = 0,
@@ -9,7 +9,7 @@ minetest.register_tool("rangedweapons:m200_uld", {
 	inventory_image = "rangedweapons_m200.png",
 	weapon_zoom = 7.5,
 	on_use = function(itemstack, user)
-		minetest.sound_play("rangedweapons_empty", {pos = user:get_pos()}, true)
+		core.sound_play("rangedweapons_empty", {pos = user:get_pos()}, true)
 	end,
 on_secondary_use = function(itemstack, user, pointed_thing)
 eject_shell(itemstack,user,"rangedweapons:m200_rld",1.0,"rangedweapons_rifle_reload_a","rangedweapons:empty_shell")
@@ -18,7 +18,7 @@ end,
 })
 
 
-minetest.register_tool("rangedweapons:m200_r", {
+core.register_tool("rangedweapons:m200_r", {
 	rw_next_reload = "rangedweapons:m200_rr",
 	load_sound = "rangedweapons_rifle_clip_in",
 	range = 0,
@@ -27,7 +27,7 @@ minetest.register_tool("rangedweapons:m200_r", {
 	groups = {not_in_creative_inventory = 1},
 	inventory_image = "rangedweapons_m200_noclip.png",
 })
-minetest.register_tool("rangedweapons:m200_rr", {
+core.register_tool("rangedweapons:m200_rr", {
 	rw_next_reload = "rangedweapons:m200_rrr",
 	load_sound = "rangedweapons_rifle_reload_a",
 	range = 0,
@@ -36,7 +36,7 @@ minetest.register_tool("rangedweapons:m200_rr", {
 	groups = {not_in_creative_inventory = 1},
 	inventory_image = "rangedweapons_m200.png",
 })
-minetest.register_tool("rangedweapons:m200_rrr", {
+core.register_tool("rangedweapons:m200_rrr", {
 	rw_next_reload = "rangedweapons:m200",
 	load_sound = "rangedweapons_rifle_reload_b",
 	range = 0,
@@ -47,7 +47,7 @@ minetest.register_tool("rangedweapons:m200_rrr", {
 })
 
 
-minetest.register_tool("rangedweapons:m200_rld", {
+core.register_tool("rangedweapons:m200_rld", {
 	stack_max= 1,
 	range = 0,
 	wield_scale = {x=2.1,y=2.1,z=1.2},
@@ -59,7 +59,7 @@ minetest.register_tool("rangedweapons:m200_rld", {
 })
 
 
-minetest.register_tool("rangedweapons:m200", {
+core.register_tool("rangedweapons:m200", {
 		description = "" ..core.colorize("#35cdff","m200 intervention \n") ..core.colorize("#FFFFFF", "Ranged damage:22 + 75/sec of bullet lifetime\n")..core.colorize("#FFFFFF", "Accuracy: 100%\n") ..core.colorize("#FFFFFF", "knockback: 20\n") ..core.colorize("#FFFFFF", "Critical chance: 33%\n") ..core.colorize("#FFFFFF", "Critical efficiency: x3.25\n") ..core.colorize("#FFFFFF", "Ammunition: .408 chey tac\n") ..core.colorize("#FFFFFF", "Rate of fire: 1.5\n") ..core.colorize("#FFFFFF", "Reload time: 2.5\n") ..core.colorize("#FFFFFF", "Zoom: 15x\n") ..core.colorize("#27a600", "The gun is loaded!\n") ..core.colorize("#FFFFFF", "Clip size: 7\n") ..core.colorize("#FFFFFF", "Enemy penetration:45%\n") ..core.colorize("#FFFFFF", "Block penetration:15%\n") ..core.colorize("#FFFFFF", "Gun type: Rifle\n") ..core.colorize("#FFFFFF", "Bullet velocity: 80"),
 	range = 0,
 	weapon_zoom = 6,

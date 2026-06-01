@@ -1,7 +1,7 @@
 
 
 
-minetest.register_craftitem("rangedweapons:tec9_r", {
+core.register_craftitem("rangedweapons:tec9_r", {
 	stack_max= 1,
 	wield_scale = {x=1.25,y=1.25,z=1.50},
 	description = "",
@@ -12,7 +12,7 @@ minetest.register_craftitem("rangedweapons:tec9_r", {
 	inventory_image = "rangedweapons_tec9_rld.png",
 })
 
-minetest.register_craftitem("rangedweapons:tec9_rr", {
+core.register_craftitem("rangedweapons:tec9_rr", {
 	stack_max= 1,
 	wield_scale = {x=1.25,y=1.25,z=1.50},
 	description = "",
@@ -23,7 +23,7 @@ minetest.register_craftitem("rangedweapons:tec9_rr", {
 	inventory_image = "rangedweapons_tec9.png",
 })
 
-minetest.register_craftitem("rangedweapons:tec9_rrr", {
+core.register_craftitem("rangedweapons:tec9_rrr", {
 	stack_max= 1,
 	wield_scale = {x=1.25,y=1.25,z=1.50},
 	description = "",
@@ -36,7 +36,7 @@ minetest.register_craftitem("rangedweapons:tec9_rrr", {
 
 
 
-	minetest.register_craftitem("rangedweapons:tec9", {
+	core.register_craftitem("rangedweapons:tec9", {
 	stack_max= 1,
 	wield_scale = {x=1.25,y=1.25,z=1.50},
 		description = "" ..core.colorize("#35cdff","TEC-9\n") ..core.colorize("#FFFFFF", "Gun damage: 1\n") ..core.colorize("#FFFFFF", "accuracy: 75%\n") ..core.colorize("#FFFFFF", "Gun knockback: 0\n")  ..core.colorize("#FFFFFF", "Gun Critical chance: 9%\n") ..core.colorize("#FFFFFF", "Gun Critical efficiency: 1.9x\n") ..core.colorize("#FFFFFF", "Reload delay: 1.0\n") ..core.colorize("#FFFFFF", "Clip size: 50\n")   ..core.colorize("#FFFFFF", "Ammunition: 9x19mm parabellum\n")  ..core.colorize("#FFFFFF", "Rate of fire: 0.2\n") ..core.colorize("#FFFFFF", "Gun type: machine pistol\n") ..core.colorize("#FFFFFF", "Bullet velocity: 20"),

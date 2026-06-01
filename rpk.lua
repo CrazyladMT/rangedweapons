@@ -1,5 +1,5 @@
 
-minetest.register_tool("rangedweapons:rpk_r", {
+core.register_tool("rangedweapons:rpk_r", {
 	stack_max= 1,
 	wield_scale = {x=1.75,y=1.75,z=1.3},
 	description = "",
@@ -10,7 +10,7 @@ minetest.register_tool("rangedweapons:rpk_r", {
 	inventory_image = "rangedweapons_rpk_rld.png",
 })
 
-minetest.register_tool("rangedweapons:rpk_rr", {
+core.register_tool("rangedweapons:rpk_rr", {
 	stack_max= 1,
 	wield_scale = {x=1.75,y=1.75,z=1.3},
 	description = "",
@@ -21,7 +21,7 @@ minetest.register_tool("rangedweapons:rpk_rr", {
 	inventory_image = "rangedweapons_rpk.png",
 })
 
-minetest.register_tool("rangedweapons:rpk_rrr", {
+core.register_tool("rangedweapons:rpk_rrr", {
 	stack_max= 1,
 	wield_scale = {x=1.75,y=1.75,z=1.3},
 	description = "",
@@ -33,7 +33,7 @@ minetest.register_tool("rangedweapons:rpk_rrr", {
 })
 
 
-	minetest.register_tool("rangedweapons:rpk", {
+	core.register_tool("rangedweapons:rpk", {
 	stack_max= 1,
 	wield_scale = {x=1.75,y=1.75,z=1.3},
 		description = "" ..core.colorize("#35cdff","rpk\n") ..core.colorize("#FFFFFF", "Gun damage: 7\n") ..core.colorize("#FFFFFF", "accuracy: 60%\n") ..core.colorize("#FFFFFF", "Gun knockback: 6\n")  ..core.colorize("#FFFFFF", "Gun Critical chance: 12%\n")..core.colorize("#FFFFFF", "Critical efficiency: 3.0x\n")  ..core.colorize("#FFFFFF", "Reload delay: 2.0\n") ..core.colorize("#FFFFFF", "Clip size: 75\n")   ..core.colorize("#FFFFFF", "Ammunition: 7.62mm rounds\n") ..core.colorize("#FFFFFF", "Rate of fire: 0.10(full-auto)\n") ..core.colorize("#FFFFFF", "Gun type: heavy machinegun\n") ..core.colorize("#FFFFFF", "Block penetration: 10%\n")

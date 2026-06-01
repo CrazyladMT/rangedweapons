@@ -1,5 +1,5 @@
 
-minetest.register_tool("rangedweapons:taurus_rld", {
+core.register_tool("rangedweapons:taurus_rld", {
 	stack_max= 1,
 	range = 0,
 	wield_scale = {x=1.25,y=1.25,z=1.1},
@@ -10,7 +10,7 @@ minetest.register_tool("rangedweapons:taurus_rld", {
 })
 
 
-minetest.register_tool("rangedweapons:taurus", {
+core.register_tool("rangedweapons:taurus", {
 		description = "" ..core.colorize("#35cdff","Taurus raging bull \n") ..core.colorize("#FFFFFF", "Ranged damage: 14\n")..core.colorize("#FFFFFF", "Accuracy: 97%\n") ..core.colorize("#FFFFFF", "Gun knockback: 8\n") ..core.colorize("#FFFFFF", "Critical chance: 22%\n") ..core.colorize("#FFFFFF", "Critical efficiency: 3.1x\n") ..core.colorize("#FFFFFF", "Ammunition: .44 Magnum rounds\n") ..core.colorize("#FFFFFF", "Reload time: 0.25\n") ..core.colorize("#FFFFFF", "Clip Size: 6\n") ..core.colorize("#FFFFFF", "Block penetration: 8%\n")
 ..core.colorize("#FFFFFF", "penetration: 24%\n") ..core.colorize("#FFFFFF", "Gun type: Revolver\n") ..core.colorize("#FFFFFF", "Bullet velocity: 64"),
 	range = 0,

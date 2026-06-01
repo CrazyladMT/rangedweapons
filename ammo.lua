@@ -3,9 +3,9 @@ forbidden_ents = {
 }
 
 
-minetest.register_alias("rangedweapons:726mm", "rangedweapons:762mm")
+core.register_alias("rangedweapons:726mm", "rangedweapons:762mm")
 
-minetest.register_craftitem("rangedweapons:shot_bullet_visual", {
+core.register_craftitem("rangedweapons:shot_bullet_visual", {
 	wield_scale = {x=1.0,y=1.0,z=1.0},
 	inventory_image = "rangedweapons_bulletshot.png",
 })
@@ -26,8 +26,8 @@ initial_properties = {
 },
 }
 
-local use_particles = minetest.settings:get_bool("rangedweapons_impact_particles", true)
-local max_lifetime = tonumber(minetest.settings:get("rangedweapons_bullet_lifetime")) or 10.0
+local use_particles = core.settings:get_bool("rangedweapons_impact_particles", true)
+local max_lifetime = tonumber(core.settings:get("rangedweapons_bullet_lifetime")) or 10.0
 
 rangedweapons_shot_bullet.on_step = function(self, dtime, moveresult)
 ----------------------------------------
@@ -45,7 +45,7 @@ local size = self.size or 0.0025
 local SBP = self.bullet_particles
 if SBP ~= nil then
 for i=1,math.random(SBP.amount[1],SBP.amount[2]) do
-	minetest.add_particle({
+	core.add_particle({
 		pos = {x=self.object:get_pos().x+(math.random(-SBP.pos_randomness,SBP.pos_randomness)/100),y=self.object:get_pos().y+(math.random(-SBP.pos_randomness,SBP.pos_randomness)/100),z=self.object:get_pos().z+(math.random(-SBP.pos_randomness,SBP.pos_randomness)/100)},
 		velocity = {x=math.random(-SBP.velocity.x,SBP.velocity.x), y=math.random(-SBP.velocity.y,SBP.velocity.y), z=math.random(-SBP.velocity.z,SBP.velocity.z)},
 		acceleration = {x=math.random(-SBP.acceleration.x,SBP.acceleration.x), y=math.random(-SBP.acceleration.y,SBP.acceleration.y)-SBP.gravity, z=math.random(-SBP.acceleration.z,SBP.acceleration.z)},
@@ -81,22 +81,22 @@ local glass_break = self.glass_break or 0
 
 if moveresult.collisions[1].type == "node" then
 
-minetest.check_for_falling(moveresult.collisions[1].node_pos)
+core.check_for_falling(moveresult.collisions[1].node_pos)
 
 
 if use_particles and
-minetest.registered_nodes[minetest.get_node(moveresult.collisions[1].node_pos).name]  and
-minetest.registered_nodes[minetest.get_node(moveresult.collisions[1].node_pos).name].tiles and
-minetest.registered_nodes[minetest.get_node(moveresult.collisions[1].node_pos).name].tiles[1]
+core.registered_nodes[core.get_node(moveresult.collisions[1].node_pos).name]  and
+core.registered_nodes[core.get_node(moveresult.collisions[1].node_pos).name].tiles and
+core.registered_nodes[core.get_node(moveresult.collisions[1].node_pos).name].tiles[1]
 then
 
-local hit_texture = minetest.registered_nodes[minetest.get_node(moveresult.collisions[1].node_pos).name].tiles[1]
+local hit_texture = core.registered_nodes[core.get_node(moveresult.collisions[1].node_pos).name].tiles[1]
 
 if hit_texture.name ~= nil then
 hit_texture = hit_texture.name
 end
 
-	minetest.add_particle({
+	core.add_particle({
 		pos = self.object:get_pos(),
 		velocity = {x=0, y=0, z=0},
           	acceleration = {x=0, y=0, z=0},
@@ -109,7 +109,7 @@ end
 	})
 
 	for i=1,math.random(4,8) do
-	minetest.add_particle({
+	core.add_particle({
 		pos = self.object:get_pos(),
 		velocity = {x=math.random(-3.0,3.0), y=math.random(2.0,5.0), z=math.random(-3.0,3.0)},
           	acceleration = {x=math.random(-3.0,3.0), y=math.random(-10.0,-15.0), z=math.random(-3.0,3.0)},
@@ -125,59 +125,59 @@ end
 end 
 
 
-minetest.sound_play("default_dig_cracky", {pos = self.object:get_pos(), gain = 1.0}, true)
+core.sound_play("default_dig_cracky", {pos = self.object:get_pos(), gain = 1.0}, true)
 
 if ignite > 0 then
 
-if minetest.get_node(moveresult.collisions[1].node_pos).name == "rangedweapons:barrel" then
-minetest.swap_node(moveresult.collisions[1].node_pos, {name = "air"})
+if core.get_node(moveresult.collisions[1].node_pos).name == "rangedweapons:barrel" then
+core.swap_node(moveresult.collisions[1].node_pos, {name = "air"})
 tnt.boom(moveresult.collisions[1].node_pos, {radius = 3})
 end 
 
-if minetest.get_node(moveresult.collisions[1].node_pos).name == "tnt:tnt" then
-minetest.swap_node(moveresult.collisions[1].node_pos, {name = "tnt:tnt_burning"})
-	minetest.sound_play("tnt_ignite", {pos = moveresult.collisions[1].node_pos}, true)
-	minetest.get_node_timer(moveresult.collisions[1].node_pos):start(3)
-	minetest.check_for_falling(moveresult.collisions[1].node_pos)
+if core.get_node(moveresult.collisions[1].node_pos).name == "tnt:tnt" then
+core.swap_node(moveresult.collisions[1].node_pos, {name = "tnt:tnt_burning"})
+	core.sound_play("tnt_ignite", {pos = moveresult.collisions[1].node_pos}, true)
+	core.get_node_timer(moveresult.collisions[1].node_pos):start(3)
+	core.check_for_falling(moveresult.collisions[1].node_pos)
 end
 
 end
 
 
-if door_break > 0 and minetest.settings:get_bool("rangedweapons_door_breaking", true) then
+if door_break > 0 and core.settings:get_bool("rangedweapons_door_breaking", true) then
 
-if string.find(minetest.get_node(moveresult.collisions[1].node_pos).name,"door_wood") then
+if string.find(core.get_node(moveresult.collisions[1].node_pos).name,"door_wood") then
 
-minetest.swap_node(moveresult.collisions[1].node_pos, {name = "air"})
-minetest.add_item(moveresult.collisions[1].node_pos, "default:wood 5")
-minetest.sound_play("rangedweapons_woodbreak",{pos = moveresult.collisions[1].node_pos}, true)
+core.swap_node(moveresult.collisions[1].node_pos, {name = "air"})
+core.add_item(moveresult.collisions[1].node_pos, "default:wood 5")
+core.sound_play("rangedweapons_woodbreak",{pos = moveresult.collisions[1].node_pos}, true)
 
 end end
 
-if glass_break > 0 and minetest.settings:get_bool("rangedweapons_glass_breaking", true) then
+if glass_break > 0 and core.settings:get_bool("rangedweapons_glass_breaking", true) then
 	
-local nodeName = minetest.get_node(moveresult.collisions[1].node_pos).name
+local nodeName = core.get_node(moveresult.collisions[1].node_pos).name
 
 	if nodeName == "default:glass" then
-	minetest.swap_node(moveresult.collisions[1].node_pos, {name = "rangedweapons:broken_glass"})
-minetest.sound_play("glass_break",{pos = moveresult.collisions[1].node_pos}, true)
+	core.swap_node(moveresult.collisions[1].node_pos, {name = "rangedweapons:broken_glass"})
+core.sound_play("glass_break",{pos = moveresult.collisions[1].node_pos}, true)
 	end
 	if   nodeName == "xpanes:pane" or
 		nodeName == "xpanes:pane_flat" then
-minetest.swap_node(moveresult.collisions[1].node_pos, {name = "air"})
-minetest.add_item(moveresult.collisions[1].node_pos, "rangedweapons:glass_shards")
-minetest.sound_play("glass_break",{pos = moveresult.collisions[1].node_pos}, true)
+core.swap_node(moveresult.collisions[1].node_pos, {name = "air"})
+core.add_item(moveresult.collisions[1].node_pos, "rangedweapons:glass_shards")
+core.sound_play("glass_break",{pos = moveresult.collisions[1].node_pos}, true)
 	end
 if string.find(nodeName,"door_glass") then
-minetest.swap_node(moveresult.collisions[1].node_pos, {name = "air"})
-minetest.add_item(moveresult.collisions[1].node_pos, "vessels:glass_fragments 5")
-minetest.sound_play("glass_break",{pos = moveresult.collisions[1].node_pos}, true)
+core.swap_node(moveresult.collisions[1].node_pos, {name = "air"})
+core.add_item(moveresult.collisions[1].node_pos, "vessels:glass_fragments 5")
+core.sound_play("glass_break",{pos = moveresult.collisions[1].node_pos}, true)
 	end
 end
 
 
-if minetest.get_item_group(minetest.get_node(moveresult.collisions[1].node_pos).name, "level") > 1  then
-   if minetest.settings:get_bool("rangedweapons_bullet_ricochet", true) then
+if core.get_item_group(core.get_node(moveresult.collisions[1].node_pos).name, "level") > 1  then
+   if core.settings:get_bool("rangedweapons_bullet_ricochet", true) then
       self.object:set_velocity(moveresult.collisions[1].old_velocity)
 
       if sparks > 0 then
@@ -212,7 +212,7 @@ else
 if math.random(1,100) <= nodePen then
    if use_particles then
 	for i=1,10 do
-	minetest.add_particle({
+	core.add_particle({
 		pos = self.object:get_pos(),
 		velocity = {x=1.5, y=1.5, z=1.5} ,
           	acceleration = {x=math.random(-3.0,3.0), y=math.random(-4.0,4.0), z=math.random(-3.0,3.0)},
@@ -225,19 +225,18 @@ if math.random(1,100) <= nodePen then
 	})
 	end
     end
-minetest.sound_play("default_dig_cracky", {pos = self.object:get_pos(), gain = 1.0}, true)
+core.sound_play("default_dig_cracky", {pos = self.object:get_pos(), gain = 1.0}, true)
 self.object:set_properties({collisionbox = {0,0,0,0,0,0}})
---minetest.chat_send_all("hit")
 self.object:set_velocity(moveresult.collisions[1].old_velocity)
 else
 
-if minetest.get_item_group(minetest.get_node(moveresult.collisions[1].node_pos).name, "leaves") > 0  then
+if core.get_item_group(core.get_node(moveresult.collisions[1].node_pos).name, "leaves") > 0  then
 
-minetest.sound_play("default_dig_snappy", {pos = self.object:get_pos(), gain = 1.5}, true)
+core.sound_play("default_dig_snappy", {pos = self.object:get_pos(), gain = 1.5}, true)
 
 if use_particles then
 for i = 1,math.random(3,6) do
-	minetest.add_particle({
+	core.add_particle({
 		pos = self.object:get_pos(),
 		velocity = {x=math.random(-2,2), y=math.random(3,6), z=math.random(-2,2)},
           acceleration = {x=math.random(-2,2), y=math.random(-3,-6), z=math.random(-2,2)},
@@ -274,7 +273,7 @@ local actualDamage = self.damage or {fleshy=1}
 local damage = {}
 local crit = self.crit or 0
 local critEffc = self.critEffc or 1
-local owner = minetest.get_player_by_name(self.owner)
+local owner = core.get_player_by_name(self.owner)
 local hit_texture = "rangedweapons_hit.png"
 local dps = self.dps or 0
 local skill = self.skill_value or 1
@@ -283,9 +282,9 @@ for _, dmg in pairs(actualDamage) do
     damage[_] = actualDamage[_]
 end
 
-local player_dmg_multiplier = tonumber(minetest.settings:get("rangedweapons_player_dmg_multiplier")) or 1.0
-local headshot_dmg_multiplier = tonumber(minetest.settings:get("rangedweapons_headshot_dmg_multiplier")) or 1.75
-local mob_dmg_multiplier = tonumber(minetest.settings:get("rangedweapons_mob_dmg_multiplier")) or 1.0
+local player_dmg_multiplier = tonumber(core.settings:get("rangedweapons_player_dmg_multiplier")) or 1.0
+local headshot_dmg_multiplier = tonumber(core.settings:get("rangedweapons_headshot_dmg_multiplier")) or 1.75
+local mob_dmg_multiplier = tonumber(core.settings:get("rangedweapons_mob_dmg_multiplier")) or 1.0
 
 if moveresult.collisions[1].object:is_player() then
    for _, player_dmg in pairs(damage) do
@@ -308,7 +307,6 @@ for _, bonus_dmg in pairs(damage) do
     damage[_] = (damage[_]*skill) + (self.dps*self.timer)
 end
 
---minetest.chat_send_all(critEffc)
 if math.random(1,100) <= crit+((skill*10)-10) then
    for _, critDmg in pairs(damage) do
        damage[_] = damage[_] * critEffc
@@ -316,7 +314,7 @@ if math.random(1,100) <= crit+((skill*10)-10) then
 
 
    local entpos = self.object:get_pos()
-   minetest.add_particle	({
+   core.add_particle	({
    	pos = entpos, velocity = 0, acceleration = {x=0, y=5, z=0},
 	expirationtime = 0.75, size = 12, collisiondetection = false,
 	vertical = false, texture = "rangedweapons_crit.png", glow = 30,})
@@ -328,9 +326,9 @@ moveresult.collisions[1].object:punch(owner, 1.0, {
 		damage_groups = damage,}, nil)
 owner:hud_change(hit, "text", hit_texture)
 
-	local bloodyness = tonumber(minetest.settings:get("rangedweapons_bloodyness")) or 10
+	local bloodyness = tonumber(core.settings:get("rangedweapons_bloodyness")) or 10
 	for i=1,math.random(math.ceil(bloodyness*0.66),math.ceil(bloodyness*1.5)) do
-	minetest.add_particle({
+	core.add_particle({
 		pos = self.object:get_pos(),
 		velocity = {x=math.random(-15.0,15.0)/10, y=math.random(2.0,5.0), z=math.random(-15.0,15.0)/10},
           	acceleration = {x=math.random(-3.0,3.0), y=math.random(-10.0,-15.0), z=math.random(-3.0,3.0)},
@@ -348,7 +346,7 @@ owner:hud_change(hit, "text", hit_texture)
 if math.random(1,100) <= mobPen then
    if use_particles then
 	for i=1,10 do
-	minetest.add_particle({
+	core.add_particle({
 		pos = self.object:get_pos(),
 		velocity = {x=1.5, y=1.5, z=1.5} ,
           	acceleration = {x=math.random(-3.0,3.0), y=math.random(-4.0,4.0), z=math.random(-3.0,3.0)},
@@ -361,7 +359,7 @@ if math.random(1,100) <= mobPen then
 	})
 	end
     end
-minetest.sound_play("default_dig_cracky", {pos = self.object:get_pos(), gain = 1.0}, true)
+core.sound_play("default_dig_cracky", {pos = self.object:get_pos(), gain = 1.0}, true)
 self.object:set_properties({collisionbox = {0,0,0,0,0,0}})
 self.object:set_velocity(moveresult.collisions[1].old_velocity)
 else
@@ -382,7 +380,7 @@ end
 
 end
 
-minetest.register_entity("rangedweapons:shot_bullet", rangedweapons_shot_bullet) 
+core.register_entity("rangedweapons:shot_bullet", rangedweapons_shot_bullet) 
 
 
 
@@ -394,12 +392,12 @@ minetest.register_entity("rangedweapons:shot_bullet", rangedweapons_shot_bullet)
 --- visual drop mags
 ---
 
-minetest.register_craftitem("rangedweapons:drum_mag", {
+core.register_craftitem("rangedweapons:drum_mag", {
 	wield_scale = {x=1.0,y=1.0,z=1.5},
 	inventory_image = "rangedweapons_drum_mag.png",
 })
 
-minetest.register_craftitem("rangedweapons:handgun_mag_black", {
+core.register_craftitem("rangedweapons:handgun_mag_black", {
 	wield_scale = {x=0.6,y=0.6,z=0.8},
 	inventory_image = "rangedweapons_magazine_handgun.png",
 })
@@ -415,10 +413,10 @@ local rangedweapons_mag = {
 rangedweapons_mag.on_step = function(self, dtime, pos)
 	self.timer = self.timer + dtime
 	local pos = self.object:get_pos()
-	local node = minetest.get_node(pos)
+	local node = core.get_node(pos)
 	if self.lastpos.y ~= nil then
-		if minetest.registered_nodes[node.name] ~= nil then
-		if minetest.registered_nodes[node.name].walkable then
+		if core.registered_nodes[node.name] ~= nil then
+		if core.registered_nodes[node.name].walkable then
 	local vel = self.object:get_velocity()
 	local acc = self.object:get_acceleration()
 	self.object:set_velocity({x=0, y=0, z=0})
@@ -432,29 +430,29 @@ rangedweapons_mag.on_step = function(self, dtime, pos)
 	self.lastpos= {x = pos.x, y = pos.y, z = pos.z}
 end
 
-minetest.register_entity("rangedweapons:mag", rangedweapons_mag)
+core.register_entity("rangedweapons:mag", rangedweapons_mag)
 
-minetest.register_craftitem("rangedweapons:handgun_mag_white", {
+core.register_craftitem("rangedweapons:handgun_mag_white", {
 	wield_scale = {x=0.6,y=0.6,z=0.8},
 	inventory_image = "rangedweapons_handgun_mag_white.png",
 })
 
-minetest.register_craftitem("rangedweapons:machinepistol_mag", {
+core.register_craftitem("rangedweapons:machinepistol_mag", {
 	wield_scale = {x=0.6,y=0.6,z=0.8},
 	inventory_image = "rangedweapons_machinepistol_mag.png",
 })
 
-minetest.register_craftitem("rangedweapons:assaultrifle_mag", {
+core.register_craftitem("rangedweapons:assaultrifle_mag", {
 	wield_scale = {x=0.6,y=0.6,z=0.8},
 	inventory_image = "rangedweapons_assaultrifle_mag.png",
 })
 
-minetest.register_craftitem("rangedweapons:rifle_mag", {
+core.register_craftitem("rangedweapons:rifle_mag", {
 	wield_scale = {x=0.6,y=0.6,z=0.8},
 	inventory_image = "rangedweapons_rifle_mag.png",
 })
 
-minetest.register_craftitem("rangedweapons:9mm", {
+core.register_craftitem("rangedweapons:9mm", {
 	stack_max= 500,
 	wield_scale = {x=0.4,y=0.4,z=1.2},
 		description = "" ..core.colorize("#35cdff","9x19mm Parabellum\n")..core.colorize("#FFFFFF", "Bullet damage: 1 \n") ..core.colorize("#FFFFFF", "Bullet crit efficiency: 0.25 \n") ..core.colorize("#FFFFFF", "Bullet crit chance: 1% \n") ..core.colorize("#FFFFFF", "Bullet velocity: 25 \n") ..core.colorize("#FFFFFF", "Bullet knockback: 1 \n")   ..core.colorize("#FFFFFF", "Ammunition for some guns"),
@@ -476,7 +474,7 @@ minetest.register_craftitem("rangedweapons:9mm", {
 		ignites_explosives = 1,
 	}
 })
-minetest.register_craftitem("rangedweapons:45acp", {
+core.register_craftitem("rangedweapons:45acp", {
 	stack_max= 450,
 	wield_scale = {x=0.4,y=0.4,z=1.2},
 		description = "" ..core.colorize("#35cdff",".45ACP catridge\n")..core.colorize("#FFFFFF", "Bullet damage: 2 \n") ..core.colorize("#FFFFFF", "Bullet crit efficiency: 0.50 \n") ..core.colorize("#FFFFFF", "Bullet crit chance: 2% \n")
@@ -500,7 +498,7 @@ minetest.register_craftitem("rangedweapons:45acp", {
 		ignites_explosives = 1,
 	},
 })
-minetest.register_craftitem("rangedweapons:10mm", {
+core.register_craftitem("rangedweapons:10mm", {
 	stack_max= 400,
 	wield_scale = {x=0.4,y=0.4,z=1.2},
 		description = "" ..core.colorize("#35cdff","10mm Auto\n")..core.colorize("#FFFFFF", "Bullet damage: 2 \n") ..core.colorize("#FFFFFF", "Bullet crit efficiency:0.30 \n") ..core.colorize("#FFFFFF", "Bullet velocity: 25 \n") 
@@ -525,7 +523,7 @@ minetest.register_craftitem("rangedweapons:10mm", {
 })
 
 
-minetest.register_craftitem("rangedweapons:357", {
+core.register_craftitem("rangedweapons:357", {
 	stack_max= 150,
 	wield_scale = {x=0.4,y=0.4,z=1.2},
 		description = "" ..core.colorize("#35cdff",".357 magnum round\n")..core.colorize("#FFFFFF", "Bullet damage: 4 \n") ..core.colorize("#FFFFFF", "Bullet crit efficiency: 0.6 \n") ..core.colorize("#FFFFFF", "Bullet crit chance: 3% \n") ..core.colorize("#FFFFFF", "Bullet knockback: 5 \n") ..core.colorize("#FFFFFF", "Bullet enemy Penetration: 5%\n") ..core.colorize("#FFFFFF", "Bullet velocity: 45 \n")    ..core.colorize("#FFFFFF", "Ammunition for some guns"),
@@ -549,7 +547,7 @@ minetest.register_craftitem("rangedweapons:357", {
 	}
 })
 
-minetest.register_craftitem("rangedweapons:50ae", {
+core.register_craftitem("rangedweapons:50ae", {
 	stack_max= 100,
 	wield_scale = {x=0.6,y=0.6,z=1.5},
 		description = "" ..core.colorize("#35cdff",".50AE catridge\n")..core.colorize("#FFFFFF", "Bullet damage: 8 \n") ..core.colorize("#FFFFFF", "Bullet crit efficiency: 0.9 \n") ..core.colorize("#FFFFFF", "Bullet crit chance: 6% \n") ..core.colorize("#FFFFFF", "Bullet knockback: 10 \n") ..core.colorize("#FFFFFF", "Bullet enemy Penetration: 15%\n") ..core.colorize("#FFFFFF", "Bullet velocity: 55 \n")    ..core.colorize("#FFFFFF", "Ammunition for some guns"),
@@ -573,7 +571,7 @@ minetest.register_craftitem("rangedweapons:50ae", {
 	}
 })
 
-minetest.register_craftitem("rangedweapons:44", {
+core.register_craftitem("rangedweapons:44", {
 	stack_max= 150,
 	wield_scale = {x=0.4,y=0.4,z=1.2},
 		description = "" ..core.colorize("#35cdff",".44 magnum round\n")..core.colorize("#FFFFFF", "Bullet damage: 4 \n") ..core.colorize("#FFFFFF", "Bullet crit efficiency: 0.7 \n") ..core.colorize("#FFFFFF", "Bullet crit chance: 4% \n") ..core.colorize("#FFFFFF", "Bullet knockback: 6 \n") ..core.colorize("#FFFFFF", "Bullet enemy Penetration: 6%\n") ..core.colorize("#FFFFFF", "Bullet velocity: 50 \n")  ..core.colorize("#FFFFFF", "Ammunition for some guns"),
@@ -596,7 +594,7 @@ minetest.register_craftitem("rangedweapons:44", {
 		ignites_explosives = 1,
 	}
 })
-minetest.register_craftitem("rangedweapons:762mm", {
+core.register_craftitem("rangedweapons:762mm", {
 	stack_max= 250,
 	wield_scale = {x=0.4,y=0.4,z=1.2},
 		description = "" ..core.colorize("#35cdff","7.62mm round\n")..core.colorize("#FFFFFF", "Bullet damage: 4 \n") ..core.colorize("#FFFFFF", "Bullet crit efficiency: 0.5 \n") ..core.colorize("#FFFFFF", "Bullet crit chance: 2% \n") ..core.colorize("#FFFFFF", "Bullet velocity: 40 \n") ..core.colorize("#FFFFFF", "Bullet knockback: 4 \n") ..core.colorize("#FFFFFF", "Bullet enemy Penetration: 5%\n")   ..core.colorize("#FFFFFF", "Ammunition for some guns"),
@@ -619,7 +617,7 @@ minetest.register_craftitem("rangedweapons:762mm", {
 		ignites_explosives = 1,
 	},
 })
-minetest.register_craftitem("rangedweapons:556mm", {
+core.register_craftitem("rangedweapons:556mm", {
 	stack_max= 300,
 	wield_scale = {x=0.4,y=0.4,z=1.2},
 		description = "" ..core.colorize("#35cdff","5.56mm round\n")..core.colorize("#FFFFFF", "Bullet damage: 3 \n") ..core.colorize("#FFFFFF", "Bullet crit efficiency: 0.4 \n") ..core.colorize("#FFFFFF", "Bullet crit chance: 2% \n") ..core.colorize("#FFFFFF", "Bullet velocity: 35 \n") ..core.colorize("#FFFFFF", "Bullet knockback: 3 \n")    ..core.colorize("#FFFFFF", "Ammunition for some guns"),
@@ -641,7 +639,7 @@ minetest.register_craftitem("rangedweapons:556mm", {
 		ignites_explosives = 1,
 	},
 })
-minetest.register_craftitem("rangedweapons:shell", {
+core.register_craftitem("rangedweapons:shell", {
 	stack_max= 50,
 	wield_scale = {x=0.4,y=0.4,z=1.2},
 		description = "" ..core.colorize("#35cdff","12 Gauge shell\n")..core.colorize("#FFFFFF", "Bullet damage: 2 \n") ..core.colorize("#FFFFFF", "Bullet crit efficiency: 0.15 \n") ..core.colorize("#FFFFFF", "Bullet crit chance: 1% \n") ..core.colorize("#FFFFFF", "Bullet velocity: 20 \n") ..core.colorize("#FFFFFF", "Bullet knockback: 4 \n") ..core.colorize("#FFFFFF", "Bullet gravity: 5 \n")  ..core.colorize("#FFFFFF", "Bullet projectile multiplier: 1.5x\n")   ..core.colorize("#FFFFFF", "Ammunition for some guns"),
@@ -666,7 +664,7 @@ minetest.register_craftitem("rangedweapons:shell", {
 		ignites_explosives = 1,
 	},
 })
-minetest.register_craftitem("rangedweapons:308winchester", {
+core.register_craftitem("rangedweapons:308winchester", {
 	stack_max= 75,
 	wield_scale = {x=0.4,y=0.4,z=1.2},
 		description = "" ..core.colorize("#35cdff",".308 winchester round\n")..core.colorize("#FFFFFF", "Bullet damage: 8 \n") ..core.colorize("#FFFFFF", "Bullet crit efficiency: 0.75 \n") ..core.colorize("#FFFFFF", "Bullet crit chance: 4% \n") ..core.colorize("#FFFFFF", "Bullet velocity: 60 \n") ..core.colorize("#FFFFFF", "Bullet knockback: 10 \n") ..core.colorize("#FFFFFF", "Damage gain over 1 sec of flight time: 40 \n") ..core.colorize("#FFFFFF", "Bullet enemy Penetration: 20%\n") ..core.colorize("#FFFFFF", "Bullet node Penetration: 10%\n")      ..core.colorize("#FFFFFF", "Ammunition for some guns"),
@@ -692,7 +690,7 @@ minetest.register_craftitem("rangedweapons:308winchester", {
 	},
 })
 
-minetest.register_craftitem("rangedweapons:408cheytac", {
+core.register_craftitem("rangedweapons:408cheytac", {
 	stack_max= 40,
 	wield_scale = {x=0.65,y=0.65,z=1.5},
 		description = "" ..core.colorize("#35cdff",".408 chey tac\n")..core.colorize("#FFFFFF", "Bullet damage: 10 \n") ..core.colorize("#FFFFFF", "Bullet crit efficiency: 0.8 \n") ..core.colorize("#FFFFFF", "Bullet crit chance: 5% \n") ..core.colorize("#FFFFFF", "Bullet velocity: 70 \n") ..core.colorize("#FFFFFF", "Bullet knockback: 15 \n") ..core.colorize("#FFFFFF", "Damage gain over 1 sec of flight time: 80 \n") ..core.colorize("#FFFFFF", "Bullet enemy Penetration: 45%\n") ..core.colorize("#FFFFFF", "Bullet node Penetration: 20%\n")      ..core.colorize("#FFFFFF", "Ammunition for some guns"),
@@ -718,7 +716,7 @@ minetest.register_craftitem("rangedweapons:408cheytac", {
 	},
 })
 
-minetest.register_craftitem("rangedweapons:40mm", {
+core.register_craftitem("rangedweapons:40mm", {
 	stack_max= 25,
 	wield_scale = {x=0.8,y=0.8,z=2.4},
 		description = "" ..core.colorize("#35cdff",".40mm grenade\n")..core.colorize("#FFFFFF", "Bullet damage: 10 \n") ..core.colorize("#FFFFFF", "Bullet crit efficiency: 1.0 \n") ..core.colorize("#FFFFFF", "Bullet crit chance: 1% \n") ..core.colorize("#FFFFFF", "Bullet velocity: 15 \n") ..core.colorize("#FFFFFF", "Bullet knockback: 10 \n") ..core.colorize("#FFFFFF", "Bullet gravity: 5 \n")  ..core.colorize("#FFFFFF", "explodes on impact with a radius of 2\n")  ..core.colorize("#FFFFFF", "Ammunition for grenade launchers"),
@@ -759,7 +757,7 @@ ammo_particles = {
 },
 })
 
-minetest.register_craftitem("rangedweapons:rocket", {
+core.register_craftitem("rangedweapons:rocket", {
 	stack_max= 15,
 	wield_scale = {x=1.2,y=1.2,z=2.4},
 		description = "" ..core.colorize("#35cdff","rocket\n")..core.colorize("#FFFFFF", "Bullet damage: 15 \n") ..core.colorize("#FFFFFF", "Bullet crit efficiency: 1.0 \n") ..core.colorize("#FFFFFF", "Bullet crit chance: 1% \n") ..core.colorize("#FFFFFF", "Bullet velocity: 20 \n") ..core.colorize("#FFFFFF", "Bullet knockback: 20 \n") ..core.colorize("#FFFFFF", "Bullet gravity: 5 \n")  ..core.colorize("#FFFFFF", "explodes on impact with a radius of 3\n")  ..core.colorize("#FFFFFF", "Ammunition for rocket launchers"),

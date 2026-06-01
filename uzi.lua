@@ -1,6 +1,6 @@
 
 
-minetest.register_tool("rangedweapons:uzi_r", {
+core.register_tool("rangedweapons:uzi_r", {
 	stack_max= 1,
 	wield_scale = {x=1.6,y=1.6,z=1.10},
 	description = "",
@@ -10,7 +10,7 @@ minetest.register_tool("rangedweapons:uzi_r", {
 	groups = {not_in_creative_inventory = 1},
 	inventory_image = "rangedweapons_uzi_rld.png",
 })
-minetest.register_tool("rangedweapons:uzi_rr", {
+core.register_tool("rangedweapons:uzi_rr", {
 	stack_max= 1,
 	wield_scale = {x=1.6,y=1.6,z=1.10},
 	description = "",
@@ -20,7 +20,7 @@ minetest.register_tool("rangedweapons:uzi_rr", {
 	groups = {not_in_creative_inventory = 1},
 	inventory_image = "rangedweapons_uzi.png",
 })
-minetest.register_tool("rangedweapons:uzi_rrr", {
+core.register_tool("rangedweapons:uzi_rrr", {
 	stack_max= 1,
 	wield_scale = {x=1.6,y=1.6,z=1.10},
 	description = "",
@@ -32,7 +32,7 @@ minetest.register_tool("rangedweapons:uzi_rrr", {
 })
 -------------------------------------------
 
-	minetest.register_tool("rangedweapons:uzi", {
+	core.register_tool("rangedweapons:uzi", {
 	stack_max= 1,
 	wield_scale = {x=1.6,y=1.6,z=1.10},
 		description = "" ..core.colorize("#35cdff","UZI\n") ..core.colorize("#FFFFFF", "Ranged damage: 2\n") ..core.colorize("#FFFFFF", "accuracy: 72%\n") ..core.colorize("#FFFFFF", "knockback: 0\n") ..core.colorize("#FFFFFF", "Reload delay: 1.2\n")  ..core.colorize("#FFFFFF", "Clip size: 40/22\n") ..core.colorize("#FFFFFF", "Critical chance: 5%\n") ..core.colorize("#FFFFFF", "Critical efficiency: 1.9x\n")  ..core.colorize("#FFFFFF", "Ammunition: 9x19mm parabellum/.45acp\n") ..core.colorize("#FFFFFF", "Rate of fire: 0.08 (full-auto)\n") ..core.colorize("#FFFFFF", "Gun type: machine pistol\n") ..core.colorize("#FFFFFF", "Bullet velocity: 25"),

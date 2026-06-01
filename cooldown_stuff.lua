@@ -1,5 +1,5 @@
-minetest.register_globalstep(function(dtime, player)
-	for _, player in pairs(minetest.get_connected_players()) do
+core.register_globalstep(function(dtime, player)
+	for _, player in pairs(core.get_connected_players()) do
 
 
 
@@ -72,14 +72,13 @@ end end
 
 
 
---minetest.chat_send_all(u_meta:get_float("rw_cooldown"))
 
 if u_meta:get_float("rw_cooldown") <= 0 then
 if player:get_wielded_item():get_definition().loaded_gun ~= nil then
 	local itemstack = player:get_wielded_item()
 
 if player:get_wielded_item():get_definition().loaded_sound ~= nil then
-minetest.sound_play(itemstack:get_definition().loaded_sound, {pos = player:get_pos()}, true)
+core.sound_play(itemstack:get_definition().loaded_sound, {pos = player:get_pos()}, true)
 end
 	itemstack:set_name(player:get_wielded_item():get_definition().loaded_gun)
 	player:set_wielded_item(itemstack)
@@ -88,7 +87,7 @@ end
 if player:get_wielded_item():get_definition().rw_next_reload ~= nil then
 	local itemstack = player:get_wielded_item()
 	if itemstack:get_definition().load_sound ~= nil then
-minetest.sound_play(itemstack:get_definition().load_sound, {pos = player:get_pos()}, true)
+core.sound_play(itemstack:get_definition().load_sound, {pos = player:get_pos()}, true)
 	end
 	local gunMeta = itemstack:get_meta()
 	u_meta:set_float("rw_cooldown",gunMeta:get_float("RW_reload_delay"))

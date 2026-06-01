@@ -1,4 +1,4 @@
-	minetest.register_tool("rangedweapons:laser_shotgun", {
+	core.register_tool("rangedweapons:laser_shotgun", {
 	stack_max= 1,
 	wield_scale = {x=2.0,y=2.0,z=1.75},
 		description = "" ..core.colorize("#35cdff","Laser shotgun\n") ..core.colorize("#FFFFFF", "Ranged damage: 10\n") ..core.colorize("#FFFFFF", "accuracy: 40%\n") ..core.colorize("#FFFFFF", "projectiles: 6\n") ..core.colorize("#FFFFFF", "knockback: 0\n")  ..core.colorize("#FFFFFF", "Critical chance: 8%\n") ..core.colorize("#FFFFFF", "Critical efficiency: 2.2x\n")  ..core.colorize("#FFFFFF", "Power usage: 30\n") ..core.colorize("#FFFFFF", "Rate of fire: 0.5\n") ..core.colorize("#FFFFFF", "Enemy penetration: 40%\n") ..core.colorize("#FFFFFF", "Gun type: power pistol\n") ..core.colorize("#FFFFFF", "Bullet velocity: 55"),

@@ -2,7 +2,7 @@
 
 
 
-minetest.register_tool("rangedweapons:python_rld", {
+core.register_tool("rangedweapons:python_rld", {
 	stack_max= 1,
 	range = 0,
 	wield_scale = {x=1.25,y=1.25,z=1.1},
@@ -13,7 +13,7 @@ minetest.register_tool("rangedweapons:python_rld", {
 })
 
 
-minetest.register_tool("rangedweapons:python", {
+core.register_tool("rangedweapons:python", {
 		description = "" ..core.colorize("#35cdff","Colt Python \n") ..core.colorize("#FFFFFF", "Ranged damage: 10\n")..core.colorize("#FFFFFF", "Accuracy: 95%\n") ..core.colorize("#FFFFFF", "Gun knockback: 6\n") ..core.colorize("#FFFFFF", "Critical chance: 19%\n") ..core.colorize("#FFFFFF", "Critical efficiency: 2.5x\n") ..core.colorize("#FFFFFF", "Ammunition: .357 Magnum rounds\n") ..core.colorize("#FFFFFF", "Reload time: 0.25\n") ..core.colorize("#FFFFFF", "Clip Size: 6\n")..core.colorize("#FFFFFF", "Gun type: Revolver\n")..core.colorize("#FFFFFF", "Block penetration: 5%\n")
 ..core.colorize("#FFFFFF", "penetration: 15%\n") ..core.colorize("#FFFFFF", "Bullet velocity: 55"),
 	range = 0,

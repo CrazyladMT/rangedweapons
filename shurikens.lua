@@ -1,6 +1,6 @@
 
 
-minetest.register_craftitem("rangedweapons:wooden_shuriken", {
+core.register_craftitem("rangedweapons:wooden_shuriken", {
 		description = "" ..core.colorize("#35cdff","Wooden shuriken\n") ..core.colorize("#FFFFFF", "Ranged damage: 2\n") ..core.colorize("#FFFFFF", "Accuracy: 80%\n") ..core.colorize("#FFFFFF", "knockback: 5\n") ..core.colorize("#FFFFFF", "Critical chance: 6%\n") ..core.colorize("#FFFFFF", "Critical efficiency: 2x\n") ..core.colorize("#FFFFFF", "Shuriken survival rate: 10%\n") ..core.colorize("#FFFFFF", "Projectile gravity: 10\n") ..core.colorize("#FFFFFF", "Throwing cooldown: 0.35\n") ..core.colorize("#FFFFFF", "Projectile velocity: 25"),
 	range = 0,
 	stack_max= 100,
@@ -30,7 +30,7 @@ minetest.register_craftitem("rangedweapons:wooden_shuriken", {
 		throw_door_breaking = 0,
 OnCollision = function(player,bullet,target)
 if math.random(1, 100) <= 10 then
-minetest.add_item(bullet.object:get_pos(), "rangedweapons:wooden_shuriken") end end,
+core.add_item(bullet.object:get_pos(), "rangedweapons:wooden_shuriken") end end,
 	},
 	on_use = function(itemstack, user, pointed_thing)
 rangedweapons_yeet(itemstack, user)
@@ -39,7 +39,7 @@ return itemstack
 })
 
 
-minetest.register_craftitem("rangedweapons:stone_shuriken", {
+core.register_craftitem("rangedweapons:stone_shuriken", {
 		description = "" ..core.colorize("#35cdff","Stone shuriken\n") ..core.colorize("#FFFFFF", "Ranged damage: 4\n") ..core.colorize("#FFFFFF", "Accuracy: 75%\n") ..core.colorize("#FFFFFF", "knockback: 8\n") ..core.colorize("#FFFFFF", "Critical chance: 7%\n") ..core.colorize("#FFFFFF", "Critical efficiency: 2.1x\n") ..core.colorize("#FFFFFF", "Shuriken survival rate: 15%\n") ..core.colorize("#FFFFFF", "Projectile gravity: 15\n") ..core.colorize("#FFFFFF", "Throwing cooldown: 0.35\n") ..core.colorize("#FFFFFF", "Projectile velocity: 20"),
 	range = 0,
 	stack_max= 125,
@@ -69,7 +69,7 @@ minetest.register_craftitem("rangedweapons:stone_shuriken", {
 		throw_door_breaking = 0,
 OnCollision = function(player,bullet,target)
 if math.random(1, 100) <= 15 then
-minetest.add_item(bullet.object:get_pos(), "rangedweapons:stone_shuriken") end end,
+core.add_item(bullet.object:get_pos(), "rangedweapons:stone_shuriken") end end,
 	},
 	on_use = function(itemstack, user, pointed_thing)
 rangedweapons_yeet(itemstack, user)
@@ -78,7 +78,7 @@ return itemstack
 })
 
 
-minetest.register_craftitem("rangedweapons:steel_shuriken", {
+core.register_craftitem("rangedweapons:steel_shuriken", {
 		description = "" ..core.colorize("#35cdff","Steel shuriken\n") ..core.colorize("#FFFFFF", "Ranged damage: 6\n") ..core.colorize("#FFFFFF", "Accuracy: 85%\n") ..core.colorize("#FFFFFF", "knockback: 3\n") ..core.colorize("#FFFFFF", "Critical chance: 8%\n") ..core.colorize("#FFFFFF", "Critical efficiency: 2.2x\n") ..core.colorize("#FFFFFF", "Shuriken survival rate: 35%\n") ..core.colorize("#FFFFFF", "Projectile gravity: 8\n") ..core.colorize("#FFFFFF", "Throwing cooldown: 0.25\n") ..core.colorize("#FFFFFF", "Projectile velocity: 30"),
 	range = 0,
 	stack_max= 150,
@@ -108,7 +108,7 @@ minetest.register_craftitem("rangedweapons:steel_shuriken", {
 		throw_door_breaking = 0,
 OnCollision = function(player,bullet,target)
 if math.random(1, 100) <= 35 then
-minetest.add_item(bullet.object:get_pos(), "rangedweapons:steel_shuriken") end end,
+core.add_item(bullet.object:get_pos(), "rangedweapons:steel_shuriken") end end,
 	},
 	on_use = function(itemstack, user, pointed_thing)
 rangedweapons_yeet(itemstack, user)
@@ -116,7 +116,7 @@ return itemstack
 	end,
 })
 
-minetest.register_craftitem("rangedweapons:bronze_shuriken", {
+core.register_craftitem("rangedweapons:bronze_shuriken", {
 		description = "" ..core.colorize("#35cdff","Bronze shuriken\n") ..core.colorize("#FFFFFF", "Ranged damage: 6\n") ..core.colorize("#FFFFFF", "Accuracy: 85%\n") ..core.colorize("#FFFFFF", "knockback: 3\n") ..core.colorize("#FFFFFF", "Critical chance: 8%\n") ..core.colorize("#FFFFFF", "Critical efficiency: 2.2x\n") ..core.colorize("#FFFFFF", "Shuriken survival rate: 30%\n") ..core.colorize("#FFFFFF", "Projectile gravity: 8\n") ..core.colorize("#FFFFFF", "Throwing cooldown: 0.25\n") ..core.colorize("#FFFFFF", "Projectile velocity: 30"),
 	range = 0,
 	stack_max= 150,
@@ -146,7 +146,7 @@ minetest.register_craftitem("rangedweapons:bronze_shuriken", {
 		throw_door_breaking = 0,
 OnCollision = function(player,bullet,target)
 if math.random(1, 100) <= 30 then
-minetest.add_item(bullet.object:get_pos(), "rangedweapons:bronze_shuriken") end end,
+core.add_item(bullet.object:get_pos(), "rangedweapons:bronze_shuriken") end end,
 	},
 	on_use = function(itemstack, user, pointed_thing)
 rangedweapons_yeet(itemstack, user)
@@ -154,7 +154,7 @@ return itemstack
 	end,
 })
 
-minetest.register_craftitem("rangedweapons:golden_shuriken", {
+core.register_craftitem("rangedweapons:golden_shuriken", {
 		description = "" ..core.colorize("#35cdff","Golden shuriken\n") ..core.colorize("#FFFFFF", "Ranged damage: 8\n") ..core.colorize("#FFFFFF", "Accuracy: 75%\n") ..core.colorize("#FFFFFF", "knockback: 10\n") ..core.colorize("#FFFFFF", "Critical chance: 12%\n") ..core.colorize("#FFFFFF", "Critical efficiency: 2.5x\n") ..core.colorize("#FFFFFF", "Shuriken survival rate: 25%\n") ..core.colorize("#FFFFFF", "Projectile gravity: 15\n") ..core.colorize("#FFFFFF", "Throwing cooldown: 0.4\n") ..core.colorize("#FFFFFF", "Projectile velocity: 25"),
 	range = 0,
 	stack_max= 175,
@@ -184,7 +184,7 @@ minetest.register_craftitem("rangedweapons:golden_shuriken", {
 		throw_door_breaking = 0,
 OnCollision = function(player,bullet,target)
 if math.random(1, 100) <= 25 then
-minetest.add_item(bullet.object:get_pos(), "rangedweapons:golden_shuriken") end end,
+core.add_item(bullet.object:get_pos(), "rangedweapons:golden_shuriken") end end,
 	},
 	on_use = function(itemstack, user, pointed_thing)
 rangedweapons_yeet(itemstack, user)
@@ -192,7 +192,7 @@ return itemstack
 	end,
 })
 
-minetest.register_craftitem("rangedweapons:mese_shuriken", {
+core.register_craftitem("rangedweapons:mese_shuriken", {
 		description = "" ..core.colorize("#35cdff","MESE shuriken\n") ..core.colorize("#FFFFFF", "Ranged damage: 7\n") ..core.colorize("#FFFFFF", "Accuracy: 90%\n") ..core.colorize("#FFFFFF", "knockback: 2\n") ..core.colorize("#FFFFFF", "Critical chance: 9%\n") ..core.colorize("#FFFFFF", "Critical efficiency: 2.3x\n") ..core.colorize("#FFFFFF", "Shuriken survival rate: 50%\n") ..core.colorize("#FFFFFF", "Projectile gravity: 5\n") ..core.colorize("#FFFFFF", "Throwing cooldown: 0.2\n") ..core.colorize("#FFFFFF", "Enemy penetration: 25%\n")  ..core.colorize("#FFFFFF", "Projectile velocity: 35"),
 	range = 0,
 	stack_max= 175,
@@ -222,7 +222,7 @@ minetest.register_craftitem("rangedweapons:mese_shuriken", {
 		throw_door_breaking = 0,
 OnCollision = function(player,bullet,target)
 if math.random(1, 100) <= 50 then
-minetest.add_item(bullet.object:get_pos(), "rangedweapons:mese_shuriken") end end,
+core.add_item(bullet.object:get_pos(), "rangedweapons:mese_shuriken") end end,
 	},
 	on_use = function(itemstack, user, pointed_thing)
 rangedweapons_yeet(itemstack, user)
@@ -230,7 +230,7 @@ return itemstack
 	end,
 })
 
-minetest.register_craftitem("rangedweapons:diamond_shuriken", {
+core.register_craftitem("rangedweapons:diamond_shuriken", {
 		description = "" ..core.colorize("#35cdff","Diamond shuriken\n") ..core.colorize("#FFFFFF", "Ranged damage: 8\n") ..core.colorize("#FFFFFF", "Accuracy: 95%\n") ..core.colorize("#FFFFFF", "knockback: 2\n") ..core.colorize("#FFFFFF", "Critical chance: 10%\n") ..core.colorize("#FFFFFF", "Critical efficiency: 2.4x\n") ..core.colorize("#FFFFFF", "Shuriken survival rate: 60%\n") ..core.colorize("#FFFFFF", "Projectile gravity: 5\n") ..core.colorize("#FFFFFF", "Throwing cooldown: 0.15\n") ..core.colorize("#FFFFFF", "Enemy penetration: 33%\n")  ..core.colorize("#FFFFFF", "Projectile velocity: 40"),
 	range = 0,
 	stack_max= 200,
@@ -260,7 +260,7 @@ minetest.register_craftitem("rangedweapons:diamond_shuriken", {
 		throw_door_breaking = 0,
 OnCollision = function(player,bullet,target)
 if math.random(1, 100) <= 60 then
-minetest.add_item(bullet.object:get_pos(), "rangedweapons:diamond_shuriken") end end,
+core.add_item(bullet.object:get_pos(), "rangedweapons:diamond_shuriken") end end,
 	},
 	on_use = function(itemstack, user, pointed_thing)
 rangedweapons_yeet(itemstack, user)

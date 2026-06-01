@@ -1,6 +1,6 @@
 
 
-minetest.register_tool("rangedweapons:svd_uld", {
+core.register_tool("rangedweapons:svd_uld", {
 	stack_max= 1,
 	wield_scale = {x=1.9,y=1.9,z=1.1},
 	range = 0,
@@ -9,7 +9,7 @@ minetest.register_tool("rangedweapons:svd_uld", {
 	inventory_image = "rangedweapons_svd.png",
 	weapon_zoom = 9,
 	on_use = function(itemstack, user)
-		minetest.sound_play("rangedweapons_empty", {pos = user:get_pos()})
+		core.sound_play("rangedweapons_empty", {pos = user:get_pos()})
 	end,
 on_secondary_use = function(itemstack, user, pointed_thing)
 eject_shell(itemstack,user,"rangedweapons:svd_rld",1.0,"rangedweapons_rifle_reload_a","rangedweapons:empty_shell")
@@ -18,7 +18,7 @@ end,
 })
 
 
-minetest.register_tool("rangedweapons:svd_r", {
+core.register_tool("rangedweapons:svd_r", {
 	rw_next_reload = "rangedweapons:svd_rr",
 	load_sound = "rangedweapons_rifle_clip_in",
 	range = 0,
@@ -27,7 +27,7 @@ minetest.register_tool("rangedweapons:svd_r", {
 	groups = {not_in_creative_inventory = 1},
 	inventory_image = "rangedweapons_svd_noclip.png",
 })
-minetest.register_tool("rangedweapons:svd_rr", {
+core.register_tool("rangedweapons:svd_rr", {
 	rw_next_reload = "rangedweapons:svd_rrr",
 	load_sound = "rangedweapons_rifle_reload_a",
 	range = 0,
@@ -36,7 +36,7 @@ minetest.register_tool("rangedweapons:svd_rr", {
 	groups = {not_in_creative_inventory = 1},
 	inventory_image = "rangedweapons_svd.png",
 })
-minetest.register_tool("rangedweapons:svd_rrr", {
+core.register_tool("rangedweapons:svd_rrr", {
 	rw_next_reload = "rangedweapons:svd",
 	load_sound = "rangedweapons_rifle_reload_b",
 	range = 0,
@@ -47,7 +47,7 @@ minetest.register_tool("rangedweapons:svd_rrr", {
 })
 
 
-minetest.register_tool("rangedweapons:svd_rld", {
+core.register_tool("rangedweapons:svd_rld", {
 	stack_max= 1,
 	range = 0,
 	wield_scale = {x=1.9,y=1.9,z=1.1},
@@ -59,7 +59,7 @@ minetest.register_tool("rangedweapons:svd_rld", {
 })
 
 
-minetest.register_tool("rangedweapons:svd", {
+core.register_tool("rangedweapons:svd", {
 		description = "" ..core.colorize("#35cdff","S.V.D. \n") ..core.colorize("#FFFFFF", "Ranged damage:17 + 30/sec of bullet lifetime\n")..core.colorize("#FFFFFF", "Accuracy: 100%\n") ..core.colorize("#FFFFFF", "knockback: 14\n") ..core.colorize("#FFFFFF", "Critical chance: 30%\n") ..core.colorize("#FFFFFF", "Critical efficiency: x3\n") ..core.colorize("#FFFFFF", "Ammunition: 7.62mm round\n") ..core.colorize("#FFFFFF", "Rate of fire: 1.0\n") ..core.colorize("#FFFFFF", "Reload time: 2.0\n") ..core.colorize("#FFFFFF", "Zoom: 10x\n") ..core.colorize("#27a600", "The gun is loaded!\n") ..core.colorize("#FFFFFF", "Clip size: 10\n") ..core.colorize("#FFFFFF", "Enemy penetration:30%\n") ..core.colorize("#FFFFFF", "Block penetration:10%\n") ..core.colorize("#FFFFFF", "Gun type: Rifle\n") ..core.colorize("#FFFFFF", "Bullet velocity: 75"),
 	range = 0,
 	weapon_zoom = 9,
