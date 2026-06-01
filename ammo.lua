@@ -48,7 +48,7 @@ rangedweapons_shot_bullet.on_step = function(self, dtime, moveresult)
 				collisiondetection = SBP.collisiondetection,
 				vertical = false,
 				texture = SBP.texture,
-          		animation = {type="vertical_frames", aspect_w=8, aspect_h=8, length = SBP.lifetime+0.1,},
+				animation = {type="vertical_frames", aspect_w=8, aspect_h=8, length = SBP.lifetime+0.1,},
 				glow = SBP.glow,
 			})
 		end
@@ -89,7 +89,7 @@ rangedweapons_shot_bullet.on_step = function(self, dtime, moveresult)
 					core.add_particle({
 						pos = self.object:get_pos(),
 						velocity = {x=0, y=0, z=0},
-          				acceleration = {x=0, y=0, z=0},
+						acceleration = {x=0, y=0, z=0},
 						expirationtime = 30,
 						size = math.random(10,20)/10,
 						collisiondetection = false,
@@ -102,7 +102,7 @@ rangedweapons_shot_bullet.on_step = function(self, dtime, moveresult)
 						core.add_particle({
 							pos = self.object:get_pos(),
 							velocity = {x=math.random(-3.0,3.0), y=math.random(2.0,5.0), z=math.random(-3.0,3.0)},
-          					acceleration = {x=math.random(-3.0,3.0), y=math.random(-10.0,-15.0), z=math.random(-3.0,3.0)},
+							acceleration = {x=math.random(-3.0,3.0), y=math.random(-10.0,-15.0), z=math.random(-3.0,3.0)},
 							expirationtime = 0.5,
 							size = math.random(10,20)/10,
 							collisiondetection = true,
@@ -159,42 +159,42 @@ rangedweapons_shot_bullet.on_step = function(self, dtime, moveresult)
 
 				if core.get_item_group(core.get_node(moveresult.collisions[1].node_pos).name, "level") > 1 then
 					if core.settings:get_bool("rangedweapons_bullet_ricochet", true) then
-      					self.object:set_velocity(moveresult.collisions[1].old_velocity)
+						self.object:set_velocity(moveresult.collisions[1].old_velocity)
 
-      					if sparks > 0 then
-      	 					make_sparks(self.object:get_pos())
-      					end
+						if sparks > 0 then
+							make_sparks(self.object:get_pos())
+						end
 
-      					local objVel = moveresult.collisions[1].old_velocity
-      					local objRot = self.object:get_rotation()
+						local objVel = moveresult.collisions[1].old_velocity
+						local objRot = self.object:get_rotation()
 
-      					if objRot and objVel then
-      	 					if moveresult.collisions[1].axis == "x" then
-	    						self.object:set_rotation({x=0,y=objRot.y,z=objRot.z+3})
-	    						self.object:set_velocity({x=objVel.x*-1,y=objVel.y,z=objVel.z})
-	 						end
+						if objRot and objVel then
+							if moveresult.collisions[1].axis == "x" then
+								self.object:set_rotation({x=0,y=objRot.y,z=objRot.z+3})
+								self.object:set_velocity({x=objVel.x*-1,y=objVel.y,z=objVel.z})
+							end
 
-	 						if moveresult.collisions[1].axis == "z" then
-	    						self.object:set_rotation({x=0,y=objRot.y,z=objRot.z+3})
-	    						self.object:set_velocity({x=objVel.x,y=objVel.y,z=objVel.z*-1})
-	 						end
+							if moveresult.collisions[1].axis == "z" then
+								self.object:set_rotation({x=0,y=objRot.y,z=objRot.z+3})
+								self.object:set_velocity({x=objVel.x,y=objVel.y,z=objVel.z*-1})
+							end
 
-	 						if moveresult.collisions[1].axis == "y" then
-	    						self.object:set_rotation({x=0,y=objRot.y+3,z=objRot.z+3})
-	    						self.object:set_velocity({x=objVel.x,y=objVel.y*-1,z=objVel.z})
-	 						end
-      					end
-   					else
+							if moveresult.collisions[1].axis == "y" then
+								self.object:set_rotation({x=0,y=objRot.y+3,z=objRot.z+3})
+								self.object:set_velocity({x=objVel.x,y=objVel.y*-1,z=objVel.z})
+							end
+						end
+					else
 						self.object:remove()
-   					end
+					end
 				else
 					if math.random(1,100) <= nodePen then
-   						if use_particles then
+						if use_particles then
 							for i = 1, 10 do
 								core.add_particle({
 									pos = self.object:get_pos(),
 									velocity = {x=1.5, y=1.5, z=1.5} ,
-          							acceleration = {x=math.random(-3.0,3.0), y=math.random(-4.0,4.0), z=math.random(-3.0,3.0)},
+									acceleration = {x=math.random(-3.0,3.0), y=math.random(-4.0,4.0), z=math.random(-3.0,3.0)},
 									expirationtime = 1.25,
 									size = math.random(3,6),
 									collisiondetection = false,
@@ -203,7 +203,7 @@ rangedweapons_shot_bullet.on_step = function(self, dtime, moveresult)
 									glow = 2,
 								})
 							end
-    					end
+						end
 
 						core.sound_play("default_dig_cracky", {pos = self.object:get_pos(), gain = 1.0}, true)
 						self.object:set_properties({collisionbox = {0,0,0,0,0,0}})
@@ -217,14 +217,14 @@ rangedweapons_shot_bullet.on_step = function(self, dtime, moveresult)
 									core.add_particle({
 										pos = self.object:get_pos(),
 										velocity = {x=math.random(-2,2), y=math.random(3,6), z=math.random(-2,2)},
-          								acceleration = {x=math.random(-2,2), y=math.random(-3,-6), z=math.random(-2,2)},
-										expirationtime = math.random(2,4), 
-										size = math.random(6,9), 
+										acceleration = {x=math.random(-2,2), y=math.random(-3,-6), z=math.random(-2,2)},
+										expirationtime = math.random(2,4),
+										size = math.random(6,9),
 										collisiondetection = true,
 										collision_removal = false,
 										vertical = false,
 										texture = "rangedweapons_leaf.png",
-          								animation = {type="vertical_frames", aspect_w=8, aspect_h=8, length = 0.8,},
+										animation = {type="vertical_frames", aspect_w=8, aspect_h=8, length = 0.8,},
 										glow = 15,
 									})
 								end
@@ -253,7 +253,7 @@ rangedweapons_shot_bullet.on_step = function(self, dtime, moveresult)
 				local skill = self.skill_value or 1
 
 				for _, dmg in pairs(actualDamage) do
-    				damage[_] = actualDamage[_]
+					damage[_] = actualDamage[_]
 				end
 
 				local player_dmg_multiplier = tonumber(core.settings:get("rangedweapons_player_dmg_multiplier")) or 1.0
@@ -261,36 +261,36 @@ rangedweapons_shot_bullet.on_step = function(self, dtime, moveresult)
 				local mob_dmg_multiplier = tonumber(core.settings:get("rangedweapons_mob_dmg_multiplier")) or 1.0
 
 				if moveresult.collisions[1].object:is_player() then
-   					for _, player_dmg in pairs(damage) do
-       					damage[_] = damage[_] * player_dmg_multiplier
-   					end
+					for _, player_dmg in pairs(damage) do
+						damage[_] = damage[_] * player_dmg_multiplier
+					end
 
-   					if self.object:get_pos().y - moveresult.collisions[1].object:get_pos().y > 1.5 then
-      					for _, hs_dmg in pairs(damage) do
-      	  					damage[_] = damage[_] * headshot_dmg_multiplier
-      					end
-   					end
+					if self.object:get_pos().y - moveresult.collisions[1].object:get_pos().y > 1.5 then
+						for _, hs_dmg in pairs(damage) do
+							damage[_] = damage[_] * headshot_dmg_multiplier
+						end
+					end
 
-   					knockback = damage.knockback or 0
-   					projectile_kb(moveresult.collisions[1].object,self.object,knockback)
+					knockback = damage.knockback or 0
+					projectile_kb(moveresult.collisions[1].object,self.object,knockback)
 				else
-   					for _, mob_dmg in pairs(damage) do
-       					damage[_] = damage[_] * mob_dmg_multiplier
-   					end
+					for _, mob_dmg in pairs(damage) do
+						damage[_] = damage[_] * mob_dmg_multiplier
+					end
 				end
 
 				for _, bonus_dmg in pairs(damage) do
-    				damage[_] = (damage[_]*skill) + (self.dps*self.timer)
+					damage[_] = (damage[_]*skill) + (self.dps*self.timer)
 				end
 
 				if math.random(1,100) <= crit+((skill*10)-10) then
-   					for _, critDmg in pairs(damage) do
-       					damage[_] = damage[_] * critEffc
-   					end
+					for _, critDmg in pairs(damage) do
+						damage[_] = damage[_] * critEffc
+					end
 
-   					local entpos = self.object:get_pos()
-   					core.add_particle({
-   						pos = entpos,
+					local entpos = self.object:get_pos()
+					core.add_particle({
+						pos = entpos,
 						velocity = 0,
 						acceleration = {x=0, y=5, z=0},
 						expirationtime = 0.75,
@@ -302,7 +302,7 @@ rangedweapons_shot_bullet.on_step = function(self, dtime, moveresult)
 					})
 
 					hit_texture = "rangedweapons_crithit.png"
-   				end
+				end
 
 				moveresult.collisions[1].object:punch(owner, 1.0, {
 					full_punch_interval = 1.0,
@@ -316,24 +316,24 @@ rangedweapons_shot_bullet.on_step = function(self, dtime, moveresult)
 					core.add_particle({
 						pos = self.object:get_pos(),
 						velocity = {x=math.random(-15.0,15.0)/10, y=math.random(2.0,5.0), z=math.random(-15.0,15.0)/10},
-          				acceleration = {x=math.random(-3.0,3.0), y=math.random(-10.0,-15.0), z=math.random(-3.0,3.0)},
+						acceleration = {x=math.random(-3.0,3.0), y=math.random(-10.0,-15.0), z=math.random(-3.0,3.0)},
 						expirationtime = 0.75,
 						size = math.random(10,20)/10,
 						collisiondetection = true,
 						vertical = false,
 						texture = "rangedweapons_blood.png",
-          				animation = {type="vertical_frames", aspect_w=8, aspect_h=8, length = 0.8,},
+						animation = {type="vertical_frames", aspect_w=8, aspect_h=8, length = 0.8,},
 						glow = 0,
 					})
 				end
 
 				if math.random(1,100) <= mobPen then
-   					if use_particles then
+					if use_particles then
 						for i=1,10 do
 							core.add_particle({
 								pos = self.object:get_pos(),
 								velocity = {x=1.5, y=1.5, z=1.5} ,
-          						acceleration = {x=math.random(-3.0,3.0), y=math.random(-4.0,4.0), z=math.random(-3.0,3.0)},
+								acceleration = {x=math.random(-3.0,3.0), y=math.random(-4.0,4.0), z=math.random(-3.0,3.0)},
 								expirationtime = 1.25,
 								size = math.random(3,6),
 								collisiondetection = false,
@@ -342,7 +342,7 @@ rangedweapons_shot_bullet.on_step = function(self, dtime, moveresult)
 								glow = 2,
 							})
 						end
-    				end
+					end
 
 					core.sound_play("default_dig_cracky", {pos = self.object:get_pos(), gain = 1.0}, true)
 					self.object:set_properties({collisionbox = {0,0,0,0,0,0}})
@@ -361,7 +361,7 @@ rangedweapons_shot_bullet.on_step = function(self, dtime, moveresult)
 	end
 end
 
-core.register_entity("rangedweapons:shot_bullet", rangedweapons_shot_bullet) 
+core.register_entity("rangedweapons:shot_bullet", rangedweapons_shot_bullet)
 
 ---
 --- actual mags
@@ -391,7 +391,7 @@ local rangedweapons_mag = {
 	collisionbox = {0, 0, 0, 0, 0, 0},
 }
 
-rangedweapons_mag.on_step = function(self, dtime, pos)
+rangedweapons_mag.on_step = function(self, dtime, _)
 	self.timer = self.timer + dtime
 	local pos = self.object:get_pos()
 	local node = core.get_node(pos)
