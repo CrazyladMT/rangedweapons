@@ -1,8 +1,6 @@
-
-
 core.register_tool("rangedweapons:jackhammer_r", {
-	stack_max= 1,
-	wield_scale = {x=2.6,y=2.6,z=1.8},
+	stack_max = 1,
+	wield_scale = {x = 2.6, y = 2.6, z = 1.8},
 	description = "",
 	rw_next_reload = "rangedweapons:jackhammer_rr",
 	load_sound = "rangedweapons_rifle_clip_in",
@@ -10,9 +8,10 @@ core.register_tool("rangedweapons:jackhammer_r", {
 	groups = {not_in_creative_inventory = 1},
 	inventory_image = "rangedweapons_jackhammer_rld.png",
 })
+
 core.register_tool("rangedweapons:jackhammer_rr", {
-	stack_max= 1,
-	wield_scale = {x=2.6,y=2.6,z=1.8},
+	stack_max = 1,
+	wield_scale = {x = 2.6, y = 2.6, z = 1.8},
 	description = "",
 	rw_next_reload = "rangedweapons:jackhammer_rrr",
 	load_sound = "rangedweapons_reload_a",
@@ -20,9 +19,10 @@ core.register_tool("rangedweapons:jackhammer_rr", {
 	groups = {not_in_creative_inventory = 1},
 	inventory_image = "rangedweapons_jackhammer.png",
 })
+
 core.register_tool("rangedweapons:jackhammer_rrr", {
-	stack_max= 1,
-	wield_scale = {x=2.6,y=2.6,z=1.8},
+	stack_max = 1,
+	wield_scale = {x = 2.6, y = 2.6, z = 1.8},
 	description = "",
 	rw_next_reload = "rangedweapons:jackhammer",
 	load_sound = "rangedweapons_reload_b",
@@ -30,21 +30,34 @@ core.register_tool("rangedweapons:jackhammer_rrr", {
 	groups = {not_in_creative_inventory = 1},
 	inventory_image = "rangedweapons_jackhammer.png",
 })
--------------------------------------------
 
-	core.register_tool("rangedweapons:jackhammer", {
-	stack_max= 1,
-	wield_scale = {x=2.6,y=2.6,z=1.8},
-		description = "" ..core.colorize("#35cdff","Jackhammer\n") ..core.colorize("#FFFFFF", "Ranged damage: 3\n") ..core.colorize("#FFFFFF", "projectiles: 8\n") ..core.colorize("#FFFFFF", "Gun gravity: 3\n") ..core.colorize("#FFFFFF", "accuracy: 35%\n") ..core.colorize("#FFFFFF", "knockback: 6\n") ..core.colorize("#FFFFFF", "Reload delay: 1.6\n")  ..core.colorize("#FFFFFF", "Clip size: 10\n") ..core.colorize("#FFFFFF", "Critical chance: 7%\n") ..core.colorize("#FFFFFF", "Critical efficiency: 2.2x\n")  ..core.colorize("#FFFFFF", "Ammunition: 12 gauge shell\n") ..core.colorize("#FFFFFF", "Rate of fire: 0.25 (full-auto)\n") ..core.colorize("#FFFFFF", "Gun type: shotgun\n") ..core.colorize("#FFFFFF", "Bullet velocity: 30"),
+core.register_tool("rangedweapons:jackhammer", {
+	stack_max = 1,
+	wield_scale = {x = 2.6, y = 2.6, z = 1.8},
+	description = core.colorize("#35cdff","Jackhammer\n") ..
+		"Ranged damage: 3\n" ..
+		"projectiles: 8\n" ..
+		"Gun gravity: 3\n" ..
+		"accuracy: 35%\n" ..
+		"knockback: 6\n" ..
+		"Reload delay: 1.6\n" ..
+		"Clip size: 10\n" ..
+		"Critical chance: 7%\n" ..
+		"Critical efficiency: 2.2x\n" ..
+		"Ammunition: 12 gauge shell\n" ..
+		"Rate of fire: 0.25 (full-auto)\n" ..
+		"Gun type: shotgun\n" ..
+		"Bullet velocity: 30",
+
 	range = 0,
 	inventory_image = "rangedweapons_jackhammer.png",
 	RW_gun_capabilities = {
 		automatic_gun = 1,
-		gun_damage = {fleshy=3,knockback=6},
+		gun_damage = {fleshy = 3, knockback = 6},
 		gun_crit = 7,
 		gun_critEffc = 2.2,
-		suitable_ammo = {{"rangedweapons:shell",10}},
-		gun_skill = {"shotgun_skill",35},
+		suitable_ammo = {{"rangedweapons:shell", 10}},
+		gun_skill = {"shotgun_skill", 35},
 		gun_magazine = "rangedweapons:drum_mag",
 		gun_unloaded = "rangedweapons:jackhammer_r",
 		gun_velocity = 30,
@@ -62,7 +75,7 @@ core.register_tool("rangedweapons:jackhammer_rrr", {
 		gun_sound = "rangedweapons_shotgun_shot",
 	},
 	on_secondary_use = function(itemstack, user, pointed_thing)
-rangedweapons_reload_gun(itemstack, user)
-return itemstack
-end,
+		rangedweapons_reload_gun(itemstack, user)
+		return itemstack
+	end,
 })
