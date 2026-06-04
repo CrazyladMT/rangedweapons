@@ -65,7 +65,3 @@ core.register_tool("rangedweapons:javelin", {
 		return itemstack
 	end,
 })
-
-
-
-
